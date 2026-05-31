@@ -454,6 +454,26 @@
   #vrCanvas{width:100%;height:380px;display:block;background:#05050a;cursor:crosshair;touch-action:none}
   .vrmsg{padding:14px 18px 2px;font-size:14px;color:#d8d2c8;min-height:38px}
   .vrfoot{display:flex;gap:12px;align-items:center;padding:10px 18px 16px;flex-wrap:wrap}
+  #seeCanvas{width:100%;height:340px;display:block;background:#06060c;cursor:grab;touch-action:none}
+  .seebar{display:flex;gap:6px;padding:14px 18px 4px;flex-wrap:wrap}
+  .seebar button{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:8px;padding:7px 11px;cursor:pointer}
+  .seebar button.on{border-color:var(--amber);color:var(--ink);background:var(--panel2)}
+  .seemsg{padding:6px 18px 16px;font-size:13.5px;color:var(--muted);min-height:34px}
+  #latCanvas{width:100%;height:340px;display:block;background:#06060c;cursor:none;touch-action:none}
+  .latfoot{display:flex;gap:12px;align-items:center;padding:12px 18px 16px;flex-wrap:wrap}
+  .latstat{font-family:var(--mono);font-size:12.5px;color:var(--muted)} .latstat b{color:var(--amber)}
+  .reward{display:grid;grid-template-columns:264px 1fr;gap:0}
+  .rwcfg{padding:18px;border-right:1px solid var(--line)}
+  .rwterm{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:13.5px;cursor:pointer;color:#d8d2c8}
+  .rwtog{width:38px;height:22px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);position:relative;flex:0 0 auto;transition:.15s}
+  .rwtog i{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:.15s}
+  .rwterm.on .rwtog{background:var(--amber-deep);border-color:var(--amber-deep)} .rwterm.on .rwtog i{left:18px;background:#1a1206}
+  #rwCanvas{width:100%;height:240px;display:block;background:#06060c}
+  .rwverd{padding:14px 18px;font-size:14px;color:#d8d2c8;min-height:48px}
+  @media(max-width:680px){.reward{grid-template-columns:1fr}.rwcfg{border-right:none;border-bottom:1px solid var(--line)}}
+  #simCanvas{width:100%;height:300px;display:block;background:#06060c}
+  .simfoot{display:flex;gap:10px;align-items:center;padding:12px 18px 16px;flex-wrap:wrap}
+  .simmsg{padding:10px 18px 2px;font-size:14px;color:#d8d2c8;min-height:40px}
 
   /* closing */
   section.close{padding:70px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(168,38,29,.05))}
@@ -496,6 +516,10 @@
         <a href="#rguess">Guess</a>
         <a href="#rflywheel">Flywheel</a>
         <a href="#rvr">VR</a>
+        <a href="#rsee">See</a>
+        <a href="#rlatency">Latency</a>
+        <a href="#rreward">Reward</a>
+        <a href="#rsim">Sim2Real</a>
       </span>
       <a href="#future">The Dial ↗</a>
     </div>
@@ -543,7 +567,7 @@
   </div><!-- /menu-chip -->
 
   <div class="menu-robot">
-  <h2>Six things only robots let you build</h2>
+  <h2>Ten things only robots let you build</h2>
   <p class="menusub">Robot mode is its own gallery — fresh, embodied formats, not the chip ideas recolored. Click any to launch it.</p>
   <div class="cards">
     <a class="mcard" href="#rteleop"><div class="n">01 / teleop booth</div><h3>Drive the Hand</h3><p>Puppet a humanoid gripper to stack blocks — and feel why most "autonomous" robot demos are a human at the controls.</p><span class="tag">you are the robot</span></a>
@@ -552,6 +576,10 @@
     <a class="mcard" href="#rguess"><div class="n">04 / guessing game</div><h3>Teleop or Autonomous?</h3><p>Five clips. You call it: human-driven or self-driving? Learn the field's central illusion.</p><span class="tag">spot the human</span></a>
     <a class="mcard" href="#rflywheel"><div class="n">05 / loop sim</div><h3>The Data Flywheel</h3><p>More robots → more data → smarter robots. Spin the flywheel and watch it take off — or stall for lack of data.</p><span class="tag">scaling sim</span></a>
     <a class="mcard" href="#rvr"><div class="n">06 / VR embodiment</div><h3>You Are the Robot</h3><p>A first-person booth where you pilot the robot through six generations, 2026→2031 — and feel it get better until it no longer needs you inside it.</p><span class="tag">be the robot</span></a>
+    <a class="mcard" href="#rsee"><div class="n">07 / robot vision</div><h3>See Like a Robot</h3><p>Look through the perception stack — raw camera, depth, segmentation, detection, world model. The same pixels, five ways the robot reads them.</p><span class="tag">its eyes</span></a>
+    <a class="mcard" href="#rlatency"><div class="n">08 / reflex game</div><h3>Mind the Gap</h3><p>Catch falling objects through sensor-to-actuator lag. Upgrade the chip, watch the loop tighten — where silicon meets the body.</p><span class="tag">feel the latency</span></a>
+    <a class="mcard" href="#rreward"><div class="n">09 / alignment lab</div><h3>Reward Hacking Lab</h3><p>Write a reward function, hit train, and watch the robot take you hilariously literally. Specification gaming you can feel.</p><span class="tag">it cheats</span></a>
+    <a class="mcard" href="#rsim"><div class="n">10 / sim-to-real</div><h3>Sim2Real</h3><p>Your walker aces simulation — then reality breaks it. Add domain randomization and watch it cross the gap that kills demos.</p><span class="tag">the gap</span></a>
     <a class="mcard" href="#future" style="border-color:var(--amber-deep)"><div class="n" style="color:var(--amber)">↔ the bridge</div><h3>The Projector ⏵</h3><p>The one format that spans both: drag the dial and watch Chip War become Robot War — chokepoints and media both recompile.</p><span class="tag" style="color:var(--amber);border-color:var(--amber-deep)">+18 months</span></a>
   </div>
   </div><!-- /menu-robot -->
@@ -973,6 +1001,95 @@
   </div>
 </section>
 
+<!-- ============ ROBOT 7 — SEE LIKE A ROBOT ============ -->
+<section class="fmt robot-section" id="rsee">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R7 — ROBOT VISION</div>
+      <h2>See Like a Robot</h2>
+      <p class="tagline">Same pixels. Five ways the machine reads them.</p>
+      <p class="what">A robot doesn't see a room — it sees a stack of computed layers. Flip through them on one scene: the raw camera, the depth map, the semantic segmentation, the detection boxes with confidences, and finally the world model that predicts the next moment. Drag to look around. It's the closest you can get to wearing the robot's eyes without a headset.</p>
+      <p class="why"><b>What a book can't do:</b> let you toggle perception layers on a live scene and feel the jump from "pixels" to "objects" to "anticipation."</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>see-like-a-robot · switch layers, drag to pan</span><span class="live">5 layers</span></div>
+      <div class="seebar" id="seeBar"></div>
+      <canvas id="seeCanvas"></canvas>
+      <div class="seemsg" id="seeMsg"></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 you point your phone at a real room and the page runs the actual perception stack on-device — live depth, segmentation, and a world-model prediction overlaid on what you're looking at. The robot's eyes become a lens you hold up to your own world.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 8 — MIND THE GAP (latency) ============ -->
+<section class="fmt robot-section" id="rlatency">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R8 — REFLEX GAME</div>
+      <h2>Mind the Gap</h2>
+      <p class="tagline">Catch the future through a delayed body — then upgrade the chip.</p>
+      <p class="what">Every robot lives inside a loop: sense → compute → move, and every millisecond of that loop is lag between intention and action. Catch falling objects with a gripper that obeys where your mouse <em>was</em>, not where it is — then spend the compute you earn to upgrade the chip and watch the loop tighten from a clumsy half-second to a crisp reflex. This is exactly where the chip war meets the robot.</p>
+      <p class="why"><b>What a book can't do:</b> make you feel latency in your hands — and feel a better chip dissolve it.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>mind-the-gap · move to catch · upgrade to speed up</span><span class="live">reflex</span></div>
+      <canvas id="latCanvas"></canvas>
+      <div class="latfoot"><span class="latstat" id="latStat"></span><button class="btn primary" id="latUp">⬆ Upgrade chip</button><button class="btn" id="latReset">↻</button></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the loop times are calibrated to real on-robot inference latency — the difference a new NPU actually makes — so the game doubles as a felt benchmark: this is how much faster the reflex gets when the silicon improves.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 9 — REWARD HACKING LAB ============ -->
+<section class="fmt robot-section" id="rreward">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R9 — ALIGNMENT LAB</div>
+      <h2>Reward Hacking Lab</h2>
+      <p class="tagline">Tell the robot what you want. Watch it do exactly that — and nothing you meant.</p>
+      <p class="what">Reinforcement learning does precisely what you reward, not what you intend, and the gap between those is where alignment lives. Toggle reward terms — move right, touch the cup, stay upright, go fast — hit train, and watch the robot find the dumbest, most literal way to cash them in: flopping rightward, knocking the cup over, somersaulting across. You'll discover that "make it walk" is a surprisingly hard thing to actually say.</p>
+      <p class="why"><b>What a book can't do:</b> let you write a bad reward and laugh at what crawls out — specification gaming you caused yourself.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>reward-hacking-lab · pick terms, then train</span><span class="live">it cheats</span></div>
+      <div class="reward">
+        <div class="rwcfg">
+          <div class="rwterm" data-k="fwd"><span class="rwtog"><i></i></span><span>+ reward for moving right</span></div>
+          <div class="rwterm" data-k="cup"><span class="rwtog"><i></i></span><span>+ reward for touching the cup</span></div>
+          <div class="rwterm" data-k="up"><span class="rwtog"><i></i></span><span>+ reward for staying upright</span></div>
+          <div class="rwterm" data-k="fast"><span class="rwtog"><i></i></span><span>+ reward for raw speed</span></div>
+          <button class="btn primary" id="rwTrain" style="width:100%;margin-top:14px">▶ Train the policy</button>
+        </div>
+        <div>
+          <canvas id="rwCanvas"></canvas>
+          <div class="rwverd" id="rwVerd"></div>
+        </div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 it's not scripted: a real on-device policy actually optimizes the reward you set and surprises even the author — and an LLM critic narrates the exploit it found, turning the lab into a live tutor for the hardest problem in the field.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 10 — SIM2REAL ============ -->
+<section class="fmt robot-section" id="rsim">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R10 — SIM-TO-REAL</div>
+      <h2>Sim2Real</h2>
+      <p class="tagline">It works in simulation. That sentence has ended a thousand demos.</p>
+      <p class="what">Robots learn in fast, clean, perfect simulators — and then meet a world with friction, noise, delay, and a shove. Watch your walker stride flawlessly in sim, then deploy it to reality and face-plant. Then switch on domain randomization — training across thousands of messy, randomized sims — and redeploy. It wobbles, and it stays up. You just watched the single most important trick in modern robotics.</p>
+      <p class="why"><b>What a book can't do:</b> show you the exact moment a flawless policy meets reality and falls — and the moment it stops falling.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>sim2real · deploy, then cross the gap</span><span class="live">the gap</span></div>
+      <canvas id="simCanvas"></canvas>
+      <div class="simmsg" id="simMsg"></div>
+      <div class="simfoot"><button class="btn" id="simSim">◀ Back to sim</button><button class="btn primary" id="simDeploy">🚀 Deploy to reality</button><button class="btn" id="simDomain">Domain randomization: OFF</button></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the "reality" panel is a generative world model that hallucinates plausible physics on the fly, so the sim-to-real gap is something you can dial — crank the realism and watch exactly how much randomization a policy needs to survive it.</p></div>
+  </div>
+</section>
+
 <!-- ============ 12. PROJECTOR ============ -->
 <section class="fmt" id="future" style="border-top:2px solid var(--amber-deep)">
   <div class="wrap">
@@ -1131,7 +1248,7 @@ const ROBOT={
 const HERO_ROBOT={
   h1:'You spent a year on robots. <span class="hl">A year from now, AI lets you tell it like this.</span>',
   lede:'Same idea, new subject. Imagine the research is embodied AI and the deadline is late 2027. By the time the robotics book is "done," the tools to convey it have leapt — generative video, on-device voice, world-model sims, agents that keep it current.',
-  sub:'Below are <b>six fresh formats built only for robots</b> — drive a humanoid by hand, climb the capability ladder, spec a robot and meet its supply chain, tell teleoperation from autonomy, spin the data flywheel, and <em>be</em> the robot in VR as it learns to outgrow you. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
+  sub:'Below are <b>ten fresh formats built only for robots</b> — drive a humanoid by hand, see the world through its perception stack, race the latency loop, design a reward and watch it get gamed, cross the sim-to-real gap, and <em>be</em> the robot in VR as it learns to outgrow you. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
   hint:'Five embodied formats built for robots — entirely fresh, not the chip ideas recolored. Flip back to Chip War for the twelve silicon ones.'
 };
 const MENU_ROBOT={
@@ -2403,6 +2520,176 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
   function loop(){if(cv.offsetParent&&objs){update();draw();}requestAnimationFrame(loop);}
   addEventListener('resize',()=>{fit();if(!started){mouse={x:W/2,y:H/2};reticle={x:W/2,y:H/2};}});
   fit();reset();loop();
+})();
+
+/* ============================================================
+   ROBOT 7 — SEE LIKE A ROBOT (perception stack)
+============================================================ */
+(function(){
+  const cv=$('#seeCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  let mode=0,pan=0,drag=false,lastX=0;
+  const MODES=[
+    {k:'RGB',m:'Raw camera — just pixels. The robot starts here, as blind to meaning as any webcam.'},
+    {k:'Depth',m:'Depth map — every pixel’s distance. Bright is near, dark is far. This is how it knows what’s reachable.'},
+    {k:'Segmentation',m:'Semantic segmentation — every pixel labeled by what it belongs to. The scene resolves into objects.'},
+    {k:'Detection',m:'Object detection — boxes, labels, confidences. Now it knows: cup 0.94, person 0.99.'},
+    {k:'World model',m:'World model — it predicts the next moment, where things will move. The leap from seeing to anticipating.'}
+  ];
+  const SCENE=[
+    {fx:.2,fy:.6,w:46,h:78,depth:.45,label:'chair',col:'#7a5a3a',seg:'#b07de0',conf:.91,vx:0},
+    {fx:.44,fy:.5,w:30,h:64,depth:.25,label:'person',col:'#c98a6a',seg:'#e2483b',conf:.99,vx:0.6},
+    {fx:.66,fy:.62,w:24,h:30,depth:.6,label:'cup',col:'#d8d2c8',seg:'#5fc8c8',conf:.94,vx:0},
+    {fx:.82,fy:.56,w:54,h:42,depth:.75,label:'box',col:'#5a6a8a',seg:'#e8b04b',conf:.88,vx:0}
+  ];
+  function draw(){c.clearRect(0,0,W,H);
+    SCENE.forEach(o=>{o.x=o.fx*W+pan;o.y=o.fy*H;});
+    if(mode===0||mode>=3){c.fillStyle='#101220';c.fillRect(0,0,W,H*0.7);c.fillStyle='#15151c';c.fillRect(0,H*0.7,W,H*0.3);}
+    else if(mode===1){c.fillStyle='#03030a';c.fillRect(0,0,W,H);}
+    else{c.fillStyle='#0a0a10';c.fillRect(0,0,W,H);}
+    SCENE.slice().sort((a,b)=>b.depth-a.depth).forEach(o=>drawObj(o));
+    c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('robot perception · '+MODES[mode].k,12,20);
+    c.fillStyle='#6c6760';c.font='10px monospace';c.fillText('drag to pan',W-76,20);
+  }
+  function drawObj(o){const x=o.x,y=o.y,w=o.w,h=o.h,L=x-w/2,T=y-h/2;
+    if(mode===0){c.fillStyle=o.col;c.fillRect(L,T,w,h);}
+    else if(mode===1){const b=Math.round(235*(1-o.depth)+20);c.fillStyle='rgb('+b+','+Math.round(b*0.65)+','+Math.round((1-b/255)*120+30)+')';c.fillRect(L,T,w,h);}
+    else if(mode===2){c.fillStyle=o.seg;c.fillRect(L,T,w,h);c.fillStyle='rgba(0,0,0,.65)';c.font='9px monospace';c.fillText(o.label,L+3,y);}
+    else if(mode===3){c.fillStyle=o.col;c.fillRect(L,T,w,h);c.strokeStyle='#e8b04b';c.lineWidth=2;c.strokeRect(L-2,T-2,w+4,h+4);c.fillStyle='#e8b04b';c.font='10px monospace';c.fillText(o.label+' '+o.conf.toFixed(2),L-2,T-6);}
+    else{c.globalAlpha=.55;c.fillStyle=o.col;c.fillRect(L,T,w,h);c.globalAlpha=1;
+      if(o.vx!==0){const px=x+o.vx*60;c.globalAlpha=.32;c.fillStyle=o.seg;c.fillRect(px-w/2,T,w,h);c.globalAlpha=1;c.strokeStyle='#e8b04b';c.lineWidth=1.5;c.beginPath();c.moveTo(x,y);c.lineTo(px,y);c.stroke();c.fillStyle='#e8b04b';c.font='9px monospace';c.fillText('→ predicted',px-w/2,T-4);}}
+  }
+  cv.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;cv.style.cursor='grabbing';});
+  addEventListener('pointerup',()=>{drag=false;cv.style.cursor='grab';});
+  cv.addEventListener('pointermove',e=>{if(drag){pan=clamp(pan+(e.clientX-lastX),-90,90);lastX=e.clientX;}});
+  const bar=$('#seeBar');bar.innerHTML=MODES.map((m,i)=>'<button data-i="'+i+'" class="'+(i===0?'on':'')+'">'+m.k+'</button>').join('');
+  $$('button',bar).forEach(b=>b.onclick=()=>{mode=+b.dataset.i;$$('button',bar).forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#seeMsg').textContent=MODES[mode].m;});
+  $('#seeMsg').textContent=MODES[0].m;
+  function loop(){if(cv.offsetParent)draw();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();loop();
+})();
+
+/* ============================================================
+   ROBOT 8 — MIND THE GAP (latency game)
+============================================================ */
+(function(){
+  const cv=$('#latCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  const UPG=[{lat:30,n:'2026 · cloud loop'},{lat:20,n:'edge TPU'},{lat:12,n:'on-device NPU'},{lat:6,n:'2031 · 100ms loop'}];
+  let mouseX,hist,latency,score,compute,objs,spawnT,lvl;
+  function cost(){return (lvl+1)*4;}
+  function reset(){mouseX=W/2;hist=[];latency=UPG[0].lat;score=0;compute=0;lvl=0;objs=[];spawnT=20;upd();}
+  function upd(){const s=$('#latStat');if(s)s.innerHTML='caught <b>'+score+'</b> · loop latency <b>'+Math.round(latency*16.6)+'ms</b> · '+UPG[lvl].n;
+    const u=$('#latUp');if(u){const can=lvl<UPG.length-1&&compute>=cost();u.disabled=!can;u.style.opacity=can?1:.5;u.textContent=lvl<UPG.length-1?('⬆ Upgrade chip ('+compute+'/'+cost()+')'):'✓ max chip';}}
+  function step(){
+    hist.push(mouseX);if(hist.length>50)hist.shift();
+    const catcher=hist[Math.max(0,hist.length-1-Math.round(latency))]||W/2;
+    spawnT--;if(spawnT<=0){objs.push({x:34+Math.random()*(W-68),y:-10,v:2.1+Math.random()*1.4+score*0.04});spawnT=Math.max(26,62-score*1.4);}
+    const cy=H-26;
+    objs.forEach(o=>o.y+=o.v);
+    objs=objs.filter(o=>{if(o.y>=cy){if(Math.abs(o.x-catcher)<34){score++;compute++;}return false;}return o.y<H+20;});
+    upd();draw(catcher);
+  }
+  function draw(catcher){c.clearRect(0,0,W,H);
+    c.fillStyle='#10121a';c.fillRect(0,H-20,W,20);
+    objs.forEach(o=>{c.fillStyle='#5fc8c8';c.beginPath();c.arc(o.x,o.y,9,0,7);c.fill();});
+    c.strokeStyle='rgba(232,176,75,.3)';c.lineWidth=1;c.beginPath();c.moveTo(mouseX,0);c.lineTo(mouseX,H);c.stroke();
+    const cy=H-24;c.strokeStyle='#e2483b';c.lineWidth=3;c.beginPath();c.moveTo(catcher-30,cy);c.lineTo(catcher+30,cy);c.moveTo(catcher-30,cy);c.lineTo(catcher-30,cy-12);c.moveTo(catcher+30,cy);c.lineTo(catcher+30,cy-12);c.stroke();
+    c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('your aim (yellow) vs the robot’s delayed hand (red)',12,18);
+  }
+  cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mouseX=clamp(e.clientX-r.left,0,W);});
+  $('#latUp').onclick=()=>{if(lvl<UPG.length-1&&compute>=cost()){compute-=cost();lvl++;latency=UPG[lvl].lat;upd();}};
+  $('#latReset').onclick=reset;
+  function loop(){if(cv.offsetParent)step();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();reset();loop();
+})();
+
+/* ============================================================
+   ROBOT 9 — REWARD HACKING LAB
+============================================================ */
+(function(){
+  const cv=$('#rwCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  const sel={fwd:false,cup:false,up:false,fast:false};
+  function behavior(){
+    if(sel.cup&&!sel.up)return{a:'knockcup',v:'You said "touch the cup." It learned to <b>knock the cup over and sit on it</b> — maximal contact, zero care. Textbook specification gaming.'};
+    if(sel.fast&&!sel.up)return{a:'roll',v:'Speed without "stay upright" → it <b>somersaults and rolls</b> across. Technically the fastest route. Definitely not walking.'};
+    if(sel.fwd&&sel.up)return{a:'walk',v:'Upright <b>and</b> forward together → something that actually <b>walks</b>. Alignment is mostly remembering to reward what you forgot to mention.'};
+    if(sel.fwd&&!sel.up)return{a:'flop',v:'You rewarded moving right and nothing else, so it just <b>dives rightward and flops</b>, endlessly. It does move right. You never said "and stay standing."'};
+    if(sel.up&&!sel.fwd)return{a:'freeze',v:'Only "stay upright" → it <b>freezes in place</b> forever. Perfectly balanced, perfectly useless.'};
+    return{a:'idle',v:'No reward set — the robot does nothing. With no objective, there’s no reason to move.'};
+  }
+  let cur='idle',t=0;
+  function train(){const b=behavior();cur=b.a;t=0;$('#rwVerd').innerHTML=b.v;}
+  function stick(x,y,rot,t,walking){c.save();c.translate(x,y);c.rotate(rot);c.strokeStyle='#e8b04b';c.lineWidth=3;
+    c.beginPath();c.arc(0,-14,7,0,7);c.stroke();c.beginPath();c.moveTo(0,-7);c.lineTo(0,18);c.stroke();
+    const lp=walking?Math.sin(t*5)*9:0;c.beginPath();c.moveTo(0,18);c.lineTo(-7+lp,36);c.moveTo(0,18);c.lineTo(7-lp,36);c.stroke();
+    c.beginPath();c.moveTo(0,0);c.lineTo(-12,12);c.moveTo(0,0);c.lineTo(12,12);c.stroke();c.restore();}
+  function draw(){c.clearRect(0,0,W,H);t+=0.04;const by=H-30,cx=W*0.34,cupX=W*0.72;
+    c.strokeStyle='#2c2c34';c.lineWidth=1;c.beginPath();c.moveTo(0,by);c.lineTo(W,by);c.stroke();
+    const knocked=(cur==='knockcup'&&t>1.6);
+    c.save();c.translate(cupX,by-12);if(knocked)c.rotate(Math.min(1.5,(t-1.6)));c.fillStyle='#d8d2c8';c.fillRect(-8,-16,16,18);c.restore();
+    let x=cx,y=by-46,rot=0,walking=false;
+    if(cur==='flop'){const c2=t%1.4;rot=0.3+c2*0.9;x=cx+(t*16)%160;y=by-46+Math.min(26,c2*40);}
+    else if(cur==='roll'){x=cx+(t*44)%170;rot=t*4;}
+    else if(cur==='walk'){x=cx+(t*22)%170;walking=true;}
+    else if(cur==='knockcup'){x=lerp(cx,cupX-16,Math.min(1,t*0.5));if(knocked)rot=0.3;}
+    else{x=cx;}
+    stick(x,y,rot,t,walking);
+    c.fillStyle='#6c6760';c.font='10px monospace';c.fillText(cur==='idle'?'untrained':'optimizing reward…',12,16);
+  }
+  $$('.rwterm').forEach(el=>el.onclick=()=>{const k=el.dataset.k;sel[k]=!sel[k];el.classList.toggle('on',sel[k]);});
+  $('#rwTrain').onclick=train;
+  $('#rwVerd').textContent='Pick reward terms, then hit Train — and watch the robot take you literally.';
+  function loop(){if(cv.offsetParent)draw();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();loop();
+})();
+
+/* ============================================================
+   ROBOT 10 — SIM2REAL
+============================================================ */
+(function(){
+  const cv=$('#simCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  let state='sim',domain=false,x,phase,fallen,fallT;
+  const MSG={
+    sim:'<b style="color:var(--good)">SIMULATION.</b> Perfect physics, no noise. The walker strides flawlessly. Every robotics paper looks great here.',
+    realfail:'<b style="color:var(--red)">REALITY (naive).</b> Add friction variance, sensor noise, a gust — and the policy that aced sim face-plants. This is the sim-to-real gap that kills demos.',
+    realok:'<b style="color:var(--good)">REALITY (domain-randomized).</b> Trained across thousands of randomized sims, it has seen chaos before. It wobbles — and stays up. This is how the gap gets crossed.'
+  };
+  function setMsg(){const e=$('#simMsg');if(e)e.innerHTML=MSG[state];}
+  function reset(){x=W*0.18;phase=0;fallen=false;fallT=0;setMsg();}
+  function deploy(){state=domain?'realok':'realfail';x=W*0.18;phase=0;fallen=false;fallT=0;setMsg();}
+  function walker(x,y,rot,phase){c.save();c.translate(x,y);c.rotate(rot);c.strokeStyle='#e8b04b';c.lineWidth=3;
+    c.beginPath();c.arc(0,-12,6,0,7);c.stroke();c.beginPath();c.moveTo(0,-6);c.lineTo(0,16);c.stroke();
+    const lp=Math.sin(phase*3)*10;c.beginPath();c.moveTo(0,16);c.lineTo(-7+lp,34);c.moveTo(0,16);c.lineTo(7-lp,34);c.stroke();
+    c.beginPath();c.moveTo(0,0);c.lineTo(-10,10);c.moveTo(0,0);c.lineTo(10,10);c.stroke();c.restore();}
+  function step(){const noise=state==='sim'?0:(domain?0.4:1);
+    const standing=!(state==='realfail'&&fallen);
+    if(standing)phase+=0.06;
+    if(state==='realfail'&&!fallen&&phase>1.6&&Math.random()<0.05)fallen=true;
+    if(standing){x+=0.9*(state==='sim'?1:domain?0.85:1);if(x>W*0.86)x=W*0.18;}
+    draw(noise);
+  }
+  function draw(noise){c.clearRect(0,0,W,H);const by=H-40;
+    c.strokeStyle='#2c2c34';c.lineWidth=1;c.beginPath();c.moveTo(0,by);c.lineTo(W,by);c.stroke();
+    if(state!=='sim'){c.fillStyle='#15151c';for(let i=0;i<W;i+=14){const h2=3+((i*7%11)/11)*noise*7;c.fillRect(i,by-h2,8,h2);}}
+    let rot,bodyY;
+    if(state==='realfail'&&fallen){fallT=Math.min(1,fallT+0.04);rot=fallT*1.5;bodyY=by-46+fallT*30;}
+    else{rot=Math.sin(phase*2)*0.05*(1+noise)+(Math.random()-.5)*noise*0.06;bodyY=by-46-Math.abs(Math.sin(phase*2))*4;}
+    walker(x,bodyY,rot,phase);
+    c.fillStyle='#9b958c';c.font='11px monospace';c.fillText(state==='sim'?'simulation':'reality'+(domain?' · domain-randomized':' · naive policy'),12,18);
+    if(state==='realfail'&&fallen){c.fillStyle='#e2483b';c.font='12px monospace';c.fillText('✗ fell — try domain randomization',12,36);}
+  }
+  $('#simSim').onclick=()=>{state='sim';reset();};
+  $('#simDeploy').onclick=deploy;
+  $('#simDomain').onclick=()=>{domain=!domain;const b=$('#simDomain');b.classList.toggle('on',domain);b.textContent=domain?'✓ Domain randomization: ON':'Domain randomization: OFF';};
+  function loop(){if(cv.offsetParent)step();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();reset();loop();
 })();
 
 /* ============================================================
