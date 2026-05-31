@@ -378,6 +378,80 @@
   body.robot .robotonly{display:inline}
   body.robot .chiponly{display:none}
 
+  /* ===== COLLAPSIBLE DEMOS (quick-skim default) ===== */
+  .democontent{animation:reveal .25s ease}
+  @keyframes reveal{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .demo.collapsed .democontent{display:none}
+  .demo.collapsed .demobar{cursor:pointer}
+  .demo.collapsed .demobar:hover{background:var(--panel2)}
+  .demo.collapsed .demobar:hover .launchbtn{border-color:var(--red);color:var(--red)}
+  .demo.collapsed .demobar .live{display:none}
+  .launchbtn{margin-left:auto;font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);border-radius:7px;padding:5px 12px;cursor:pointer;white-space:nowrap;transition:.12s}
+  .launchbtn:hover{border-color:var(--red);color:var(--red)}
+  .demo:not(.collapsed) .launchbtn{color:var(--muted)}
+  .menusub{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin:-10px 0 22px}
+
+  /* ===== MODE GALLERY VISIBILITY ===== */
+  .navchip{display:contents}.navrobot{display:none}
+  body.robot .navchip{display:none} body.robot .navrobot{display:contents}
+  .menu-robot{display:none}
+  body.robot .menu-chip{display:none} body.robot .menu-robot{display:block}
+  .robot-section{display:none}
+  body.robot .chip-section{display:none} body.robot .robot-section{display:block}
+
+  /* ===== ROBOT DEMOS ===== */
+  #teleopCanvas{width:100%;height:320px;display:block;background:#0a0a0e;border-radius:0;cursor:crosshair;touch-action:none}
+  .teleopfoot{display:flex;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .teleopmsg{padding:0 18px 16px;font-size:14px;color:#d8d2c8;min-height:20px}
+  .ladder{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .rungs{padding:18px;border-right:1px solid var(--line)}
+  .rung{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:.15s}
+  .rung:hover{border-color:var(--amber);transform:translateX(3px)} .rung.on{border-color:var(--amber);background:var(--panel2)}
+  .rung .rt{font-size:14px;flex:1} .rung .badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:12px;white-space:nowrap}
+  .badge.solved{background:rgba(95,191,120,.15);color:var(--good)} .badge.emerging{background:rgba(232,176,75,.15);color:var(--amber)} .badge.frontier{background:rgba(226,72,59,.15);color:var(--red)} .badge.open{background:var(--panel2);color:var(--muted)}
+  .rungout{padding:22px}
+  .rungout h4{margin:0 0 8px;font-size:20px}
+  .rungout .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:12px}
+  .rungout p{font-size:14.5px;color:#d8d2c8;margin:0 0 10px}
+  @media(max-width:680px){.ladder{grid-template-columns:1fr}.rungs{border-right:none;border-bottom:1px solid var(--line)}}
+  .spec{display:grid;grid-template-columns:1fr 300px;gap:0}
+  .speccfg{padding:18px;border-right:1px solid var(--line)}
+  .specrow{margin-bottom:15px}
+  .specrow .sl3{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+  .specopts{display:flex;gap:6px;flex-wrap:wrap}
+  .specopts button{font-family:var(--serif);font-size:12.5px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:8px;padding:8px 11px;cursor:pointer;text-align:left;flex:1;min-width:130px}
+  .specopts button.on{border-color:var(--amber);color:var(--ink);background:var(--panel2)}
+  .specout{padding:20px;background:var(--bg2)}
+  .specstat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .specstat b{font-family:var(--mono);color:var(--amber)}
+  .gauge{margin-top:14px}
+  .gauge .gl{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px}
+  .gauge .gt{height:10px;background:var(--panel2);border-radius:6px;overflow:hidden}
+  .gauge .gt i{display:block;height:100%;border-radius:6px;transition:width .4s,background .4s}
+  .specverd{font-size:13.5px;color:#d8d2c8;margin-top:14px;min-height:40px}
+  @media(max-width:680px){.spec{grid-template-columns:1fr}.speccfg{border-right:none;border-bottom:1px solid var(--line)}}
+  .guess{padding:20px;text-align:center}
+  #guessCanvas{width:100%;max-width:440px;height:200px;display:block;margin:0 auto 14px;background:#0a0a0e;border-radius:10px;border:1px solid var(--line)}
+  .guesscap{font-size:15px;color:#e6e0d6;margin-bottom:14px;min-height:42px;max-width:48ch;margin-left:auto;margin-right:auto}
+  .guessbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .guessbtns button{font-family:var(--mono);font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:11px 18px;cursor:pointer}
+  .guessbtns button:hover{border-color:var(--amber)}
+  .guessreveal{font-size:14px;margin:14px auto 8px;min-height:40px;max-width:54ch;color:#d8d2c8}
+  .guessscore{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .flywheel{display:grid;grid-template-columns:1fr 280px;gap:0}
+  #flyCanvas{width:100%;height:300px;display:block;background:#0a0a0e}
+  .flyside{padding:20px;border-left:1px solid var(--line)}
+  .flyside .fcap{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .flyside .fcapv{font-family:var(--mono);font-size:34px;color:var(--amber);line-height:1;margin-bottom:8px}
+  .flyslider{margin:12px 0}
+  .flyslider label{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+  .flyslider input{width:100%;margin-top:5px;accent-color:var(--amber)}
+  .flybtns{display:flex;gap:8px;margin-top:8px}
+  .flyunlocks{margin-top:14px;font-size:12.5px}
+  .flyunlocks div{padding:5px 0;color:var(--faint);transition:.3s}
+  .flyunlocks div.lit{color:var(--good)}
+  @media(max-width:680px){.flywheel{grid-template-columns:1fr}.flyside{border-left:none;border-top:1px solid var(--line)}}
+
   /* closing */
   section.close{padding:70px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(168,38,29,.05))}
   .close h2{font-size:clamp(26px,4vw,38px);margin:0 0 18px;max-width:20ch}
@@ -399,17 +473,26 @@
     <span class="brand"><b>◆</b> Beyond&nbsp;the&nbsp;Book</span>
     <div class="modemini"><button class="chip on" data-m="chip">Chip</button><button class="robot" data-m="robot">Robot</button></div>
     <div class="links">
-      <a href="#scroll">Scroll</a>
-      <a href="#map">Map</a>
-      <a href="#game">Game</a>
-      <a href="#ask">Ask</a>
-      <a href="#steer">Steer</a>
-      <a href="#living">Living</a>
-      <a href="#zoom">Zoom</a>
-      <a href="#sound">Sound</a>
-      <a href="#stage">Stage</a>
-      <a href="#whatif">What-If</a>
-      <a href="#cards">Cards</a>
+      <span class="navchip">
+        <a href="#scroll">Scroll</a>
+        <a href="#map">Map</a>
+        <a href="#game">Game</a>
+        <a href="#ask">Ask</a>
+        <a href="#steer">Steer</a>
+        <a href="#living">Living</a>
+        <a href="#zoom">Zoom</a>
+        <a href="#sound">Sound</a>
+        <a href="#stage">Stage</a>
+        <a href="#whatif">What-If</a>
+        <a href="#cards">Cards</a>
+      </span>
+      <span class="navrobot">
+        <a href="#rteleop">Drive</a>
+        <a href="#rladder">Ladder</a>
+        <a href="#rspec">Spec</a>
+        <a href="#rguess">Guess</a>
+        <a href="#rflywheel">Flywheel</a>
+      </span>
       <a href="#future">The Dial ↗</a>
     </div>
   </div>
@@ -429,14 +512,16 @@
     <p class="modehint" id="modehint">The book that exists. Flip the toggle to see the same gallery rebuilt for the next book — a year of robot research, and the AI that will tell it.</p>
     <p class="booknote">SOURCE OBJECT — <em>Chip War: The Fight for the World's Most Critical Technology</em>, Chris Miller, Scribner / Simon &amp; Schuster, 2022. Every figure below is real and dated. This site is an homage and a design provocation, not affiliated with the author or publisher.</p>
     <div class="cta">
-      <a class="btn primary" href="#scroll">See the twelve evolutions ↓</a>
+      <a class="btn primary" href="#ideas">See all the ideas at a glance ↓</a>
       <a class="btn" href="#future">Jump to the 18-months dial →</a>
     </div>
   </div>
 </header>
 
-<div class="wrap menu">
+<div class="wrap menu" id="ideas">
+  <div class="menu-chip">
   <h2>Twelve ways out of the book</h2>
+  <p class="menusub">The whole gallery at a glance — click any idea to launch its live demo. (Demos start collapsed so you can skim all twelve fast.)</p>
   <div class="cards">
     <a class="mcard" href="#scroll"><div class="n">01 / scrollytelling</div><h3>Silicon Scroll</h3><p>The exponential outruns your scroll wheel. Moore's Law, the fab-cost explosion, and the collapse onto one island — felt, not read.</p><span class="tag">canvas · live</span></a>
     <a class="mcard" href="#map"><div class="n">02 / explorable map</div><h3>Chokepoint</h3><p>The supply chain as a graph you can sever. Cut ASML and watch the cascade idle every advanced fab on Earth.</p><span class="tag">click to break it</span></a>
@@ -451,6 +536,20 @@
     <a class="mcard" href="#cards"><div class="n">11 / card game</div><h3>Silicon Top Trumps</h3><p>ASML vs TSMC vs Nvidia. Play your chokepoint power against the house. Best of five.</p><span class="tag">playable</span></a>
     <a class="mcard" href="#future" style="border-color:var(--amber-deep)"><div class="n" style="color:var(--amber)">12 / the forecast</div><h3>The Projector ⏵</h3><p>Drag the year from 2026 to 2027 and watch the book — and the chokepoints — recompile from Chip War into <em>Robot War</em>.</p><span class="tag" style="color:var(--amber);border-color:var(--amber-deep)">+18 months</span></a>
   </div>
+  </div><!-- /menu-chip -->
+
+  <div class="menu-robot">
+  <h2>Five things only robots let you build</h2>
+  <p class="menusub">Robot mode is its own gallery — fresh, embodied formats, not the chip ideas recolored. Click any to launch it.</p>
+  <div class="cards">
+    <a class="mcard" href="#rteleop"><div class="n">01 / teleop booth</div><h3>Drive the Hand</h3><p>Puppet a humanoid gripper to stack blocks — and feel why most "autonomous" robot demos are a human at the controls.</p><span class="tag">you are the robot</span></a>
+    <a class="mcard" href="#rladder"><div class="n">02 / capability tree</div><h3>The Capability Ladder</h3><p>Climb from "pick up a cube" to "cook dinner." Each rung shows the real bottleneck — and who's closest.</p><span class="tag">what's solved?</span></a>
+    <a class="mcard" href="#rspec"><div class="n">03 / configurator</div><h3>Spec Your Humanoid</h3><p>Choose actuators, magnets, battery, brain — and watch the cost, the payload, and how much of your robot depends on one country.</p><span class="tag">build one</span></a>
+    <a class="mcard" href="#rguess"><div class="n">04 / guessing game</div><h3>Teleop or Autonomous?</h3><p>Five clips. You call it: human-driven or self-driving? Learn the field's central illusion.</p><span class="tag">spot the human</span></a>
+    <a class="mcard" href="#rflywheel"><div class="n">05 / loop sim</div><h3>The Data Flywheel</h3><p>More robots → more data → smarter robots. Spin the flywheel and watch it take off — or stall for lack of data.</p><span class="tag">scaling sim</span></a>
+    <a class="mcard" href="#future" style="border-color:var(--amber-deep)"><div class="n" style="color:var(--amber)">↔ the bridge</div><h3>The Projector ⏵</h3><p>The one format that spans both: drag the dial and watch Chip War become Robot War — chokepoints and media both recompile.</p><span class="tag" style="color:var(--amber);border-color:var(--amber-deep)">+18 months</span></a>
+  </div>
+  </div><!-- /menu-robot -->
 </div>
 
 <!-- ============ 1. SCROLLY ============ -->
@@ -735,6 +834,120 @@
   </div>
 </section>
 
+<!-- ============ ROBOT 1 — DRIVE THE HAND ============ -->
+<section class="fmt robot-section" id="rteleop">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R1 — TELEOP BOOTH</div>
+      <h2>Drive the Hand</h2>
+      <p class="tagline">You be the robot. It's harder than it looks.</p>
+      <p class="what">A year of robot research teaches you one thing fast: the bottleneck isn't the brain, it's the hand. So instead of telling you, this hands you the controls. Move the gripper, grab the blocks, stack all three. You'll feel how much attention a five-second task demands — and why most "autonomous" robot videos are quietly teleoperated by a human doing exactly this.</p>
+      <p class="why"><b>What a book can't do:</b> put the embodiment gap in your own hand, so "manipulation is unsolved" stops being a sentence and becomes a thing you struggled to do.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>drive-the-hand · move mouse, click to grab/drop</span><span class="live">teleop</span></div>
+      <canvas id="teleopCanvas"></canvas>
+      <div class="teleopmsg" id="teleopMsg"></div>
+      <div class="teleopfoot"><button class="btn primary" id="teleopReset">↻ Reset blocks</button><span class="small">Goal: stack all three blocks. Click a block to grab it, click again to drop.</span></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 this booth is real teleop data collection: every human demonstration you give trains the policy, and a slider blends "you driving" into "the robot driving," so you literally watch autonomy take over the task you just taught it. The toy becomes the actual data flywheel the industry runs on.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 2 — CAPABILITY LADDER ============ -->
+<section class="fmt robot-section" id="rladder">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R2 — CAPABILITY TREE</div>
+      <h2>The Capability Ladder</h2>
+      <p class="tagline">From "pick up a cube" to "cook dinner" — what's actually solved?</p>
+      <p class="what">Robotics progress is wildly uneven, and the public read of it is mostly hype. This is the honest ladder: every rung is a task, color-coded by how solved it really is, from done-since-2015 to open-research. Click any rung for the true bottleneck and who's closest. It's the field's reality check, made climbable.</p>
+      <p class="why"><b>What a book can't do:</b> stay current. A printed ladder is wrong in a year; this one is built to be re-graded as the frontier moves.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>capability-ladder · click a rung</span><span class="live">8 rungs</span></div>
+      <div class="ladder">
+        <div class="rungs" id="rungList"></div>
+        <div class="rungout" id="rungOut"></div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the ladder re-grades itself: an agent watches new papers and demo videos, re-scores each rung weekly, and auto-promotes a task from "frontier" to "emerging" with the citation that moved it. The reader sees the field climb in real time instead of trusting a frozen snapshot.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 3 — SPEC YOUR HUMANOID ============ -->
+<section class="fmt robot-section" id="rspec">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R3 — CONFIGURATOR</div>
+      <h2>Spec Your Humanoid</h2>
+      <p class="tagline">Build a robot — and discover whose supply chain you just bought.</p>
+      <p class="what">Every design choice in a humanoid is also a geopolitical choice. Pick the actuators, the motor magnets, the battery, and the brain, and watch the cost, payload, and runtime move — alongside a gauge of how much of your robot's value traces back to a single country. It's the chip-war chokepoint thesis turned into a build-a-bear you can't win cleanly.</p>
+      <p class="why"><b>What a book can't do:</b> let you feel the trade-off in your own hands — every step toward resilience costs you payload, runtime, or dollars.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>spec-your-humanoid · choose components</span><span class="live">live build</span></div>
+      <div class="spec">
+        <div class="speccfg" id="specCfg"></div>
+        <div class="specout" id="specOut"></div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the configurator prices from live BoM and commodity data, flags parts under active export control, and an agent suggests the cheapest resilient swap ("drop dysprosium dependence 30% for +$1.4k"). It becomes a real strategic-sourcing tool wearing a toy's clothes.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 4 — TELEOP OR AUTONOMOUS ============ -->
+<section class="fmt robot-section" id="rguess">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R4 — GUESSING GAME</div>
+      <h2>Teleop or Autonomous?</h2>
+      <p class="tagline">Five clips. Spot the human in the loop.</p>
+      <p class="what">The single most useful skill for reading robot news is telling teleoperation from autonomy — because the most jaw-dropping demos are usually a person puppeteering off-camera. Watch five vignettes, call each one, and learn the tell: smooth + dexterous + novel environment = probably a human; boring + repetitive + constrained = probably the machine.</p>
+      <p class="why"><b>What a book can't do:</b> train your eye. You only stop being fooled by robot demos by guessing wrong a few times and learning why.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>teleop-or-autonomous · call each clip</span><span class="live">5 clips</span></div>
+      <div class="guess">
+        <canvas id="guessCanvas"></canvas>
+        <div class="guesscap" id="guessCap"></div>
+        <div class="guessbtns"><button id="guessTeleop">🕹️ Teleoperated</button><button id="guessAuto">🤖 Autonomous</button></div>
+        <div class="guessreveal" id="guessReveal"></div>
+        <div class="guessscore" id="guessScore"></div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the clips are real, freshly generated from this week's demo reel, and the game streams genuine robot footage with the answer verified against the lab's own logs — a living media-literacy trainer for an era when "look, a robot did a backflip" needs an asterisk.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 5 — DATA FLYWHEEL ============ -->
+<section class="fmt robot-section" id="rflywheel">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R5 — LOOP SIM</div>
+      <h2>The Data Flywheel</h2>
+      <p class="tagline">More robots make smarter robots. Spin it — or watch it stall.</p>
+      <p class="what">The central bet of the whole field: deploy robots, they collect real-world data, the model gets smarter, it unlocks new tasks, which justifies deploying more robots. Set the fleet size and hours, then spin the flywheel and watch capability climb past thresholds that unlock folding, pouring, generalization — or watch it stall when there just isn't enough data to turn the wheel.</p>
+      <p class="why"><b>What a book can't do:</b> let you turn the knobs on the flywheel yourself and feel why "scale solves it" is a bet, not a guarantee.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>data-flywheel · set the fleet, hit run</span><span class="live">loop sim</span></div>
+      <div class="flywheel">
+        <canvas id="flyCanvas"></canvas>
+        <div class="flyside">
+          <div class="fcap">capability</div>
+          <div class="fcapv" id="flyCapV">8</div>
+          <div class="flyslider"><label>Robots deployed <span id="flyRobotsV">1,000</span></label><input id="flyRobots" type="range" min="0" max="100" value="40"/></div>
+          <div class="flyslider"><label>Hours / robot / day <span id="flyHoursV">8h</span></label><input id="flyHours" type="range" min="1" max="20" value="8"/></div>
+          <div class="flybtns"><button class="btn primary" id="flyRun">▶ Run a year</button><button class="btn" id="flyReset">↻</button></div>
+          <div class="flyunlocks" id="flyUnlocks"><div>pick &amp; place</div><div>open doors</div><div>pour &amp; liquids</div><div>fold laundry</div><div>generalize to new homes</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the sim is calibrated to real fleet-deployment and capability numbers as they're reported, so the flywheel's spin rate tracks the actual industry — and you can scrub a real forecast of when "fold laundry" goes green instead of a toy curve.</p></div>
+  </div>
+</section>
+
 <!-- ============ 12. PROJECTOR ============ -->
 <section class="fmt" id="future" style="border-top:2px solid var(--amber-deep)">
   <div class="wrap">
@@ -893,8 +1106,8 @@ const ROBOT={
 const HERO_ROBOT={
   h1:'You spent a year on robots. <span class="hl">A year from now, AI lets you tell it like this.</span>',
   lede:'Same idea, new subject. Imagine the research is embodied AI and the deadline is late 2027. By the time the robotics book is "done," the tools to convey it have leapt — generative video, on-device voice, world-model sims, agents that keep it current.',
-  sub:'Every format below re-skins for the robot story. The chokepoints move from EUV and TSMC to <b>rare-earth magnets, harmonic-drive actuators, batteries, and world-model weights</b> — and the medium moves with them. This is what a year of robot research becomes when it refuses to end up as just a book.',
-  hint:'The next book. Flip back to Chip War to see the format that already exists.'
+  sub:'Below are <b>five fresh formats built only for robots</b> — drive a humanoid by hand, climb the capability ladder, spec a robot and meet its supply chain, tell teleoperation from autonomy, and spin the data flywheel. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
+  hint:'Five embodied formats built for robots — entirely fresh, not the chip ideas recolored. Flip back to Chip War for the twelve silicon ones.'
 };
 const MENU_ROBOT={
   '#scroll':'Robot capability as an exponential you fall down, while the parts list collapses to a few suppliers.',
@@ -1037,7 +1250,7 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
     steps.forEach((s,i)=>s.classList.toggle('active',i===best));
     activeAct=+steps[best].dataset.act;prog=bp;
   }
-  let raf;function loop(){draw();raf=requestAnimationFrame(loop);}
+  let raf;function loop(){if(cv.offsetParent)draw();raf=requestAnimationFrame(loop);}
   addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',resize);
   $('#logToggle').onclick=e=>{logScale=!logScale;e.target.textContent='scale: '+(logScale?'log':'linear');e.target.classList.toggle('on',!logScale);};
   resize();onScroll();loop();
@@ -1921,11 +2134,200 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
   knob.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){setT(t+1/18);e.preventDefault();}if(e.key==='ArrowLeft'){setT(t-1/18);e.preventDefault();}});
 
   // animate the canvases continuously
-  let raf;function loop(){if(t>.05){drawEUV();}if(t>.33){drawWave();}drawRobot();raf=requestAnimationFrame(loop);}
+  let raf;function loop(){if(euv.offsetParent){if(t>.05){drawEUV();}if(t>.33){drawWave();}drawRobot();}raf=requestAnimationFrame(loop);}
   addEventListener('resize',fitAll);
   // voices preload for tts (chrome)
   if(window.speechSynthesis)speechSynthesis.getVoices();
   fitAll();loop();
+})();
+
+/* ============================================================
+   ROBOT 1 — DRIVE THE HAND (teleop booth)
+============================================================ */
+(function(){
+  const cv=$('#teleopCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  let blocks,grip,carrying,startT,done;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  const floor=()=>H-30;
+  function restY(b,exc){let s=floor();blocks.forEach((o,i)=>{if(i===exc||o===b||o.y==null)return;const ov=Math.abs((o.x+o.w/2)-(b.x+b.w/2))<(o.w+b.w)/2-8;if(ov)s=Math.min(s,o.y);});return s-b.h;}
+  function settle(){for(let p=0;p<4;p++)blocks.forEach((b,i)=>{if(i===carrying)return;b.y=restY(b,i);});}
+  function reset(){blocks=[{x:70,w:62,h:32,col:'#4a8fe0'},{x:175,w:62,h:32,col:'#5fbf78'},{x:280,w:62,h:32,col:'#e8b04b'}];blocks.forEach(b=>b.y=null);grip={x:(W||400)/2,y:64,open:true};carrying=-1;startT=null;done=false;settle();msg('Move the mouse to aim the gripper. Click on a block to grab it, click again to drop. Stack all three.');}
+  function msg(m){const e=$('#teleopMsg');if(e)e.innerHTML=m;}
+  function rr(x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();c.fill();}
+  function draw(){
+    c.clearRect(0,0,W,H);
+    c.fillStyle='#15151c';c.fillRect(0,floor(),W,H-floor());
+    c.strokeStyle='#2c2c34';c.lineWidth=1;c.beginPath();c.moveTo(0,floor());c.lineTo(W,floor());c.stroke();
+    c.strokeStyle='rgba(232,176,75,.22)';c.setLineDash([4,4]);for(let k=0;k<3;k++)c.strokeRect(W-96,floor()-32*(k+1),62,32);c.setLineDash([]);
+    c.fillStyle='#6c6760';c.font='10px monospace';c.fillText('goal',W-86,floor()-32*3-6);
+    blocks.forEach((b,i)=>{c.fillStyle=b.col;c.globalAlpha=i===carrying?.85:1;rr(b.x,b.y,b.w,b.h,5);});c.globalAlpha=1;
+    const g=grip,sp=g.open?16:9;c.strokeStyle='#e2483b';c.lineWidth=3;
+    c.beginPath();c.moveTo(g.x,6);c.lineTo(g.x,g.y);c.stroke();
+    c.beginPath();c.moveTo(g.x-sp,g.y);c.lineTo(g.x+sp,g.y);c.moveTo(g.x-sp,g.y);c.lineTo(g.x-sp,g.y+16);c.moveTo(g.x+sp,g.y);c.lineTo(g.x+sp,g.y+16);c.stroke();
+    c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('YOU = the robot’s brain · teleoperating',12,18);
+  }
+  function pos(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+  cv.addEventListener('pointermove',e=>{if(!blocks)return;const p=pos(e);grip.x=clamp(p.x,18,W-18);grip.y=clamp(p.y,40,floor()-8);if(carrying>=0){const b=blocks[carrying];b.x=clamp(grip.x-b.w/2,0,W-b.w);b.y=grip.y+16;}});
+  cv.addEventListener('pointerdown',e=>{if(!blocks)return;const p=pos(e);grip.x=clamp(p.x,18,W-18);grip.y=clamp(p.y,40,floor()-8);
+    if(carrying<0){let pick=-1;blocks.forEach((b,i)=>{if(grip.x>b.x-8&&grip.x<b.x+b.w+8&&grip.y>b.y-30&&grip.y<b.y+b.h+18)pick=i;});if(pick>=0){carrying=pick;grip.open=false;if(!startT)startT=performance.now();msg('Carrying a block. Click again to release it.');}}
+    else{const ci=carrying,b=blocks[ci];carrying=-1;grip.open=true;b.x=clamp(grip.x-b.w/2,0,W-b.w);b.y=restY(b,ci);settle();win();}});
+  function win(){const stacked=blocks.filter(b=>b.y<floor()-b.h-3).length;if(stacked>=2&&!done){done=true;const s=((performance.now()-startT)/1000).toFixed(1);msg('<b style="color:var(--good)">Stacked in '+s+'s.</b> And that took your full attention. Now imagine doing it from camera pixels, in a kitchen you’ve never seen, ten thousand times, with no human in the loop. <em>That</em> — not the intelligence, the hands — is the unsolved part.');}}
+  $('#teleopReset').onclick=reset;
+  addEventListener('resize',()=>{fit();if(blocks)settle();});
+  function loop(){if(cv.offsetParent&&blocks)draw();requestAnimationFrame(loop);}
+  fit();reset();loop();
+})();
+
+/* ============================================================
+   ROBOT 2 — THE CAPABILITY LADDER
+============================================================ */
+(function(){
+  const RUNGS=[
+    {t:'Pick up a rigid cube',badge:'solved',cls:'solved',b:'None — rigid grasping is mature.',who:'Everyone, since the 2010s.',why:'Known shape, known weight, a flat table. The "hello world" of manipulation, long solved.'},
+    {t:'Walk over rough terrain',badge:'solved',cls:'solved',b:'Locomotion — cracked by RL in simulation.',who:'Boston Dynamics, Unitree, most quadrupeds.',why:'Counter-intuitively, walking is the easy part now. Legged locomotion transfers from sim to real shockingly well.'},
+    {t:'Open a hinged door',badge:'solved',cls:'solved',b:'Mostly solved; odd latches still trip it.',who:'Figure, Apptronik, Google robotics.',why:'A door is a constrained, repeatable interaction. The long tail is the weird handle never seen in training.'},
+    {t:'Pour a drink without spilling',badge:'emerging',cls:'emerging',b:'Continuous control + handling liquids.',who:'Lab demos (2024–25); brittle in the wild.',why:'Liquids are deformable and unforgiving — a small error spills. Fine in a demo, fragile in a real kitchen.'},
+    {t:'Fold a shirt / handle laundry',badge:'emerging',cls:'emerging',b:'Deformable-object manipulation — the "towel problem."',who:'Physical Intelligence, Google, recent humanoid demos.',why:'Cloth has infinite configurations and no fixed shape. A classic frontier that’s finally cracking — slowly.'},
+    {t:'Tidy a kitchen you’ve never seen',badge:'frontier',cls:'frontier',b:'Generalization to novel scenes + long-horizon planning.',who:'Open research — no one reliably.',why:'Every home is different. This means transferring skills to objects and layouts never in the training data.'},
+    {t:'Cook a full meal unsupervised',badge:'frontier',cls:'frontier',b:'Long-horizon autonomy, failure recovery, safety.',who:'2030+ territory.',why:'Dozens of chained steps, tools, and heat. One mistake ruins the dish — or starts a fire.'},
+    {t:'General-purpose home robot',badge:'open',cls:'open',b:'All of the above, generalized — the real prize.',who:'The whole industry is racing here.',why:'The trillion-dollar goal: a robot that does arbitrary physical tasks in any home rewrites the labor economy.'}
+  ];
+  const LBL={solved:'✅ solved',emerging:'🟡 emerging',frontier:'🟠 frontier',open:'🔴 open'};
+  const list=$('#rungList'),out=$('#rungOut');if(!list)return;
+  list.innerHTML=RUNGS.map((r,i)=>'<div class="rung" data-i="'+i+'"><span class="rt">'+r.t+'</span><span class="badge '+r.cls+'">'+LBL[r.badge]+'</span></div>').join('');
+  function show(i){$$('.rung',list).forEach(el=>el.classList.toggle('on',+el.dataset.i===i));const r=RUNGS[i];out.innerHTML='<h4>'+r.t+'</h4><div class="meta">'+LBL[r.badge]+' · bottleneck: '+r.b+'</div><p>'+r.why+'</p><p style="color:var(--muted)"><b style="color:var(--ink)">Who’s closest:</b> '+r.who+'</p>';}
+  $$('.rung',list).forEach(el=>el.onclick=()=>show(+el.dataset.i));show(0);
+})();
+
+/* ============================================================
+   ROBOT 3 — SPEC YOUR HUMANOID
+============================================================ */
+(function(){
+  const OPTS={
+    act:[{n:'Geared BLDC',cost:6,pay:8,dep:40,note:'cheap, mass-producible'},{n:'Harmonic drive',cost:14,pay:16,dep:80,note:'precise — Japanese near-monopoly'},{n:'Quasi-direct-drive',cost:10,pay:12,dep:55,note:'Tesla-style, backdrivable'}],
+    mag:[{n:'NdFeB (China)',cost:4,pay:6,dep:90,note:'best torque density; ~85% China'},{n:'Ferrite (RE-free)',cost:1,pay:-4,dep:10,note:'no rare earths, weaker'},{n:'RE-reduced NdFeB',cost:6,pay:3,dep:55,note:'less dysprosium, costlier'}],
+    bat:[{n:'Li-ion (CN/KR)',cost:5,run:4,dep:80,note:'CATL / LG supply chain'},{n:'Next-gen high-density',cost:11,run:8,dep:70,note:'more runtime, pricier'}],
+    brain:[{n:'Cloud VLA',cost:2,dep:30,auto:0,note:'cheap robot, needs connectivity'},{n:'On-device VLA',cost:9,dep:40,auto:1,note:'autonomous, costly compute'}]
+  };
+  const LBL={act:'Actuators (×~40)',mag:'Motor magnets',bat:'Battery',brain:'Brain'};
+  const sel={act:0,mag:0,bat:0,brain:0};
+  const cfg=$('#specCfg'),out=$('#specOut');if(!cfg)return;
+  cfg.innerHTML=Object.keys(OPTS).map(k=>'<div class="specrow"><div class="sl3">'+LBL[k]+'</div><div class="specopts" data-k="'+k+'">'+OPTS[k].map((o,i)=>'<button data-i="'+i+'" class="'+(i===0?'on':'')+'">'+o.n+'<br><span style="color:var(--faint);font-size:10px">'+o.note+'</span></button>').join('')+'</div></div>').join('');
+  $$('.specopts',cfg).forEach(row=>{const k=row.dataset.k;$$('button',row).forEach(b=>b.onclick=()=>{sel[k]=+b.dataset.i;$$('button',row).forEach(x=>x.classList.remove('on'));b.classList.add('on');calc();});});
+  function calc(){
+    const a=OPTS.act[sel.act],m=OPTS.mag[sel.mag],ba=OPTS.bat[sel.bat],br=OPTS.brain[sel.brain];
+    const cost=a.cost*6+m.cost*4+ba.cost+br.cost+8;
+    const payload=clamp(8+a.pay*0.6+m.pay*0.5,3,40);
+    const runtime=clamp(2+(ba.run||0),1,12);
+    const dep=Math.round(a.dep*0.4+m.dep*0.3+ba.dep*0.2+br.dep*0.1);
+    let v;if(dep>70)v='⚠️ <b>'+dep+'%</b> of this robot’s critical value traces to a single country (China, via magnets + cells). The chip-war chokepoint, reborn in hardware.';
+    else if(dep>45)v='You’ve cut some dependence — but rare-earth-free and reshored parts cost payload and dollars. The same trade-off the CHIPS Act faces.';
+    else v='Low foreign dependence — bought with a weaker, pricier robot. Resilience is never free.';
+    out.innerHTML='<div class="specstat"><span>Est. unit cost</span><b>$'+Math.round(cost)+'k</b></div>'+
+      '<div class="specstat"><span>Payload</span><b>'+payload.toFixed(0)+' kg</b></div>'+
+      '<div class="specstat"><span>Runtime</span><b>'+runtime.toFixed(0)+' h</b></div>'+
+      '<div class="specstat"><span>Autonomy</span><b style="font-size:12px">'+(br.auto?'offline ✓':'cloud-only')+'</b></div>'+
+      '<div class="gauge"><div class="gl">Single-country supply dependence</div><div class="gt"><i style="width:'+dep+'%;background:'+(dep>65?'var(--red)':dep>40?'var(--amber)':'var(--good)')+'"></i></div></div>'+
+      '<div class="specverd">'+v+'</div>';
+  }
+  calc();
+})();
+
+/* ============================================================
+   ROBOT 4 — TELEOP OR AUTONOMOUS?
+============================================================ */
+(function(){
+  const cv=$('#guessCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  const ROUNDS=[
+    {cap:'A humanoid walks across a gravel yard and stays up when it’s shoved.',m:'walk',ans:'auto',why:'Legged locomotion is one of robotics’ solved problems — RL in sim transfers to real shockingly well.'},
+    {cap:'A robot smoothly folds a crumpled shirt flat on a table.',m:'fold',ans:'teleop',why:'Deformable-object manipulation isn’t reliably autonomous yet — the smooth folding demos are usually a human puppeteering.'},
+    {cap:'A quadruped does a clean backflip on a stage.',m:'flip',ans:'auto',why:'Dynamic, repeatable acrobatics are pre-trained controllers, not live human control.'},
+    {cap:'A humanoid makes a fresh espresso in an unfamiliar kitchen.',m:'pour',ans:'teleop',why:'A novel kitchen + tools + liquids is exactly where autonomy still fails. Great demo, human at the controls.'},
+    {cap:'A warehouse arm picks known boxes off a conveyor for hours.',m:'pick',ans:'auto',why:'Constrained, repetitive industrial pick-and-place is mature, deployed technology.'}
+  ];
+  let i=0,score=0,answered=true;
+  function show(){answered=false;const r=ROUNDS[i];$('#guessCap').textContent=r.cap;$('#guessReveal').innerHTML='';$('#guessScore').textContent='Clip '+(i+1)+' / '+ROUNDS.length+' · score '+score;}
+  function answer(a){if(answered)return;answered=true;const r=ROUNDS[i],ok=a===r.ans;if(ok)score++;
+    $('#guessReveal').innerHTML='<b style="color:'+(ok?'var(--good)':'var(--red)')+'">'+(ok?'Right — ':'Nope — ')+(r.ans==='auto'?'autonomous.':'teleoperated.')+'</b> '+r.why;
+    $('#guessScore').textContent='Clip '+(i+1)+' / '+ROUNDS.length+' · score '+score;
+    setTimeout(()=>{i++;if(i>=ROUNDS.length)finish();else show();},2800);}
+  function finish(){$('#guessCap').textContent='';$('#guessReveal').innerHTML='<b>'+score+' / '+ROUNDS.length+'.</b> The tell: smooth, dexterous, novel-environment clips are usually a human teleoperating; boring, repetitive, constrained ones are autonomous. We keep mistaking teleoperation for intelligence — and that gap <em>is</em> the robotics frontier.';$('#guessScore').innerHTML='<button class="launchbtn" id="guessAgain" style="margin:8px auto 0">↻ Play again</button>';const g=$('#guessAgain');if(g)g.onclick=()=>{i=0;score=0;show();};}
+  function drawScene(m){c.clearRect(0,0,W,H);const t=performance.now()/400,cx=W/2,by=H-26;
+    c.strokeStyle='#2c2c34';c.lineWidth=1;c.beginPath();c.moveTo(0,by);c.lineTo(W,by);c.stroke();
+    c.strokeStyle='#e8b04b';c.fillStyle='#e8b04b';c.lineWidth=3;
+    const bob=(m==='walk')?Math.sin(t)*3:0;const hy=by-66+bob;
+    c.beginPath();c.arc(cx,hy-14,8,0,7);c.stroke();c.beginPath();c.moveTo(cx,hy-6);c.lineTo(cx,hy+26);c.stroke();
+    if(m==='flip'){c.save();c.translate(cx,hy+8);c.rotate(t%6.283);c.fillRect(-3,-22,6,44);c.restore();}
+    else{const lp=(m==='walk')?Math.sin(t)*9:0;c.beginPath();c.moveTo(cx,hy+26);c.lineTo(cx-8+lp,by);c.moveTo(cx,hy+26);c.lineTo(cx+8-lp,by);c.stroke();}
+    if(m==='fold'){const a=Math.sin(t*2)*9;c.beginPath();c.moveTo(cx,hy);c.lineTo(cx-22,hy+18+a);c.moveTo(cx,hy);c.lineTo(cx+22,hy+18-a);c.stroke();c.fillRect(cx-14,hy+22,28,7);}
+    else if(m==='pour'){c.save();c.beginPath();c.moveTo(cx,hy);c.lineTo(cx+22,hy+6);c.stroke();c.translate(cx+22,hy+6);c.rotate(Math.sin(t)*0.5+0.3);c.fillRect(0,-4,12,8);c.restore();}
+    else if(m==='pick'){const py=Math.abs(Math.sin(t))*16;c.beginPath();c.moveTo(cx,hy);c.lineTo(cx+20,hy+10+py);c.stroke();c.fillRect(cx+14,hy+14+py,12,9);}
+    else if(m!=='flip'){c.beginPath();c.moveTo(cx,hy);c.lineTo(cx-17,hy+16);c.moveTo(cx,hy);c.lineTo(cx+17,hy+16);c.stroke();}
+    c.fillStyle='#6c6760';c.font='10px monospace';c.fillText('▶ clip '+(Math.min(i,ROUNDS.length-1)+1),12,16);
+  }
+  function loop(){if(cv.offsetParent)drawScene(ROUNDS[Math.min(i,ROUNDS.length-1)].m);requestAnimationFrame(loop);}
+  $('#guessTeleop').onclick=()=>answer('teleop');$('#guessAuto').onclick=()=>answer('auto');
+  addEventListener('resize',fit);fit();show();loop();
+})();
+
+/* ============================================================
+   ROBOT 5 — THE DATA FLYWHEEL
+============================================================ */
+(function(){
+  const cv=$('#flyCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  let robots=1000,hours=8,cap=8,angle=0,running=false;
+  const UN=[[25,'pick & place'],[45,'open doors'],[65,'pour & liquids'],[80,'fold laundry'],[92,'generalize to new homes']];
+  const fmtN=n=>n>=1e6?(n/1e6).toFixed(n>=1e7?0:1)+'M':n>=1e3?(n/1e3).toFixed(0)+'k':''+n;
+  function dataRate(){return robots*hours;}
+  function draw(){c.clearRect(0,0,W,H);const cx=W/2,cy=H/2,R=Math.min(W,H)/2-44;
+    c.strokeStyle='#2c2c34';c.lineWidth=10;c.beginPath();c.arc(cx,cy,R,0,7);c.stroke();
+    c.strokeStyle='#e8b04b';c.lineWidth=10;c.beginPath();c.arc(cx,cy,R,-Math.PI/2,-Math.PI/2+cap/100*Math.PI*2);c.stroke();
+    const labels=['Deploy','Collect data','Model improves','Skills unlock'];
+    for(let k=0;k<4;k++){const a=angle+k*Math.PI/2;const x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;c.fillStyle='#e2483b';c.beginPath();c.arc(x,y,7,0,7);c.fill();c.fillStyle='#9b958c';c.font='10px monospace';c.textAlign='center';c.fillText(labels[k],cx+Math.cos(a)*(R-24),cy+Math.sin(a)*(R-24)+3);}
+    c.textAlign='center';c.fillStyle='#e8b04b';c.font='bold 30px monospace';c.fillText(cap.toFixed(0),cx,cy+2);c.font='10px monospace';c.fillStyle='#9b958c';c.fillText('capability',cx,cy+18);
+    if(dataRate()<2.5e5){c.fillStyle='#e2483b';c.font='11px monospace';c.fillText('⚠ too little data — the flywheel stalls',cx,H-12);}
+    c.textAlign='left';
+  }
+  function step(){const dr=dataRate();const spin=Math.min(0.18,dr/2.5e6);angle+=spin*(running?2.4:0.3);
+    if(running){const gain=(dr/2.2e6)*(1-cap/100)*0.85;cap=clamp(cap+gain,0,99);}
+    if(cv.offsetParent)draw();
+    const v=$('#flyCapV');if(v)v.textContent=cap.toFixed(0);
+    $$('#flyUnlocks div').forEach((d,i)=>d.classList.toggle('lit',cap>=UN[i][0]));
+    requestAnimationFrame(step);}
+  $('#flyRobots').oninput=e=>{const v=+e.target.value/100;robots=Math.round(10*Math.pow(10,v*5));$('#flyRobotsV').textContent=fmtN(robots);};
+  $('#flyHours').oninput=e=>{hours=+e.target.value;$('#flyHoursV').textContent=hours+'h';};
+  $('#flyRun').onclick=()=>{running=!running;$('#flyRun').textContent=running?'⏸ Pause':'▶ Run a year';};
+  $('#flyReset').onclick=()=>{cap=8;running=false;$('#flyRun').textContent='▶ Run a year';};
+  addEventListener('resize',fit);fit();step();
+})();
+
+/* ============================================================
+   GALLERY: tag chip sections, collapse demos for quick skim
+============================================================ */
+(function(){
+  // tag the chip-specific sections (everything except robot sections and the shared Projector)
+  document.querySelectorAll('section.fmt').forEach(s=>{if(!s.classList.contains('robot-section')&&s.id!=='future')s.classList.add('chip-section');});
+  // collapse every demo behind a launch button so all ideas skim fast
+  document.querySelectorAll('.demo').forEach(demo=>{
+    const bar=demo.querySelector('.demobar');if(!bar)return;
+    const rest=[...demo.children].filter(ch=>ch!==bar);
+    const box=document.createElement('div');box.className='democontent';
+    rest.forEach(ch=>box.appendChild(ch));demo.appendChild(box);
+    demo.classList.add('collapsed');
+    const btn=document.createElement('button');btn.className='launchbtn';btn.textContent='▶ Launch';bar.appendChild(btn);
+    function open(){if(!demo.classList.contains('collapsed'))return;demo.classList.remove('collapsed');btn.textContent='✕ Close';try{window.dispatchEvent(new Event('resize'));}catch(e){}}
+    function close(){demo.classList.add('collapsed');btn.textContent='▶ Launch';}
+    btn.addEventListener('click',e=>{e.stopPropagation();demo.classList.contains('collapsed')?open():close();});
+    bar.addEventListener('click',()=>{if(demo.classList.contains('collapsed'))open();});
+    demo._open=open;
+  });
+  // launching from the at-a-glance grid auto-opens the target demo
+  document.querySelectorAll('.menu .mcard').forEach(a=>{a.addEventListener('click',()=>{const id=(a.getAttribute('href')||'').slice(1);const sec=document.getElementById(id);const d=sec&&sec.querySelector('.demo');if(d&&d._open)setTimeout(d._open,420);});});
 })();
 </script>
 </body>
