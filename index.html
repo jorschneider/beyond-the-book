@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Beyond the Book — What if Chip War wasn't a book?</title>
+<meta name="theme-color" content="#a8261d" />
+<meta name="description" content="Seven working prototypes of how the research behind Chris Miller's Chip War could be told as something other than a printed nonfiction book — plus a dial that fast-forwards the media tech 18 months." />
+<style>
+  :root{
+    --bg:#0d0d10; --bg2:#141418; --panel:#1b1b21; --panel2:#23232b;
+    --ink:#ece8e1; --muted:#9b958c; --faint:#6c6760;
+    --red:#e2483b; --red-deep:#a8261d; --amber:#e8b04b; --amber-deep:#c98a2a;
+    --us:#4a8fe0; --prc:#e2483b; --jp:#5fbf78; --nl:#e8b04b; --kr:#b07de0; --eu:#5fc8c8; --tw:#e2483b;
+    --line:#2c2c34; --good:#5fbf78;
+    --serif:Georgia,'Times New Roman',serif;
+    --mono:'SF Mono',ui-monospace,'Cascadia Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--red);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.01em;line-height:1.12}
+  .mono{font-family:var(--mono)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin:0 0 14px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(13,13,16,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:18px;height:54px}
+  nav .brand{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink);white-space:nowrap}
+  nav .brand b{color:var(--red)}
+  nav .links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+  nav .links::-webkit-scrollbar{display:none}
+  nav .links a{font-family:var(--mono);font-size:12px;color:var(--muted);padding:6px 9px;border-radius:7px;white-space:nowrap}
+  nav .links a:hover{color:var(--ink);background:var(--panel);text-decoration:none}
+
+  /* hero */
+  header.hero{padding:74px 0 40px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  .hero .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:42px 42px;opacity:.25;mask-image:radial-gradient(ellipse 80% 70% at 50% 0,#000,transparent)}
+  .hero h1{font-size:clamp(34px,6vw,62px);margin:0 0 18px;max-width:17ch}
+  .hero h1 .hl{color:var(--red)}
+  .hero .lede{font-size:clamp(17px,2.4vw,21px);color:var(--ink);max-width:60ch;margin:0 0 14px}
+  .hero .sub{font-size:16px;color:var(--muted);max-width:64ch}
+  .hero .booknote{margin-top:26px;font-family:var(--mono);font-size:12.5px;color:var(--faint);border-left:2px solid var(--red-deep);padding-left:14px;max-width:58ch}
+  .hero .cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;font-family:var(--mono);font-size:13px;padding:11px 18px;border-radius:9px;border:1px solid var(--line);color:var(--ink);background:var(--panel);cursor:pointer}
+  .btn:hover{border-color:var(--red);text-decoration:none}
+  .btn.primary{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+  .btn.primary:hover{background:var(--red)}
+
+  /* menu grid */
+  .menu{padding:54px 0 10px}
+  .menu h2{font-size:13px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:400;margin:0 0 22px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .mcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px;transition:.15s;color:var(--ink)}
+  .mcard:hover{border-color:var(--red);transform:translateY(-2px);text-decoration:none;background:var(--panel2)}
+  .mcard .n{font-family:var(--mono);font-size:12px;color:var(--red)}
+  .mcard h3{font-size:19px;margin:8px 0 6px}
+  .mcard p{font-size:14px;color:var(--muted);margin:0}
+  .mcard .tag{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:20px;padding:3px 10px}
+
+  /* generic section */
+  section.fmt{padding:66px 0;border-top:1px solid var(--line)}
+  .fmt .head{max-width:72ch;margin-bottom:30px}
+  .fmt .num{font-family:var(--mono);font-size:13px;color:var(--red);letter-spacing:.12em}
+  .fmt h2{font-size:clamp(26px,4vw,40px);margin:10px 0 6px}
+  .fmt .tagline{font-size:18px;color:var(--amber);font-style:italic;margin:0 0 18px}
+  .fmt .what{font-size:16.5px;color:var(--ink);margin:0 0 10px}
+  .fmt .why{font-size:15px;color:var(--muted);margin:0;border-left:2px solid var(--line);padding-left:14px}
+  .fmt .why b{color:var(--ink);font-style:normal}
+
+  .demo{background:var(--bg2);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:8px}
+  .demo .demobar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .demo .demobar .dot{width:10px;height:10px;border-radius:50%;background:#3a3a44}
+  .demo .demobar .dot.r{background:#e2483b66}.demo .demobar .dot.y{background:#e8b04b66}.demo .demobar .dot.g{background:#5fbf7866}
+  .demo .demobar .live{margin-left:auto;color:var(--good)}
+  .demo .demobar .live::before{content:"●";margin-right:6px;animation:blink 1.6s infinite}
+  @keyframes blink{50%{opacity:.3}}
+
+  .future{margin-top:18px;background:linear-gradient(180deg,rgba(232,176,75,.06),transparent);border:1px solid var(--amber-deep);border-left-width:3px;border-radius:11px;padding:15px 18px}
+  .future .fl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 7px}
+  .future p{margin:0;font-size:14.5px;color:#d9cdb6}
+
+  /* ===== 1. SCROLLY ===== */
+  .scrolly{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .scrolly-steps{padding:18px}
+  .scrolly-graphic{position:sticky;top:60px;height:min(74vh,560px);display:flex;align-items:center;justify-content:center;border-left:1px solid var(--line)}
+  #scrollCanvas{width:100%;height:100%}
+  .step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;padding:8px 6px}
+  .step .k{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .step h4{font-size:23px;margin:0 0 10px}
+  .step p{font-size:15px;color:var(--muted);margin:0}
+  .step.active h4{color:var(--ink)} .step h4{color:var(--faint);transition:.3s}
+  .scrolly-ctrl{position:absolute;top:14px;right:14px;z-index:5}
+  .pill{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:20px;padding:5px 11px;cursor:pointer}
+  .pill.on{color:var(--ink);border-color:var(--red)}
+  @media(max-width:760px){.scrolly{grid-template-columns:1fr}.scrolly-graphic{position:sticky;order:-1;height:46vh;border-left:none;border-bottom:1px solid var(--line)}.step{min-height:78vh}}
+
+  /* ===== 2. CHOKEPOINT ===== */
+  .chain{padding:22px 16px}
+  .chain-row{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}
+  .node{flex:0 0 128px;min-width:128px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 10px;cursor:pointer;text-align:center;transition:.25s;position:relative}
+  .node:hover{border-color:var(--red);transform:translateY(-2px)}
+  .node.sel{border-color:var(--red);box-shadow:0 0 0 2px rgba(226,72,59,.3)}
+  .node.down{opacity:.28;filter:grayscale(.8)}
+  .node.cut{border-color:var(--red);opacity:1;filter:none}
+  .node .em{font-size:26px}
+  .node .nm{font-size:13.5px;font-weight:700;margin:6px 0 3px;line-height:1.15}
+  .node .ctl{font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .node .flag{position:absolute;top:6px;right:8px;font-size:13px}
+  .node .xmark{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:34px;color:var(--red);font-weight:900}
+  .node.cut .xmark{display:flex}
+  .arrow{flex:0 0 26px;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:20px;font-family:var(--mono)}
+  .chain-foot{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:14px 16px 0}
+  .dossier{border-top:1px solid var(--line);padding:18px;display:none;background:var(--bg2)}
+  .dossier.show{display:block}
+  .dossier h4{margin:0 0 4px;font-size:20px}
+  .dossier .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:12px}
+  .dossier .bar{height:8px;background:var(--panel2);border-radius:5px;overflow:hidden;margin:6px 0 12px;max-width:340px}
+  .dossier .bar i{display:block;height:100%;background:var(--red);border-radius:5px}
+  .dossier p{font-size:14.5px;color:#cfc9c0;margin:0 0 14px;max-width:64ch}
+  .banner{display:none;margin:0 16px 16px;padding:13px 16px;border-radius:11px;background:rgba(226,72,59,.1);border:1px solid var(--red);font-size:14px;color:#f2c9c4}
+  .banner.show{display:block}
+  .banner b{color:#fff}
+
+  /* ===== 3. GAME ===== */
+  .game{padding:0}
+  .game .screen{padding:24px}
+  .game .pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .sidecard{border:1px solid var(--line);border-radius:13px;padding:20px;cursor:pointer;background:var(--panel);transition:.18s}
+  .sidecard:hover{transform:translateY(-2px)}
+  .sidecard.us:hover{border-color:var(--us)} .sidecard.prc:hover{border-color:var(--prc)}
+  .sidecard h4{margin:0 0 6px;font-size:21px}
+  .sidecard.us h4{color:var(--us)} .sidecard.prc h4{color:var(--prc)}
+  .sidecard p{margin:0;font-size:13.5px;color:var(--muted)}
+  .tug{height:30px;border-radius:16px;background:linear-gradient(90deg,var(--us),#2b2b33 48%,#2b2b33 52%,var(--prc));position:relative;margin:6px 0 4px;overflow:hidden;border:1px solid var(--line)}
+  .tug .needle{position:absolute;top:-3px;bottom:-3px;width:4px;background:#fff;border-radius:3px;box-shadow:0 0 8px #000;transition:left .6s cubic-bezier(.4,1.3,.5,1)}
+  .tuglabel{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+  .stat .v{font-family:var(--mono);font-size:22px;font-weight:700}
+  .stat .l{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+  .levers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 4px}
+  .lever{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .lever h5{margin:0 0 4px;font-size:15px}
+  .lever .d{font-size:12px;color:var(--muted);min-height:46px;margin-bottom:10px}
+  .seg{display:flex;gap:5px}
+  .seg button{flex:1;font-family:var(--mono);font-size:11px;padding:7px 4px;border-radius:7px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);cursor:pointer}
+  .seg button.on{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+  .lever .cost{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:8px}
+  .brief{background:#101014;border:1px solid var(--line);border-radius:11px;padding:14px;margin-top:14px;max-height:200px;overflow:auto;font-size:13.5px}
+  .brief .entry{padding:8px 0;border-bottom:1px solid var(--line)}
+  .brief .entry:last-child{border:none}
+  .brief .yr{font-family:var(--mono);font-size:11px;color:var(--red)}
+  .gamebtns{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .budget{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
+  .ending{text-align:center;padding:24px}
+  .ending .grade{font-size:42px;margin:6px 0}
+  @media(max-width:640px){.levers{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.game .pick{grid-template-columns:1fr}}
+
+  /* ===== 4. CHAT ===== */
+  .chat{max-width:560px;margin:0 auto;padding:0}
+  .chat .head2{padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .chat .msgs{padding:18px;height:380px;overflow:auto;display:flex;flex-direction:column;gap:12px}
+  .msg{max-width:84%;padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.5}
+  .msg.u{align-self:flex-end;background:var(--red-deep);color:#fff;border-bottom-right-radius:4px}
+  .msg.b{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .msg.b .cite{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--faint);font-style:italic}
+  .msg.b p{margin:0 0 8px}.msg.b p:last-of-type{margin:0}
+  .typing span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--muted);margin:0 2px;animation:bounce 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 18px 12px}
+  .chip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:20px;padding:6px 12px;cursor:pointer}
+  .chip:hover{border-color:var(--red);color:var(--ink)}
+  .chatinput{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
+  .chatinput input{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px;color:var(--ink);font-family:var(--serif);font-size:14.5px}
+  .chatinput input:focus{outline:none;border-color:var(--red)}
+  .chatinput button{font-family:var(--mono);font-size:13px;padding:0 16px;border-radius:10px;border:none;background:var(--red-deep);color:#fff;cursor:pointer}
+
+  /* ===== 5. STEERCAST ===== */
+  .cast{padding:18px}
+  .cast .breadcrumb{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+  .cast .breadcrumb b{color:var(--red)}
+  .player{display:flex;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .hosts{display:flex;gap:14px}
+  .host{display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.4;transition:.2s}
+  .host.on{opacity:1}
+  .host .vu{display:flex;gap:2px;align-items:flex-end;height:26px}
+  .host .vu i{width:3px;background:var(--red);border-radius:2px;height:6px}
+  .host.on .vu i{animation:vu .8s infinite ease-in-out}
+  .host.on .vu i:nth-child(2){animation-delay:.1s}.host.on .vu i:nth-child(3){animation-delay:.2s}.host.on .vu i:nth-child(4){animation-delay:.3s}.host.on .vu i:nth-child(5){animation-delay:.15s}
+  @keyframes vu{0%,100%{height:5px}50%{height:24px}}
+  .host .nm{font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .host.analyst .vu i{background:var(--us)}
+  .player .pbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--red-deep);color:#fff;font-size:18px;cursor:pointer;flex:0 0 auto}
+  .player .info{flex:1;min-width:0}
+  .player .seg-title{font-size:14px;margin-bottom:6px}
+  .player .scrub{height:5px;background:var(--panel2);border-radius:3px;overflow:hidden}
+  .player .scrub i{display:block;height:100%;width:0;background:var(--red);transition:width .25s linear}
+  .player .speed{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:7px;padding:6px 8px;cursor:pointer}
+  .transcript{background:#101014;border:1px solid var(--line);border-radius:13px;padding:16px;margin-top:14px;height:200px;overflow:auto;font-size:15px}
+  .transcript .ln{margin:0 0 9px;opacity:0;animation:fade .4s forwards}
+  .transcript .ln b{color:var(--red)} .transcript .ln.analyst b{color:var(--us)}
+  @keyframes fade{to{opacity:1}}
+  .transcript .inlinechip{border-bottom:1px dashed var(--amber);color:var(--amber);cursor:pointer}
+  .steerdock{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+  .steerbtn{font-family:var(--mono);font-size:12px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;flex:1;min-width:160px;text-align:left}
+  .steerbtn:hover{transform:translateY(-1px)}
+  .steerbtn.deeper{border-left:3px solid var(--amber)} .steerbtn.counter{border-left:3px solid var(--us)} .steerbtn.eng{border-left:3px solid var(--jp)} .steerbtn.today{border-left:3px solid var(--red)} .steerbtn.spine{border-left:3px solid var(--faint)}
+  .steerbtn .kk{font-size:10px;color:var(--faint);display:block}
+  .castfoot{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .depth{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;gap:5px;align-items:center}
+  .depth .d{width:8px;height:8px;border-radius:50%;background:var(--panel2)}
+  .depth .d.on{background:var(--amber)}
+
+  /* ===== 6. LIVING ===== */
+  .living{display:grid;grid-template-columns:1.6fr 1fr;gap:0}
+  .living .read{padding:22px;border-right:1px solid var(--line)}
+  .living .statusbar{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin-bottom:18px}
+  .living .statusbar b{color:var(--good)}
+  .living .read p{font-size:16px;line-height:1.7;color:#d8d2c8}
+  .cell{border-bottom:1px dotted var(--amber);cursor:pointer;position:relative;color:var(--ink);transition:.15s}
+  .cell:hover{background:rgba(232,176,75,.12)}
+  .cell::after{content:"";position:absolute;top:-4px;right:-6px;width:5px;height:5px;border-radius:50%;background:var(--amber);animation:blink 1.8s infinite}
+  .readtoggle{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .switch{width:46px;height:24px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);position:relative;cursor:pointer;flex:0 0 auto}
+  .switch i{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:.2s}
+  .switch.on{background:var(--red-deep);border-color:var(--red-deep)} .switch.on i{left:24px;background:#fff}
+  .feed{padding:22px;background:var(--bg2)}
+  .feed h4{margin:0 0 6px;font-size:14px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .feedfilter{display:flex;gap:6px;margin:10px 0 14px;flex-wrap:wrap}
+  .feedfilter button{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:16px;padding:4px 10px;cursor:pointer}
+  .feedfilter button.on{border-color:var(--red);color:var(--ink)}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;font-size:13px}
+  .fcard .fd{font-family:var(--mono);font-size:10px;color:var(--faint)}
+  .fcard .old{color:var(--faint);text-decoration:line-through} .fcard .new{color:var(--good)}
+  .fcard .conf{display:inline-block;font-family:var(--mono);font-size:9.5px;padding:2px 7px;border-radius:10px;margin-top:6px}
+  .conf.v{background:rgba(95,191,120,.15);color:var(--good)} .conf.p{background:rgba(232,176,75,.15);color:var(--amber)}
+  .diffpanel{display:none;border-top:1px solid var(--line);padding:18px;background:#101014}
+  .diffpanel.show{display:block}
+  .diffrow{display:flex;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+  .diffrow .lbl{font-family:var(--mono);font-size:10px;width:90px;color:var(--faint)}
+  .diffrow .o{color:var(--faint);text-decoration:line-through}.diffrow .nw{color:var(--good)}
+  @media(max-width:760px){.living{grid-template-columns:1fr}.living .read{border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* ===== 7. PROJECTOR ===== */
+  .proj{padding:22px}
+  .rail{position:relative;height:70px;margin:6px 0 26px;border-radius:12px;background:linear-gradient(90deg,rgba(74,143,224,.12),rgba(232,176,75,.16));border:1px solid var(--line)}
+  .rail .ticks{position:absolute;inset:0;display:flex;justify-content:space-between;padding:0 8px;align-items:flex-end}
+  .rail .tick{font-family:var(--mono);font-size:10px;color:var(--muted);padding-bottom:6px}
+  .rail .track{position:absolute;left:14px;right:14px;top:50%;height:4px;background:var(--panel2);border-radius:3px}
+  .rail .knob{position:absolute;top:50%;width:30px;height:30px;border-radius:50%;background:var(--amber);border:3px solid #fff2;transform:translate(-50%,-50%);cursor:grab;box-shadow:0 0 18px rgba(232,176,75,.6);touch-action:none}
+  .rail .knob:active{cursor:grabbing}
+  .rail .datebadge{position:absolute;top:-26px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--amber);white-space:nowrap;font-weight:700}
+  .projgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px;min-height:172px;position:relative;overflow:hidden}
+  .pcard .pk{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+  .pcard h5{margin:0 0 8px;font-size:16px}
+  .pcard .fid{font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:10px;min-height:16px}
+  .pcard canvas{width:100%;height:78px;display:block}
+  .pcard .agentrow{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
+  .pcard .agentrow .dot2{width:7px;height:7px;border-radius:50%;background:var(--panel2);display:inline-block;margin-right:6px;vertical-align:middle}
+  .pcard .note{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:8px;min-height:14px}
+  .projmap{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px}
+  .projmap .thesis{font-size:19px;font-style:italic;color:var(--amber);text-align:center;margin:0 0 18px;min-height:28px;transition:.3s}
+  .stacks{position:relative}
+  .stackcol{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;transition:opacity .25s}
+  .stk{border:1px solid var(--line);border-radius:10px;padding:11px;text-align:center;background:var(--bg2)}
+  .stk .em{font-size:22px}
+  .stk .t{font-size:13px;font-weight:700;margin:5px 0 2px}
+  .stk .c{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .stk .pct{font-family:var(--mono);font-size:11px;color:var(--red);margin-top:3px}
+  @media(max-width:680px){.projgrid{grid-template-columns:1fr}}
+
+  /* ===== 07 ZOOM ===== */
+  .zoomwrap{display:grid;grid-template-columns:1fr 240px;gap:0}
+  #zoomCanvas{width:100%;height:380px;display:block;background:#08080a}
+  .zoomside{padding:20px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:12px;justify-content:center}
+  .zoomside .scale{font-family:var(--mono);font-size:28px;color:var(--amber);line-height:1}
+  .zoomside .lname{font-size:20px;font-weight:700}
+  .zoomside .lctl{font-size:13.5px;color:var(--muted);min-height:54px}
+  .zslider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;background:linear-gradient(90deg,var(--us),var(--amber),var(--prc));outline:none;margin-top:6px}
+  .zslider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 0 10px rgba(0,0,0,.6)}
+  .zslider::-moz-range-thumb{width:22px;height:22px;border:none;border-radius:50%;background:#fff;cursor:pointer}
+  .zhint{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  @media(max-width:680px){.zoomwrap{grid-template-columns:1fr}.zoomside{border-left:none;border-top:1px solid var(--line)}}
+
+  /* ===== 08 SOUND ===== */
+  .sound{padding:20px}
+  .movements{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+  .movement{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;transition:.15s}
+  .movement:hover{border-color:var(--red);transform:translateY(-2px)}
+  .movement.playing{border-color:var(--amber);box-shadow:0 0 0 2px rgba(232,176,75,.25)}
+  .movement .mn{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:.1em}
+  .movement h5{margin:6px 0 4px;font-size:16px}
+  .movement p{margin:0;font-size:12.5px;color:var(--muted)}
+  .movement .play{margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--amber)}
+  #soundCanvas{width:100%;height:120px;display:block;background:#08080a;border-radius:10px;border:1px solid var(--line)}
+  .soundnote{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:10px}
+  @media(max-width:680px){.movements{grid-template-columns:1fr}}
+
+  /* ===== 09 STAGE ===== */
+  .stage-tabs{display:flex;gap:8px;padding:16px 18px 4px;flex-wrap:wrap}
+  .stage-tabs button{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:8px;padding:7px 12px;cursor:pointer}
+  .stage-tabs button.on{border-color:var(--red);color:var(--ink)}
+  .stagewrap{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .stageview{position:relative;height:300px;background:radial-gradient(ellipse 60% 80% at 50% 25%,#1c1c28,#08080a);overflow:hidden;border-right:1px solid var(--line)}
+  .stageview .moon{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#3a3a48,#15151c);box-shadow:0 0 50px rgba(120,120,160,.16)}
+  .stageview .floor{position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(#15151c,#0c0c12);border-top:1px solid #2c2c34}
+  .actor{position:absolute;bottom:42px;transform:translateX(-50%);text-align:center;transition:.4s;opacity:.4;z-index:2}
+  .actor.lit{opacity:1}
+  .actor .body{width:18px;height:46px;border-radius:9px 9px 4px 4px;background:#2c2c34;margin:0 auto;transition:.4s}
+  .actor.lit .body{background:var(--amber);box-shadow:0 0 24px rgba(232,176,75,.5)}
+  .actor .who{font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-top:5px;white-space:nowrap}
+  .actor.lit .who{color:var(--ink)}
+  .spotlight{position:absolute;top:0;width:130px;height:300px;background:linear-gradient(180deg,rgba(232,176,75,.20),transparent 72%);transform:translateX(-50%);transition:left .5s;pointer-events:none;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);z-index:1}
+  .script{padding:18px;height:300px;overflow:auto;background:#0c0c10}
+  .scenehead{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.1em;margin-bottom:12px}
+  .sl{margin:0 0 12px;opacity:.32;transition:.35s}
+  .sl.spoken{opacity:1}
+  .sl .char{font-family:var(--mono);font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:.05em}
+  .sl .dir{font-style:italic;color:var(--muted);font-size:13px}
+  .sl .line{font-size:15.5px;color:#e6e0d6}
+  .stagefoot{display:flex;gap:12px;align-items:center;padding:14px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .cast{padding:0 18px 18px;font-size:13px;color:var(--muted)}
+  .cast b{color:var(--ink)}
+  @media(max-width:680px){.stagewrap{grid-template-columns:1fr}.stageview{border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* ===== 10 WHATIF ===== */
+  .whatif{display:grid;grid-template-columns:310px 1fr;gap:0}
+  .forks{padding:16px;border-right:1px solid var(--line)}
+  .fork{padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:9px;cursor:pointer;font-size:14px;transition:.15s;background:var(--panel)}
+  .fork:hover{border-color:var(--red)} .fork.on{border-color:var(--red);background:var(--panel2)}
+  .wout{padding:22px;min-height:300px}
+  .wout .wq{font-size:21px;color:var(--amber);font-style:italic;margin:0 0 14px}
+  .wout p{font-size:15px;color:#d8d2c8;margin:0 0 12px}
+  .wout .verdict{border-left:2px solid var(--red);padding-left:14px;font-size:14px;color:var(--muted);margin:14px 0}
+  .plaus .pl{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:5px}
+  .plaus .track{height:8px;background:var(--panel2);border-radius:5px;overflow:hidden;max-width:360px}
+  .plaus .track i{display:block;height:100%;background:linear-gradient(90deg,var(--prc),var(--amber),var(--jp));border-radius:5px;transition:width .7s}
+  @media(max-width:680px){.whatif{grid-template-columns:1fr}.forks{border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* ===== 11 CARDS ===== */
+  .trumps{padding:20px}
+  .trumps .score{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;margin-bottom:14px}
+  .trumps .score b{color:var(--amber)}
+  .tcard{max-width:300px;margin:0 auto;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .tcard .flag2{font-size:24px}
+  .tcard h4{margin:4px 0 2px;font-size:21px}
+  .tcard .role{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:14px}
+  .tstat{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:7px;cursor:pointer;transition:.12s;background:var(--bg2)}
+  .tstat:hover{border-color:var(--red);transform:translateX(3px)}
+  .tstat.win{border-color:var(--good);background:rgba(95,191,120,.12)} .tstat.lose{border-color:var(--red);background:rgba(226,72,59,.1);opacity:.6}
+  .tstat .sl2{font-size:13.5px}
+  .tstat .sv{font-family:var(--mono);font-size:15px;color:var(--amber)}
+  .trumps .houserow{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin:14px 0}
+  .trumps .result{text-align:center;font-size:14.5px;margin:12px 0;min-height:22px}
+  .deckcount{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:center}
+
+  /* ===== MODE TOGGLE ===== */
+  .modeswitch{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:4px;gap:2px;font-family:var(--mono);font-size:13px}
+  .modeswitch button{border:none;background:transparent;color:var(--muted);padding:9px 18px;border-radius:24px;cursor:pointer;font-family:var(--mono);font-size:13px;transition:.18s;display:flex;align-items:center;gap:7px}
+  .modeswitch button.on{background:var(--red-deep);color:#fff}
+  .modeswitch button.robot.on{background:var(--amber-deep);color:#1a1206}
+  .modehint{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:10px}
+  nav .modemini{margin-left:8px;display:flex;border:1px solid var(--line);border-radius:18px;overflow:hidden;flex:0 0 auto}
+  nav .modemini button{border:none;background:transparent;color:var(--muted);font-family:var(--mono);font-size:11px;padding:5px 10px;cursor:pointer}
+  nav .modemini button.on{background:var(--red-deep);color:#fff}
+  nav .modemini button.robot.on{background:var(--amber-deep);color:#1a1206}
+  body.robot{--red:#e8b04b;--red-deep:#c98a2a}
+  body.robot nav .brand b,body.robot .eyebrow,body.robot .fmt .num,body.robot .mcard .n{color:var(--amber)}
+  body.robot .hero h1 .hl{color:var(--amber)}
+  body.robot .demo .demobar .live{color:var(--amber)}
+  .robotonly{display:none}
+  body.robot .robotonly{display:inline}
+  body.robot .chiponly{display:none}
+
+  /* closing */
+  section.close{padding:70px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(168,38,29,.05))}
+  .close h2{font-size:clamp(26px,4vw,38px);margin:0 0 18px;max-width:20ch}
+  .close p{font-size:16.5px;color:#cfc9c0;max-width:66ch;margin:0 0 16px}
+  .close .robot{border:1px solid var(--amber-deep);border-radius:13px;padding:20px;margin:24px 0;background:rgba(232,176,75,.05)}
+  .close .robot h3{color:var(--amber);font-size:19px;margin:0 0 10px}
+  .close .robot p{color:#d9cdb6;font-size:15px;margin:0 0 10px}
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12.5px;color:var(--faint)}
+  footer a{color:var(--muted)}
+  .small{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .tip{position:fixed;pointer-events:none;background:#000;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-family:var(--mono);font-size:11px;color:var(--ink);z-index:100;opacity:0;transition:opacity .12s;max-width:240px}
+  .tip.show{opacity:1}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand"><b>◆</b> Beyond&nbsp;the&nbsp;Book</span>
+    <div class="modemini"><button class="chip on" data-m="chip">Chip</button><button class="robot" data-m="robot">Robot</button></div>
+    <div class="links">
+      <a href="#scroll">Scroll</a>
+      <a href="#map">Map</a>
+      <a href="#game">Game</a>
+      <a href="#ask">Ask</a>
+      <a href="#steer">Steer</a>
+      <a href="#living">Living</a>
+      <a href="#zoom">Zoom</a>
+      <a href="#sound">Sound</a>
+      <a href="#stage">Stage</a>
+      <a href="#whatif">What-If</a>
+      <a href="#cards">Cards</a>
+      <a href="#future">The Dial ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="grid-bg"></div>
+  <div class="wrap">
+    <p class="eyebrow">A thought experiment for Chris Miller</p>
+    <h1>You did the research. What if it <span class="hl">never became a book?</span></h1>
+    <p class="lede">Chris Miller spent years mapping the silicon supply chain and turned it into <em>Chip War</em> — 400 printed pages, a static object, frozen the day it shipped. But the research was a model of a living system. A book is only one render of it.</p>
+    <p class="sub">Below are <b>seven working prototypes</b> of the same research told as something other than a nonfiction book — a scroll you fall down, a map you can break, a war you can play, a book you can argue with. Each is a real, clickable demo. The last one is a dial that fast-forwards the media tech 18 months — because if you'd spent that year chasing robots instead, the tools to tell this story would have moved too.</p>
+    <div class="modeswitch" role="tablist" aria-label="Mode">
+      <button class="chip on" data-m="chip">📘 Chip War</button>
+      <button class="robot" data-m="robot">🤖 Robot research</button>
+    </div>
+    <p class="modehint" id="modehint">The book that exists. Flip the toggle to see the same gallery rebuilt for the next book — a year of robot research, and the AI that will tell it.</p>
+    <p class="booknote">SOURCE OBJECT — <em>Chip War: The Fight for the World's Most Critical Technology</em>, Chris Miller, Scribner / Simon &amp; Schuster, 2022. Every figure below is real and dated. This site is an homage and a design provocation, not affiliated with the author or publisher.</p>
+    <div class="cta">
+      <a class="btn primary" href="#scroll">See the seven evolutions ↓</a>
+      <a class="btn" href="#future">Jump to the 18-months dial →</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap menu">
+  <h2>Seven ways out of the book</h2>
+  <div class="cards">
+    <a class="mcard" href="#scroll"><div class="n">01 / scrollytelling</div><h3>Silicon Scroll</h3><p>The exponential outruns your scroll wheel. Moore's Law, the fab-cost explosion, and the collapse onto one island — felt, not read.</p><span class="tag">canvas · live</span></a>
+    <a class="mcard" href="#map"><div class="n">02 / explorable map</div><h3>Chokepoint</h3><p>The supply chain as a graph you can sever. Cut ASML and watch the cascade idle every advanced fab on Earth.</p><span class="tag">click to break it</span></a>
+    <a class="mcard" href="#game"><div class="n">03 / playable sim</div><h3>Win the Chip War</h3><p>Six turns as the US or China. Pull the levers, trigger the backfire loop, learn the system by losing inside it.</p><span class="tag">policy game</span></a>
+    <a class="mcard" href="#ask"><div class="n">04 / conversational</div><h3>Interrogate the Book</h3><p>Stop reading the index. Cross-examine the argument — and get follow-ups, citations, and a pop quiz.</p><span class="tag">offline chat</span></a>
+    <a class="mcard" href="#steer"><div class="n">05 / steerable audio</div><h3>SteerCast</h3><p>A two-host podcast you interrupt. Say "tell me more about ASML" and the hosts follow you down the branch.</p><span class="tag">it talks</span></a>
+    <a class="mcard" href="#living"><div class="n">06 / living document</div><h3>The Living Chip War</h3><p>Agents watch the wire and re-draft the stale sentences. Read the 2022 book — or read it as of today.</p><span class="tag">self-updating</span></a>
+    <a class="mcard" href="#zoom"><div class="n">07 / deep zoom</div><h3>Inside the Machine</h3><p>Powers of ten from your phone to a single atom — and the supply chain hiding inside the silicon.</p><span class="tag">powers of ten</span></a>
+    <a class="mcard" href="#sound"><div class="n">08 / sonification</div><h3>The Sound of the Chip War</h3><p>Moore's Law as a rising pitch, the export controls as a drumline, Taiwan as a chord collapsing to one note.</p><span class="tag">turn it up 🔊</span></a>
+    <a class="mcard" href="#stage"><div class="n">09 / theater</div><h3>The Silicon Stage</h3><p>A docudrama in three fabs — Shockley, Chang, the Dutch minister. The people, not the parts.</p><span class="tag">a play ✦</span></a>
+    <a class="mcard" href="#whatif"><div class="n">10 / counterfactual</div><h3>The What-If Engine</h3><p>Pull a thread of history — what if Japan had won the DRAM war? — and read the alternate present.</p><span class="tag">alternate histories</span></a>
+    <a class="mcard" href="#cards"><div class="n">11 / card game</div><h3>Silicon Top Trumps</h3><p>ASML vs TSMC vs Nvidia. Play your chokepoint power against the house. Best of five.</p><span class="tag">playable</span></a>
+    <a class="mcard" href="#future" style="border-color:var(--amber-deep)"><div class="n" style="color:var(--amber)">12 / the forecast</div><h3>The Projector ⏵</h3><p>Drag the year from 2026 to 2027 and watch the book — and the chokepoints — recompile from Chip War into <em>Robot War</em>.</p><span class="tag" style="color:var(--amber);border-color:var(--amber-deep)">+18 months</span></a>
+  </div>
+</div>
+
+<!-- ============ 1. SCROLLY ============ -->
+<section class="fmt" id="scroll">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">01 — SCROLLYTELLING</div>
+      <h2>Silicon Scroll</h2>
+      <p class="tagline">You don't read the exponential. You fall down it.</p>
+      <p class="what">A printed book flattens an exponential into a static log chart and trusts you to imagine the motion. Here the curve actually outruns your scroll, the cost bars blow past the top of the screen, and the map of the world's fabs goes dark until one dot is left blinking.</p>
+      <p class="why"><b>What the book can't do:</b> make you physically feel a 58-million-fold increase, or watch leading-edge manufacturing collapse onto a single island in real time.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>silicon-scroll · scroll the panel</span><span class="live">canvas live</span></div>
+      <div class="scrolly" id="scrolly">
+        <div class="scrolly-steps" id="scrollySteps">
+          <div class="step" data-act="0"><div class="k">Act I · Moore's Law</div><h4>2,300 → 208,000,000,000</h4><p>The Intel 4004 (1971) held 2,300 transistors. Nvidia's 2024 Blackwell B200 holds 208 billion across two dies — and Apple's M2 Ultra packs 134 billion. Roughly a doubling every two years, for fifty years. Scroll, and watch the line claw up a log scale.</p></div>
+          <div class="step" data-act="0"><div class="k">Act I · the trick of the log</div><h4>The chart lies to calm you</h4><p>That smooth line is drawn on a logarithmic axis. Flip it to linear and 50 years of progress becomes a flat floor with a wall at the end. The log scale is a choice — it makes the unimaginable look like a tidy diagonal.</p></div>
+          <div class="step" data-act="1"><div class="k">Act II · the cost of staying on the curve</div><h4>The bill comes due</h4><p>Keeping pace got brutally expensive. A 28nm fab cost roughly $6B. A 2nm-class fab runs ~$20-28B — and a single EUV scanner inside it costs ~$200M ($380M for High-NA). Scroll and watch the 2nm bar grow past the top of the frame.</p></div>
+          <div class="step" data-act="1"><div class="k">Act II · the survivors</div><h4>From a crowd to a duopoly</h4><p>The line threading the bars counts how many companies can still afford to build at each node. Around a dozen could do 28nm. Today only <b>three</b> — TSMC, Samsung, Intel — can mass-produce sub-7nm. At 2nm, really two.</p></div>
+          <div class="step" data-act="2"><div class="k">Act III · one island</div><h4>Where the advanced chips actually get made</h4><p>Here is the world's chip output, scattered by region. Now filter to the leading edge — 5nm and below — and watch every dot fade except a cluster off the coast of China.</p></div>
+          <div class="step" data-act="2"><div class="k">Act III · the silicon shield</div><h4>~90% — on one island</h4><p>Roughly 90% of the world's most advanced logic is fabricated in Taiwan. That single blinking dot is the most concentrated point of failure in the modern economy. The book argues this in a paragraph. The scroll shows you the lights going out.</p></div>
+        </div>
+        <div class="scrolly-graphic">
+          <div class="scrolly-ctrl"><span class="pill" id="logToggle">scale: log</span></div>
+          <canvas id="scrollCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p>By end-2027 the scroll stops being pre-baked: an on-device model lets a reader ask "what if China hits 3nm by 2028?" and the charts re-render live with a flagged speculative branch. A cron-driven agent refreshes every datapoint from the latest TrendForce / IBS quarter, so "90% / $28B" is never stale — and each act auto-narrates itself in a licensed voice as you pin it.</p></div>
+  </div>
+</section>
+
+<!-- ============ 2. CHOKEPOINT ============ -->
+<section class="fmt" id="map">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">02 — EXPLORABLE MAP</div>
+      <h2>Chokepoint</h2>
+      <p class="tagline">Click a node. See who holds the knife.</p>
+      <p class="what">The book tells the supply chain as a 400-page narrative. This renders it as a graph you wander: sand → wafer → ASML's EUV scanner → Japanese photoresist → TSMC → Nvidia → the device in your pocket. Click any node for the dossier — and hit <b>"Cut this node"</b> to watch the cascade propagate downstream.</p>
+      <p class="why"><b>What the book can't do:</b> let you sever a link with your own cursor and feel "the supply chain is fragile" turn from a claim into a system you just broke.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>chokepoint-map · click a node, then cut it</span><span class="live">8 nodes</span></div>
+      <div class="chain">
+        <div class="chain-row" id="chainRow"></div>
+      </div>
+      <div class="banner" id="cutBanner"></div>
+      <div class="chain-foot">
+        <button class="btn" id="resetChain">↻ Repair the chain</button>
+        <button class="pill" id="countryToggle">Color by country</button>
+        <span class="small" id="chainHint">Tip: click a node below to open its dossier.</span>
+      </div>
+      <div class="dossier" id="dossier"></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p>By end-2027 the static graph becomes an agentic intelligence surface: a model ingests the daily wire and pushes a red pulse onto TSMC when a Taiwan quake or a new BIS rule hits, with a generated one-line brief. "Cut a node" renders a 10-second documentary of the cascade in a synthetic narrator's voice — and a podcast listener just <em>asks</em> "what breaks if China takes Taiwan?" and hears the graph reason through it aloud.</p></div>
+  </div>
+</section>
+
+<!-- ============ 3. GAME ============ -->
+<section class="fmt" id="game">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">03 — PLAYABLE SIMULATION</div>
+      <h2>Win the Chip War</h2>
+      <p class="tagline">Six turns. Three chokepoints. One supply chain you can't unsnarl.</p>
+      <p class="what">The book tells you export controls "backfired." This lets you impose them — and watch SMIC stockpile, reverse-engineer, and indigenize while your own firms lose the China market. Pick a side, pull three levers a year for six years, and learn the feedback loops by failing inside them.</p>
+      <p class="why"><b>What the book can't do:</b> make the tradeoff between near-term denial and long-term self-sufficiency show up in your own score.</p>
+    </div>
+    <div class="demo game" id="game-demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>win-the-chip-war · 6 turns · 2025–2030</span><span class="live" id="gameLive">choose a side</span></div>
+      <div class="screen" id="gameScreen"></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p>By end-2027 the random-event table is replaced by a reasoning adversary: an on-page model role-plays the "PRC planner" or "US BIS official," reacts to your exact moves, and trash-talks in character — no two runs alike. Negotiate the Dutch into multilateral controls out loud with a voice model, and the whole sim, opponent included, runs offline on the static page with no API key.</p></div>
+  </div>
+</section>
+
+<!-- ============ 4. CHAT ============ -->
+<section class="fmt" id="ask">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">04 — CONVERSATIONAL</div>
+      <h2>Interrogate the Book</h2>
+      <p class="tagline">Stop reading the index. Start cross-examining the argument.</p>
+      <p class="what">Type a real question — "Why couldn't China just buy ASML's machines?" — and the book answers in its own voice, cites the chapter, and offers two ways to go deeper. Every claim becomes a launchpad to the next question.</p>
+      <p class="why"><b>What the book can't do:</b> notice you misunderstood the EUV chokepoint and re-explain it three ways, or follow up when you ask "but what about Japan?"</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>interrogate · keyword-matched, fully offline</span><span class="live">no API key</span></div>
+      <div class="chat">
+        <div class="head2">Ask <b style="color:var(--red)">Chip War</b> — interrogate the argument</div>
+        <div class="msgs" id="chatMsgs"></div>
+        <div class="chips" id="chatChips"></div>
+        <form class="chatinput" id="chatForm" autocomplete="off">
+          <input id="chatInput" placeholder="Ask about ASML, TSMC, export controls…" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p>The keyword matcher becomes the cache and eval set; a WebGPU model (Llama / Phi-class) runs the whole tutor on-device with zero API cost, grounded by RAG over the full book so every answer cites real page spans and refuses to hallucinate. Argue with it by voice on your commute — "explain it like I'm a Senate staffer" — and ask "what's happened since 2022?" to get the live delta flagged against the print edition.</p></div>
+  </div>
+</section>
+
+<!-- ============ 5. STEERCAST ============ -->
+<section class="fmt" id="steer">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">05 — STEERABLE AUDIO</div>
+      <h2>SteerCast</h2>
+      <p class="tagline">A podcast that shuts up and answers your question.</p>
+      <p class="what">An audiobook is one fixed path, one fixed depth, for every listener. SteerCast is a branching conversation between two synthetic hosts — an explainer and a skeptic — that you steer in real time. Ride the spine, or interrupt to go three levels deep on EUV. It actually talks (your browser's speech engine), and it builds the personalized chapter you heard.</p>
+      <p class="why"><b>What the book can't do:</b> let a curious listener dig while a casual one takes the express route — and update its own script when the news moves.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>steercast · branching audio · uses browser TTS</span><span class="live" id="ttsState">tap play</span></div>
+      <div class="cast" id="cast"></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p>Today it fakes the hosts with hand-authored branches and robotic browser TTS. By end-2027, cheap streaming voice models running locally make the two hosts sound like real ChinaTalk co-hosts with natural barge-in — you talk over them and they pivot. A small on-device LLM generates branches live from a vetted source pack, so any question ("CXMT's HBM situation this week?") gets a grounded, freshly-spoken answer.</p></div>
+  </div>
+</section>
+
+<!-- ============ 6. LIVING ============ -->
+<section class="fmt" id="living">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">06 — LIVING DOCUMENT</div>
+      <h2>The Living Chip War</h2>
+      <p class="tagline">Chris Miller wrote the book. The agents keep writing the next page.</p>
+      <p class="what">The narrative spine stays fixed, but every claim with a shelf life — node names, fab timelines, Entity List counts, market shares — is a <b>live cell</b> bound to a watched source. A fleet of agents reads the wire daily, drafts diffs, checks them against primary documents, and surfaces them in a "What Changed" feed. Read the book as Miller closed it in 2022 — or as it stands today.</p>
+      <p class="why"><b>What the book can't do:</b> tell you <em>which</em> of its sentences went stale, by how much, and show you the receipt.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>living-edition · dotted cells are agent-watched</span><span class="live">3 updated · 1 pending</span></div>
+      <div class="living">
+        <div class="read">
+          <div class="statusbar">⟳ Last reviewed by agents: <b>today</b> · 3 claims updated · 1 pending human review</div>
+          <div class="readtoggle">Read as: 2022 print <span class="switch" id="eraSwitch"><i></i></span> live, today</div>
+          <div id="livingProse"></div>
+        </div>
+        <div class="feed">
+          <h4>What changed</h4>
+          <div class="feedfilter" id="feedFilter">
+            <button class="on" data-f="all">All</button>
+            <button data-f="v">Verified</button>
+            <button data-f="p">Pending</button>
+          </div>
+          <div id="feedList"></div>
+          <button class="btn" id="pipelineBtn" style="width:100%;margin-top:6px">▶ Watch the agent pipeline</button>
+        </div>
+      </div>
+      <div class="diffpanel" id="diffPanel"></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p>The human approval gate becomes the exception: agents poll the Federal Register, SEC EDGAR 6-Ks, and earnings transcripts in near-real-time, and verified diffs publish autonomously while only narrative-altering edits route to a human. Each major diff auto-produces a 30-second explainer in a synthetic voice — and the same agent graph that maintains <em>Chip War</em> becomes a template any author points at their own footnotes. "Second edition" stops being a multi-year event and becomes a daily background process.</p></div>
+  </div>
+</section>
+
+<!-- ============ 07. INSIDE THE MACHINE ============ -->
+<section class="fmt" id="zoom">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">07 — DEEP ZOOM</div>
+      <h2>Inside the Machine</h2>
+      <p class="tagline">Powers of ten, from your pocket to a single atom.</p>
+      <p class="what">A book prints one cross-section diagram and moves on. Here you <em>dive</em> — phone, board, die, logic cell, one transistor, the silicon lattice — six orders of magnitude, and at every level the label tells you which country and which company owns that layer. The supply chain isn't a chapter; it's folded into the object in your hand.</p>
+      <p class="why"><b>What the book can't do:</b> let you fall through scale continuously and feel how a geopolitical map is packed into a few cubic millimeters of silicon.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>inside-the-machine · drag to dive</span><span class="live">6 scales</span></div>
+      <div class="zoomwrap">
+        <canvas id="zoomCanvas"></canvas>
+        <div class="zoomside">
+          <div><div class="zhint">scale</div><div class="scale" id="zScale">~5 mm</div></div>
+          <div class="lname" id="zName">The silicon die</div>
+          <div class="lctl" id="zCtl">~20 billion transistors on a chip the size of a fingernail</div>
+          <input class="zslider" id="zoomSlider" type="range" min="0" max="100" value="42" aria-label="Zoom depth"/>
+          <div class="zhint">◄ phone &nbsp;·&nbsp; atom ►</div>
+        </div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the zoom isn't a hand-drawn abstraction — it's a real die-shot pulled live from a teardown database, and each level renders a generated micro-explainer on tap. Point a phone at any device and an AR overlay labels the actual chips inside it with their provenance. The book becomes an x-ray you hold up to the world.</p></div>
+  </div>
+</section>
+
+<!-- ============ 08. SOUND ============ -->
+<section class="fmt" id="sound">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">08 — SONIFICATION</div>
+      <h2>The Sound of the Chip War</h2>
+      <p class="tagline">Give the data a sixth sense — your ears.</p>
+      <p class="what">Some arguments are easier to hear than to read. This turns three of the book's claims into short synthesized movements: Moore's Law as a fifty-year rise across seven octaves, the export-control era as a quickening drumline, and the world's fab capacity as a full chord that falls silent voice by voice until one note is left ringing — Taiwan.</p>
+      <p class="why"><b>What the book can't do:</b> make you <em>feel</em> an exponential in your chest, or hear a supply chain collapse to a single sustained note.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>sound-of-the-chip-war · turn your volume up</span><span class="live">🔊 web audio</span></div>
+      <div class="sound">
+        <div class="movements">
+          <div class="movement" id="mMoore" data-k="moore"><div class="mn">MOVEMENT I</div><h5 class="mtitle">Moore's Law</h5><p class="mdesc">Fifty years of doubling, compressed into a seven-octave rise.</p><div class="play">▶ play</div></div>
+          <div class="movement" id="mControls" data-k="controls"><div class="mn">MOVEMENT II</div><h5 class="mtitle">The Controls</h5><p class="mdesc">Each strike is an export-control action, 2018 → 2026.</p><div class="play">▶ play</div></div>
+          <div class="movement" id="mConc" data-k="conc"><div class="mn">MOVEMENT III</div><h5 class="mtitle">Concentration</h5><p class="mdesc">Six fab regions sound together — then fall silent, one by one.</p><div class="play">▶ play</div></div>
+        </div>
+        <canvas id="soundCanvas"></canvas>
+        <div class="soundnote" id="soundNote">Three movements, all synthesized live with the Web Audio API — no audio files. Headphones recommended.</div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 a generative-audio model scores the whole book on demand: hum a mood and it renders a data-driven movement; ask "make the AI-chip race a string quartet" and it does. The sonification becomes an adaptive soundtrack that a podcast can drop under a segment, re-keyed live to the latest market data.</p></div>
+  </div>
+</section>
+
+<!-- ============ 09. THE SILICON STAGE (THEATER) ============ -->
+<section class="fmt" id="stage">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">09 — THEATER</div>
+      <h2>The Silicon Stage</h2>
+      <p class="tagline">A docudrama in three fabs. The people, not the parts.</p>
+      <p class="what">Strip the charts away and the chip war is a series of rooms where a few people made outsized bets: the "traitorous eight" walking out on Shockley, Morris Chang describing a foundry to a baffled minister, a US envoy leaning on the one country that makes the one machine. This is the book as a stage play — pick a scene, press play, and watch the spotlight follow whoever's speaking.</p>
+      <p class="why"><b>What the book can't do:</b> give these moments a body and a silence. The most loaded line in the chip war is a pause an actor holds.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>the-silicon-stage · pick a scene, press play</span><span class="live">3 scenes</span></div>
+      <div class="stage-tabs" id="stageTabs">
+        <button data-s="a1">I · The Traitorous Eight</button>
+        <button data-s="a2" class="on">II · The Foundry</button>
+        <button data-s="a3">III · The One Machine</button>
+      </div>
+      <div class="stagewrap">
+        <div class="stageview" id="stageView">
+          <div class="spotlight" id="spot"></div>
+          <div class="moon"></div>
+          <div class="floor"></div>
+        </div>
+        <div class="script" id="stageScript"></div>
+      </div>
+      <div class="stagefoot">
+        <button class="btn primary" id="stagePlay">▶ Stage this scene</button>
+        <span class="small">Dramatized from real events. The dialogue is invented; the history isn't.</span>
+      </div>
+      <div class="cast" id="stageCast"><b>Dramatis personae:</b> Robert Noyce &amp; the eight who founded Fairchild · William Shockley · Morris Chang (TSMC) · a Taiwanese minister · a US trade envoy · a Dutch official holding ASML's leash.</div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the stick-figure blocking becomes generated performances: cast it with synthetic actors, hear each role in its own voice, and let an audience member step into a part and improvise against an in-character scene partner. The play restages nightly with the latest headlines folded into Act III — documentary theater that never closes.</p></div>
+  </div>
+</section>
+
+<!-- ============ 10. WHAT-IF ENGINE ============ -->
+<section class="fmt" id="whatif">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">10 — COUNTERFACTUAL</div>
+      <h2>The What-If Engine</h2>
+      <p class="tagline">History was contingent. Pull a thread and watch it unravel.</p>
+      <p class="what">The book's quiet argument is that the chip world we got was never inevitable — a few sales, bets, and bans could have gone the other way. This makes that argument operable: choose a fork in the road and read the alternate present it produces, with a historians'-plausibility meter on how real the counterfactual is.</p>
+      <p class="why"><b>What the book can't do:</b> let you A/B test history — hold a moment, change one variable, and watch the whole map redraw.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>what-if-engine · pick a fork in the road</span><span class="live">5 timelines</span></div>
+      <div class="whatif">
+        <div class="forks" id="forkList"></div>
+        <div class="wout" id="forkOut"></div>
+      </div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the five hand-written forks become an open prompt: type any counterfactual and a grounded model spins a sourced alternate-history brief, redraws the live chokepoint map for that timeline, and assigns a calibrated plausibility from the historical record. The "what-if" stops being a menu and becomes a conversation with history.</p></div>
+  </div>
+</section>
+
+<!-- ============ 11. SILICON TOP TRUMPS ============ -->
+<section class="fmt" id="cards">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">11 — CARD GAME</div>
+      <h2>Silicon Top Trumps</h2>
+      <p class="tagline">ASML vs TSMC vs Nvidia. Play your chokepoint against the house.</p>
+      <p class="what">Who actually holds power in the chip world — the company with the biggest market share, or the one that's impossible to replace? Turn the book's cast into a deck and find out. Pick a stat, beat the house's card, best of five. You learn fast that share and power are not the same thing.</p>
+      <p class="why"><b>What the book can't do:</b> make you internalize relative leverage by wagering on it — and feel the jolt when a 62%-share toolmaker out-trumps a 90%-share designer.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>silicon-top-trumps · best of five</span><span class="live">your deal</span></div>
+      <div class="trumps"><div id="trumpsWrap"></div></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the stat lines are live: each card's chokepoint and share numbers refresh from current market data, new entrants (a Chinese EUV attempt, a fresh HBM maker) get auto-dealt into the deck, and an agent narrates each round with the week's real headline behind the matchup.</p></div>
+  </div>
+</section>
+
+<!-- ============ 12. PROJECTOR ============ -->
+<section class="fmt" id="future" style="border-top:2px solid var(--amber-deep)">
+  <div class="wrap">
+    <div class="head">
+      <div class="num" style="color:var(--amber)">12 — THE FORECAST · the centerpiece</div>
+      <h2>The Projector</h2>
+      <p class="tagline">Drag the year. Watch the book — and the world it describes — recompile itself.</p>
+      <p class="what">Here is the part you asked to price in. Spend a year going down the robotics rabbit hole and two things happen at once. <b>The media tech leaps</b> — the static explainer becomes generative video, the glossary becomes a self-maintaining agent, the diagram becomes an embodied robot tutor. And <b>the thesis advances</b>: compute walks off the wafer into actuators, and a fresh set of chokepoints — rare-earth magnets, harmonic-drive actuators, battery cells, world-model weights — snaps into place. <em>Chip War</em> becomes <em>Robot War</em>. Grab the knob and drag from mid-2026 to end-2027.</p>
+      <p class="why"><b>What the book can't do:</b> let you drag time forward with your thumb and watch both the medium and the argument re-render — folding the next book into this one as a continuation instead of a sequel you wait two years to buy.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>the-projector · drag the knob ⟷ (or use arrow keys)</span><span class="live" id="projDate">Jun 2026</span></div>
+      <div class="proj">
+        <div class="rail" id="rail">
+          <div class="track"></div>
+          <div class="ticks">
+            <span class="tick">Jun '26</span><span class="tick">Dec '26</span><span class="tick">Jun '27</span><span class="tick">Dec '27</span>
+          </div>
+          <div class="knob" id="knob" tabindex="0" role="slider" aria-label="Time, mid 2026 to end 2027" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="datebadge" id="knobDate">Jun '26</div></div>
+        </div>
+
+        <div class="projgrid">
+          <div class="pcard">
+            <div class="pk">⊳ Format A · explainer</div><h5>How an EUV machine prints a chip</h5>
+            <div class="fid" id="fidVideo">static labeled diagram</div>
+            <canvas id="euvCanvas"></canvas>
+          </div>
+          <div class="pcard">
+            <div class="pk">⊳ Format B · the glossary</div><h5>Chokepoint Tracker</h5>
+            <div class="fid" id="fidDoc">a static table</div>
+            <div id="trackerRows"></div>
+            <div class="note" id="trackerNote"></div>
+          </div>
+          <div class="pcard">
+            <div class="pk">⊳ Format C · the audio tutor</div><h5>193nm DUV vs 13.5nm EUV?</h5>
+            <div class="fid" id="fidVoice">text Q&amp;A</div>
+            <canvas id="waveCanvas"></canvas>
+            <div class="note" id="voiceNote">cloud-hosted · costs per query</div>
+          </div>
+          <div class="pcard">
+            <div class="pk">⊳ Format D · the diagram</div><h5>Robot tutor at the whiteboard</h5>
+            <div class="fid" id="fidRobot">a static concept frame</div>
+            <canvas id="robotCanvas"></canvas>
+          </div>
+        </div>
+
+        <div class="projmap">
+          <p class="thesis" id="thesis">Compute is the prize.</p>
+          <div class="stacks">
+            <div class="stackcol" id="stackSilicon"></div>
+            <div class="stackcol" id="stackRobot" style="position:absolute;inset:0;opacity:0;pointer-events:none"></div>
+          </div>
+          <p class="small" id="stackFoot" style="text-align:center;margin-top:14px">The silicon stack. Drag right to watch it crossfade into the robotics stack →</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close">
+  <div class="wrap">
+    <p class="eyebrow">So — what could you have done?</p>
+    <h2>The book was never the only render.</h2>
+    <p>A nonfiction book is a brilliant compression format: portable, linear, authoritative, frozen. But the research underneath <em>Chip War</em> was a model of a living, adversarial system — exponentials, chokepoints, feedback loops, a clock. Those are exactly the things a printed page is worst at and an interactive artifact is best at. The seven prototypes above aren't replacements for the prose. They're what the prose could <em>become</em> when you stop assuming "book" is the last step.</p>
+    <div class="robot">
+      <h3>And the robots?</h3>
+      <p>You asked me to price in 18 months of progress — what if that year went into robotics instead. Here's the bet baked into the Projector: by end-2027 the same author who mapped silicon is writing about <b>embodied AI</b>, because the next chokepoints are physical. China controls ~90% of the rare-earth magnets that move actuators (the Dy/Tb that turn an F-35 control surface, an Optimus arm, a Virginia-class sub). Harmonic-drive actuators are a Japanese near-monopoly. World-model weights are the new EDA; Nvidia compute is the new TSMC. <em>Robot War</em> isn't a metaphor — it's the same supply-chain logic walking off the wafer and into a body.</p>
+      <p>And the medium moves with it. The faked demos here — CSS-animated EUV beams, browser TTS, a stick-figure tutor — are end-2026 placeholders for what genuinely ships by end-2027: real-time generative video, on-device voice, agentic living docs, VLA-driven robot tutors. Spend the year on robots and you don't just get a new subject. You get a new set of tools to tell it with.</p>
+    </div>
+    <p class="small">Built as a single self-contained HTML file. Facts verified against public sources (ASML, TSMC, BIS, IEEE, company filings) via a research workflow; figures are real and dated, demos are illustrative. An homage to Chris Miller's work, not affiliated with the author or publisher.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Beyond the Book · a design provocation on <em>Chip War</em> · made for the ChinaTalk / WarTalk world<br/>
+    Seven prototypes, one file, zero dependencies. Drag the dial, break the chain, play the war.
+  </div>
+</footer>
+
+<div class="tip" id="tip"></div>
+
+<script>
+/* ============================================================
+   shared helpers
+============================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const tip=$('#tip');
+function showTip(html,x,y){tip.innerHTML=html;tip.classList.add('show');tip.style.left=Math.min(x+12,innerWidth-tip.offsetWidth-10)+'px';tip.style.top=(y+14)+'px';}
+function hideTip(){tip.classList.remove('show');}
+
+/* ============================================================
+   MODE ENGINE — Chip War  ⟷  Robot research
+   The same gallery, re-skinned for the next book. Demos that
+   carry their own data (map, zoom, sound, stage, what-if, cards)
+   register an onMode() hook; everything else swaps copy.
+============================================================ */
+const MODE={cur:'chip',hooks:[]};
+function onMode(fn){MODE.hooks.push(fn);}
+
+const ROBOT={
+  scroll:{tag:'You don’t read the capability curve. You fall down it.',
+    what:'Same scrollytelling, a new exponential. Watch robot capability climb — degrees of freedom, payload, autonomy hours — while the bill of materials concentrates onto a few suppliers and the cost of a humanoid falls off a cliff toward mass production.',
+    why:'<b>What the book can’t do:</b> make you feel embodied-AI progress accelerate under your scroll, and watch the actuator supply chain collapse toward a handful of names.',
+    future:'By end-2027 the curve is live: ask "what if Unitree halves actuator cost again?" and the projection re-renders, auto-narrated, from this quarter’s teardown data.'},
+  map:{tag:'Click a node. See who holds the magnet.',
+    what:'The same explorable graph, rewired for robots: rare-earth ore → Dy/Tb refining → motor magnets → harmonic-drive actuators → the world-model brain → the humanoid. Cut a node and watch the body go limp.',
+    why:'<b>What the book can’t do:</b> let you sever China’s magnet refining with your cursor and watch every Western robot, EV, and missile fin stall downstream.',
+    future:'By end-2027 the graph self-annotates from rare-earth license filings and robotics-funding news, pulsing red when a real chokepoint tightens this week.'},
+  game:{tag:'Six turns. Magnets, motors, models. One body you can’t yet build at home.',
+    what:'The same policy sim, a new board: race the US or China to field humanoids at scale — reshore magnets, fund actuators, lock up world-model compute — and feel the very backfire loops the chip war taught, replayed one rung up the stack.',
+    why:'<b>What the book can’t do:</b> let you impose a magnet embargo and watch it accelerate the rival’s vertical integration, exactly as chip controls did.',
+    future:'By end-2027 the opponent is a reasoning planner that negotiates supply deals in character — no two robot races alike, and the event deck writes itself from the news.'},
+  ask:{tag:'Stop reading the index. Cross-examine the robotics thesis.',
+    what:'The same conversational tutor, pointed at embodied AI. Ask "why is the hand the bottleneck, not the brain?" and the argument answers, cites itself, and offers two ways deeper.',
+    why:'<b>What the book can’t do:</b> notice you’re conflating teleoperation with autonomy and re-explain it three ways, then follow up when you ask "but what about the magnets?"',
+    future:'By end-2027 an on-device model runs the whole robotics tutor offline, grounded by RAG over the field’s fast-moving literature, refusing to hallucinate past the citations.'},
+  steer:{tag:'A robotics podcast that shuts up and answers your question.',
+    what:'The same steerable two-host show, restaged for robots. Ride the spine — Optimus, Figure, the magnet squeeze — or interrupt to go three levels deep on harmonic drives while a skeptic pushes back.',
+    why:'<b>What the book can’t do:</b> let a curious listener dig into actuator torque density while a casual one takes the express route — and rewrite its script when the news moves.',
+    future:'By end-2027 local streaming voice models make the hosts sound real, with barge-in, and a small LLM generates fresh robot branches live from a vetted source pack.'},
+  living:{tag:'You wrote the robot book. The agents keep writing the next page.',
+    what:'The same living document, watching the fastest-moving field there is. Capability numbers, funding rounds, magnet-export rules, who shipped a working humanoid this quarter — each a live cell bound to a source the agents re-check daily.',
+    why:'<b>What the book can’t do:</b> survive a field that doubles its capability in months. A printed robot book is obsolete at the printer; this one flags exactly which sentences moved.',
+    future:'By end-2027 verified diffs publish autonomously off arXiv, SEC filings, and teardown feeds, and each major change auto-produces a 30-second spoken explainer.'},
+  zoom:{tag:'Powers of ten, from a humanoid to a rare-earth atom.',
+    what:'The same deep-dive, a different machine. Fall through scale — the robot, a joint actuator, the harmonic drive, the motor magnet, a grain of dysprosium, the atoms — and at each layer the label names the country and company that owns it.',
+    why:'<b>What the book can’t do:</b> let you dive continuously and feel how the next geopolitical map is folded into the motor of a robot’s hip.',
+    future:'By end-2027 the zoom pulls a real CT-scan of a shipping humanoid, renders a generated micro-explainer per layer, and AR-labels the actuators in a robot standing in front of you.'},
+  sound:{tag:'Give the robot data a sixth sense — your ears.',
+    what:'The same sonification, three new movements: robot capability as a rising sweep, the rare-earth export curbs as a quickening drumline, and the magnet supply chain as a chord that fades voice by voice until only one country’s note sustains.',
+    why:'<b>What the book can’t do:</b> make you feel embodied-AI’s takeoff in your chest, or hear a supply chain narrow to a single held note.',
+    future:'By end-2027 a generative-audio model scores the robotics story on demand and re-keys it live to the latest capability and supply data.'},
+  stage:{tag:'A docudrama of the robot age. The people, not the parts.',
+    what:'The same stage, a new cast. The founder whose robot still can’t fold a towel, the broker who controls the magnets, the senator learning that compute now has arms. Pick a scene, press play, and watch the spotlight follow the speaker.',
+    why:'<b>What the book can’t do:</b> give these moments a body and a silence — the held pause when a buyer realizes the chip war just moved to magnets.',
+    future:'By end-2027 cast it with synthetic actors in distinct voices, step into a role yourself, and restage Act III nightly with the week’s headlines.'},
+  whatif:{tag:'The robot future is contingent too. Pull a thread.',
+    what:'The same counterfactual engine, aimed forward. What if China weaponizes its magnet monopoly? What if a US lab open-sources a frontier world-model? Choose a fork and read the alternate present, with a plausibility meter.',
+    why:'<b>What the book can’t do:</b> let you A/B test the next decade — hold a moment, change one variable, and watch the robotics map redraw.',
+    future:'By end-2027 type any robot counterfactual and a grounded model spins a sourced brief, redraws the supply map for that timeline, and calibrates how likely it is.'},
+  cards:{tag:'Optimus vs Unitree vs the magnet refiner. Play your leverage.',
+    what:'The same card game, a new deck. The household names — Tesla, Figure, Boston Dynamics — against the quiet chokepoints: China’s rare-earth refiners, Japan’s harmonic-drive makers, Nvidia’s robot brains. Best of five.',
+    why:'<b>What the book can’t do:</b> make you feel the jolt when a magnet refiner you’d never heard of out-trumps the humanoid everyone’s seen on TV.',
+    future:'By end-2027 the stat lines refresh from live market data and new entrants get auto-dealt as they ship.'},
+  future:{tag:'You’re already here. This is the book the robot research becomes.',
+    what:'In robot mode the Projector isn’t a forecast — it’s the homepage. Drag the dial and watch the formats you just toured arrive for real: generative-video explainers, agentic living docs, on-device voice, an embodied robot tutor that steps off the screen.',
+    why:'<b>What the book can’t do:</b> be finished. By the time a robotics book ships, the tools to tell it have lapped it — so the artifact has to be the dial, not the page.',
+    future:''}
+};
+const HERO_ROBOT={
+  h1:'You spent a year on robots. <span class="hl">A year from now, AI lets you tell it like this.</span>',
+  lede:'Same idea, new subject. Imagine the research is embodied AI and the deadline is late 2027. By the time the robotics book is "done," the tools to convey it have leapt — generative video, on-device voice, world-model sims, agents that keep it current.',
+  sub:'Every format below re-skins for the robot story. The chokepoints move from EUV and TSMC to <b>rare-earth magnets, harmonic-drive actuators, batteries, and world-model weights</b> — and the medium moves with them. This is what a year of robot research becomes when it refuses to end up as just a book.',
+  hint:'The next book. Flip back to Chip War to see the format that already exists.'
+};
+const MENU_ROBOT={
+  '#scroll':'Robot capability as an exponential you fall down, while the parts list collapses to a few suppliers.',
+  '#map':'The robot supply chain as a graph you can sever — cut the magnets, watch the body go limp.',
+  '#game':'Race the US or China to field humanoids at scale. The chip-war backfire loops, one rung up.',
+  '#ask':'Cross-examine the robotics thesis: why the hand, not the brain, is the bottleneck.',
+  '#steer':'A robotics two-hander you interrupt — "more on harmonic drives" and the hosts follow.',
+  '#living':'A robot book that re-writes its own stale numbers in a field that doubles every few months.',
+  '#zoom':'Powers of ten from a humanoid to a rare-earth atom — who owns each layer of the body.',
+  '#sound':'Capability as a rising sweep; the magnet monopoly as a chord that fades to one note.',
+  '#stage':'The founder, the broker, the senator — the robot age as documentary theater.',
+  '#whatif':'What if China weaponizes the magnet monopoly? Pull a thread of the robot future.',
+  '#cards':'Optimus vs Unitree vs the magnet refiner — quiet chokepoints beat famous names.',
+  '#future':'In robot mode this isn’t a forecast — it’s the homepage. Drag the dial into the present.'
+};
+
+const FIELD={tag:'.tagline',what:'.what',why:'.why'};
+let SNAP={sec:{}};
+function snapshot(){
+  document.querySelectorAll('section.fmt').forEach(sec=>{const id=sec.id;SNAP.sec[id]={};
+    for(const k in FIELD){const el=sec.querySelector(FIELD[k]);if(el)SNAP.sec[id][k]=el.innerHTML;}
+    const fp=sec.querySelector('.future p:last-of-type');if(fp)SNAP.sec[id].future=fp.innerHTML;});
+  SNAP.hero={h1:$('.hero h1').innerHTML,lede:$('.hero .lede').innerHTML,sub:$('.hero .sub').innerHTML,hint:($('#modehint')||{}).innerHTML};
+  SNAP.menu={};document.querySelectorAll('.menu .mcard').forEach(a=>{const p=a.querySelector('p');if(p)SNAP.menu[a.getAttribute('href')]=p.innerHTML;});
+}
+function setField(sec,sel,val){if(val==null)return;const el=sec.querySelector(sel);if(el)el.innerHTML=val;}
+function applyCopy(m){
+  const robot=m==='robot';
+  document.querySelectorAll('section.fmt').forEach(sec=>{const id=sec.id;const d=robot?ROBOT[id]:SNAP.sec[id];if(!d)return;
+    setField(sec,'.tagline',d.tag);setField(sec,'.what',d.what);setField(sec,'.why',d.why);
+    if(d.future!=null&&d.future!==''){const fp=sec.querySelector('.future p:last-of-type');if(fp)fp.innerHTML=d.future;}
+    else if(!robot){const fp=sec.querySelector('.future p:last-of-type');if(fp&&SNAP.sec[id])fp.innerHTML=SNAP.sec[id].future;}});
+  const h=robot?HERO_ROBOT:SNAP.hero;if(h){$('.hero h1').innerHTML=h.h1;$('.hero .lede').innerHTML=h.lede;$('.hero .sub').innerHTML=h.sub;const mh=$('#modehint');if(mh&&h.hint!=null)mh.innerHTML=h.hint;}
+  document.querySelectorAll('.menu .mcard').forEach(a=>{const p=a.querySelector('p');if(!p)return;const v=robot?MENU_ROBOT[a.getAttribute('href')]:(SNAP.menu||{})[a.getAttribute('href')];if(v!=null)p.innerHTML=v;});
+}
+function updateModeUI(){$$('.modeswitch button,.modemini button').forEach(b=>b.classList.toggle('on',b.dataset.m===MODE.cur));}
+function setMode(m){if(m===MODE.cur)return;MODE.cur=m;document.body.classList.toggle('robot',m==='robot');applyCopy(m);MODE.hooks.forEach(fn=>{try{fn(m);}catch(e){}});updateModeUI();}
+snapshot();
+$$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+
+/* ============================================================
+   1. SILICON SCROLL
+============================================================ */
+(function(){
+  const cv=$('#scrollCanvas'),ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=Math.min(devicePixelRatio||1,2);
+  let activeAct=0,prog=0,logScale=true;
+  const steps=$$('#scrollySteps .step');
+
+  const moore=[
+    {y:1971,n:'4004',v:2300},{y:1978,n:'8086',v:29000},{y:1985,n:'386',v:275000},
+    {y:1993,n:'Pentium',v:3100000},{y:2000,n:'Pentium 4',v:42000000},{y:2006,n:'Core 2',v:291000000},
+    {y:2013,n:'Apple A7',v:1000000000},{y:2020,n:'Apple M1',v:16000000000},
+    {y:2022,n:'Nvidia H100',v:80000000000},{y:2023,n:'M2 Ultra',v:134000000000},{y:2024,n:'B200',v:208000000000}
+  ];
+  const fabs=[
+    {node:'28nm',cost:6,firms:10},{node:'16nm',cost:8,firms:7},{node:'10nm',cost:10,firms:5},
+    {node:'7nm',cost:12,firms:4},{node:'5nm',cost:16,firms:3},{node:'3nm',cost:20,firms:3},{node:'2nm',cost:28,firms:2}
+  ];
+  const regions=[['US','#4a8fe0'],['Japan','#5fbf78'],['Europe','#5fc8c8'],['Korea','#b07de0'],['China','#e8b04b'],['Taiwan','#e2483b']];
+  const dots=[];
+  (function seed(){let s=7;const rnd=()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};
+   const dist=[6,6,4,5,7,12];// counts per region; taiwan heavy at edge
+   regions.forEach((r,ri)=>{for(let i=0;i<dist[ri];i++){dots.push({x:.08+rnd()*.84,y:.12+rnd()*.76,r:ri,edge: ri===5? rnd()<.8 : rnd()<.12});}});
+  })();
+
+  function resize(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);draw();}
+
+  function axes(){ctx.strokeStyle='#2c2c34';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(54,18);ctx.lineTo(54,H-34);ctx.lineTo(W-16,H-34);ctx.stroke();}
+
+  function drawMoore(){
+    const x0=54,x1=W-22,y0=H-34,y1=20;
+    axes();
+    ctx.fillStyle='#6c6760';ctx.font='10px '+'monospace';
+    const maxV=208e9,minV=2000;
+    const xx=i=>lerp(x0,x1,i/(moore.length-1));
+    const yy=v=>logScale? lerp(y0,y1,(Math.log10(v)-Math.log10(minV))/(Math.log10(maxV)-Math.log10(minV)))
+                        : lerp(y0,y1,v/maxV);
+    // gridlines
+    if(logScale){for(let e=3;e<=11;e+=2){const v=Math.pow(10,e);const y=yy(v);ctx.strokeStyle='#1c1c22';ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();ctx.fillStyle='#6c6760';ctx.fillText('1e'+e,6,y+3);}}
+    const reveal=clamp(prog*1.15,0,1);const shown=reveal*(moore.length-1);
+    ctx.strokeStyle='#e2483b';ctx.lineWidth=2.4;ctx.beginPath();
+    for(let i=0;i<moore.length;i++){if(i>shown)break;const x=xx(i),y=yy(moore[i].v);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+    ctx.stroke();
+    for(let i=0;i<moore.length;i++){if(i>shown+.001)break;const x=xx(i),y=yy(moore[i].v);ctx.fillStyle='#e2483b';ctx.beginPath();ctx.arc(x,y,3.4,0,7);ctx.fill();}
+    const li=Math.min(Math.floor(shown),moore.length-1);const d=moore[li];
+    ctx.fillStyle='#ece8e1';ctx.font='bold 13px monospace';
+    ctx.fillText(d.n+' · '+d.y,xx(li)-10> W-160? W-170:xx(li)+6, yy(d.v)-8);
+    ctx.fillStyle='#9b958c';ctx.font='11px monospace';
+    ctx.fillText(fmt(d.v)+' transistors',12,H-14);
+    if(!logScale){ctx.fillStyle='#e8b04b';ctx.fillText('LINEAR — 50 years looks flat, then a wall',12,16);}
+  }
+  function drawFabs(){
+    const x0=58,x1=W-22,y0=H-34,yTop=24;axes();
+    const bw=(x1-x0)/fabs.length*0.62;const gap=(x1-x0)/fabs.length;
+    const maxC=28;const grow=easeInOut(clamp(prog,0,1));
+    ctx.font='10px monospace';
+    fabs.forEach((f,i)=>{
+      const cx=x0+gap*i+gap*0.2;const hFull=(f.cost/maxC)*(y0-yTop);const h=hFull*lerp(.25,1,grow);
+      const topY=y0-h;
+      ctx.fillStyle=i>=4?'#e2483b':'#7a3b34';ctx.fillRect(cx,Math.max(topY,2),bw,y0-Math.max(topY,2));
+      ctx.fillStyle='#9b958c';ctx.fillText(f.node,cx,y0+14);
+      ctx.fillStyle='#ece8e1';ctx.fillText('$'+f.cost+'B',cx,Math.max(topY,12)-4);
+    });
+    // survivors line
+    ctx.strokeStyle='#e8b04b';ctx.lineWidth=1.6;ctx.beginPath();
+    fabs.forEach((f,i)=>{const cx=x0+gap*i+gap*0.2+bw/2;const y=lerp(y0-6,yTop+30,(10-f.firms)/9*grow);i===0?ctx.moveTo(cx,y):ctx.lineTo(cx,y);});
+    ctx.stroke();
+    fabs.forEach((f,i)=>{const cx=x0+gap*i+gap*0.2+bw/2;const y=lerp(y0-6,yTop+30,(10-f.firms)/9*grow);ctx.fillStyle='#e8b04b';ctx.beginPath();ctx.arc(cx,y,2.6,0,7);ctx.fill();});
+    ctx.fillStyle='#e8b04b';ctx.font='11px monospace';ctx.fillText('firms that can build it →',x0,yTop+6);
+    if(grow>.85){ctx.fillStyle='#e2483b';ctx.font='bold 11px monospace';ctx.fillText('2nm ≈ $28B · 1 EUV scanner = $200M ($380M High-NA)',x0,14);}
+  }
+  function drawDots(){
+    const filter=easeInOut(clamp((prog-0.15)/0.7,0,1));
+    dots.forEach(d=>{
+      const px=lerp(40,W-26,d.x),py=lerp(24,H-30,d.y);
+      const dim = d.edge?0: filter; // non-edge dots fade out
+      const col=regions[d.r][1];
+      ctx.globalAlpha=lerp(.9,d.edge?1:.06,dim);
+      ctx.fillStyle=d.edge? mix(col,filter):col;
+      const rad=d.edge? lerp(3,5.5,filter):3;
+      ctx.beginPath();ctx.arc(px,py,rad,0,7);ctx.fill();
+      if(d.edge&&d.r===5&&filter>.6){ctx.globalAlpha=lerp(0,.5,(filter-.6)/.4)*(0.5+0.5*Math.sin(Date.now()/300));ctx.strokeStyle='#e2483b';ctx.lineWidth=2;ctx.beginPath();ctx.arc(px,py,rad+5,0,7);ctx.stroke();}
+    });
+    ctx.globalAlpha=1;
+    // legend
+    ctx.font='10px monospace';let lx=14;
+    regions.forEach(r=>{ctx.fillStyle=r[1];ctx.fillRect(lx,H-16,8,8);ctx.fillStyle='#9b958c';ctx.fillText(r[0],lx+11,H-9);lx+=Math.max(54,r[0].length*7+24);});
+    if(filter>.5){ctx.fillStyle='#e2483b';ctx.font='bold 13px monospace';ctx.textAlign='center';ctx.fillText('leading edge (<5nm): ~90% on one island',W/2,26);ctx.textAlign='left';}
+  }
+  function mix(col,t){return t>.5?'#e2483b':col;}
+  function fmt(v){return v>=1e9?(v/1e9).toFixed(0)+'B':v>=1e6?(v/1e6).toFixed(0)+'M':v>=1e3?(v/1e3).toFixed(0)+'K':v;}
+
+  function draw(){ctx.clearRect(0,0,W,H);if(activeAct===0)drawMoore();else if(activeAct===1)drawFabs();else drawDots();}
+
+  function onScroll(){
+    let best=0,bestd=1e9,bp=0;
+    steps.forEach((s,i)=>{const r=s.getBoundingClientRect();const c=r.top+r.height/2;const d=Math.abs(c-innerHeight/2);
+      if(d<bestd){bestd=d;best=i;bp=clamp(1-(r.top+r.height*0.3)/innerHeight,0,1);}});
+    steps.forEach((s,i)=>s.classList.toggle('active',i===best));
+    activeAct=+steps[best].dataset.act;prog=bp;
+  }
+  let raf;function loop(){draw();raf=requestAnimationFrame(loop);}
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',resize);
+  $('#logToggle').onclick=e=>{logScale=!logScale;e.target.textContent='scale: '+(logScale?'log':'linear');e.target.classList.toggle('on',!logScale);};
+  resize();onScroll();loop();
+})();
+
+/* ============================================================
+   2. CHOKEPOINT MAP
+============================================================ */
+(function(){
+  const NODES_CHIP=[
+    {em:'⛰️',nm:'Quartz / sand',ctl:'US · NC',flag:'🇺🇸',cc:'us',share:'~70%+',by:'Spruce Pine, NC',rep:'years',
+      txt:"The world's purest quartz — for the crucibles that grow silicon — comes mostly from a single town: Spruce Pine, North Carolina. Hurricane Helene's 2024 flooding there briefly spooked the whole industry.",
+      cutTxt:"Cut ultra-pure quartz → crucible supply for silicon-crystal growth is squeezed. Not instantly fatal, but a real single-town dependency. ~Months of disruption."},
+    {em:'💿',nm:'Silicon wafers',ctl:'Japan',flag:'🇯🇵',cc:'jp',share:'~50%',by:'Shin-Etsu + SUMCO',rep:'years',
+      txt:"Shin-Etsu and SUMCO (both Japan) polish roughly half the world's silicon wafers. Making a defect-free 300mm wafer is its own deep art.",
+      cutTxt:"Cut polished wafers → fabs have nothing to print on. Two Japanese firms make ~50% of supply. ~50%+ of advanced output at risk."},
+    {em:'🔬',nm:'EUV litho',ctl:'Netherlands',flag:'🇳🇱',cc:'nl',share:'100%',by:'ASML (sole supplier)',rep:'a decade+',
+      txt:"ASML in Veldhoven is the ONLY company on Earth that makes EUV lithography machines — each ~$200M ($380M for High-NA), 100,000+ parts, a tin droplet hit by a laser 50,000×/sec to make 13.5nm light. Mirrors from Zeiss, laser from Trumpf, source from Cymer. No rival exists.",
+      cutTxt:"Cut ASML EUV → 100% of leading-edge (<7nm) fabs go idle. No new H100s, no advanced iPhones. This is the chokepoint. Estimated recovery: a decade.",isKey:true},
+    {em:'🧪',nm:'Photoresist',ctl:'Japan',flag:'🇯🇵',cc:'jp',share:'~90%',by:'JSR · TOK · Shin-Etsu',rep:'years',
+      txt:"Japanese firms supply ~90% of advanced photoresist (95%+ of EUV resist). In 2019 Japan froze resist exports to Korea over a political dispute — a live demonstration of materials as a weapon.",
+      cutTxt:"Cut Japanese photoresist → no light-sensitive chemistry to pattern wafers. ~90% of advanced resist is one country. Most leading-edge fabs stall within weeks."},
+    {em:'🏭',nm:'Advanced fab',ctl:'Taiwan',flag:'🇹🇼',cc:'tw',share:'~90%',by:'TSMC',rep:'a decade+',
+      txt:"TSMC makes ~90% of the world's most advanced (≤5nm) logic — on one island, 110 miles off the coast of China. The single greatest geographic concentration risk in the global economy. The 'Silicon Shield.'",
+      cutTxt:"Cut TSMC / Taiwan → ~90% of advanced logic vanishes overnight. The 2020-21 chip shortage was a rounding error next to this. Recovery: a decade, and a global recession.",isKey:true},
+    {em:'✏️',nm:'Design / EDA',ctl:'United States',flag:'🇺🇸',cc:'us',share:'~75%',by:'Synopsys + Cadence',rep:'years',
+      txt:"Every chip is designed in software no one talks about: EDA. Synopsys + Cadence (US), with Siemens, control ~75% of it. A quiet American chokepoint over the blueprints themselves — plus ARM's instruction set in >99% of phones.",
+      cutTxt:"Cut US EDA tools → designers can't tape out new chips at all. The blueprints stop. Affects everyone downstream, including TSMC's customers."},
+    {em:'📦',nm:'Assembly / packaging',ctl:'East Asia',flag:'🌏',cc:'tw',share:'high',by:'ASE · Amkor · OSAT',rep:'1-2 yrs',
+      txt:"After the wafer is printed it's cut, stacked, and packaged — increasingly the hard part as 'advanced packaging' (chiplets, HBM stacks) becomes where performance comes from. Concentrated in East Asia.",
+      cutTxt:"Cut advanced packaging → finished chips can't be assembled, especially AI accelerators that stack HBM. The next chokepoint the book only gestures at."},
+    {em:'📱',nm:'Your devices',ctl:'everywhere',flag:'🌐',cc:'us',share:'—',by:'iPhone · H100 · F-35 · your car',rep:'—',
+      txt:"The end of the line: the phone in your hand, the GPU training every AI model, the avionics in an F-35, the 1,000+ chips in a modern car. All of it rides on the seven nodes to the left.",
+      cutTxt:"This is the destination, not a chokepoint — but everything above determines whether it exists. Pull any upstream node and the device list goes dark."}
+  ];
+  const NODES_ROBOT=[
+    {em:'⛏️',nm:'Rare-earth ore',ctl:'mined widely',flag:'🌍',cc:'us',share:'~70%',by:'mines in China, US, Australia, Myanmar',rep:'years',
+      txt:"Neodymium, dysprosium, terbium come out of the ground in several countries — the US (Mountain Pass), Australia, Myanmar. Mining was never the chokepoint. Refining is.",
+      cutTxt:"Cut ore supply → a real squeeze, but ore is the least concentrated link. Mining can be re-sourced in years."},
+    {em:'⚗️',nm:'Dy/Tb refining',ctl:'China',flag:'🇨🇳',cc:'cn',share:'~90%',by:'Chinese separation plants',rep:'a decade+',
+      txt:"Separating heavy rare earths is filthy, low-margin chemistry the West largely offshored. China refines ~90% of the dysprosium and terbium that let a magnet survive heat. This is the EUV of the robot age.",
+      cutTxt:"Cut Chinese refining → the heat-stable magnets that every high-performance motor needs vanish. ~90% of supply, one country. Recovery: the better part of a decade.",isKey:true},
+    {em:'🧲',nm:'Motor magnets',ctl:'China',flag:'🇨🇳',cc:'cn',share:'~85%',by:'sintered NdFeB makers',rep:'years',
+      txt:"The finished neodymium magnets that turn current into torque are overwhelmingly made in China — and Beijing has already restricted magnet and magnet-tech exports as leverage.",
+      cutTxt:"Cut magnet supply → no torque-dense motors. Every humanoid, drone, and EV traction motor stalls. ~85% of supply is one country."},
+    {em:'⚙️',nm:'Harmonic actuators',ctl:'Japan',flag:'🇯🇵',cc:'jp',share:'~80%',by:'Harmonic Drive Systems',rep:'years',
+      txt:"A humanoid is a stack of precision actuators, and the strain-wave (harmonic) gears at their core are a near-monopoly held in Japan. Torque density per dollar is the whole game.",
+      cutTxt:"Cut precision actuators → robots lose the joints that make them dexterous. A Japanese near-monopoly; ~1-2 years of pain to re-source partially."},
+    {em:'🔋',nm:'Battery cells',ctl:'China + Korea',flag:'🇨🇳',cc:'cn',share:'high',by:'CATL · BYD · LG · Samsung SDI',rep:'years',
+      txt:"A robot is only as useful as its runtime. High-density cells are dominated by CATL and BYD (China) with Korean players behind — the same supply chain that powers EVs.",
+      cutTxt:"Cut battery cells → robots become tethered tools. Cell manufacturing concentrates in China + Korea; reshoring is slow and capital-heavy."},
+    {em:'🧠',nm:'World-model brain',ctl:'United States',flag:'🇺🇸',cc:'us',share:'~',by:'US labs + Nvidia compute/sim',rep:'fast-moving',
+      txt:"The vision-language-action model that lets a robot improvise — and the GPUs and simulators it’s trained on — are mostly American. The new EDA: the design layer everyone builds on.",
+      cutTxt:"Cut the world-model + compute layer → robots can move but not think. The one chokepoint the West still holds — for now."},
+    {em:'🦾',nm:'The integrator',ctl:'US + China',flag:'🌐',cc:'us',share:'—',by:'Tesla · Figure · Unitree · 1X',rep:'—',
+      txt:"Whoever assembles brains, magnets, actuators, and cells into a working body cheaply and reliably: Tesla’s Optimus, Figure, China’s Unitree, Norway’s 1X. The Apple/Nvidia seat of the robot age.",
+      cutTxt:"Integration is where the value lands — but it’s hostage to every upstream node. No magnets, no body."},
+    {em:'🤖',nm:'The humanoid',ctl:'the world',flag:'🌐',cc:'us',share:'—',by:'your factory · your warehouse · the battlefield',rep:'—',
+      txt:"The end of the line: a machine that does physical labor. The factory worker, the warehouse picker, the soldier’s logistics — all riding on the seven nodes to the left, most of which trace to one country.",
+      cutTxt:"This is the destination. Pull any upstream node — magnets, actuators, cells — and the body never stands up."}
+  ];
+  let NODES=NODES_CHIP;
+  const row=$('#chainRow'),dossier=$('#dossier'),banner=$('#cutBanner');
+  let byCountry=false,sel=-1;
+  function render(){
+    row.innerHTML='';
+    NODES.forEach((n,i)=>{
+      const d=document.createElement('div');d.className='node';d.dataset.i=i;
+      if(n.down)d.classList.add('down');if(n.isCut)d.classList.add('cut');if(i===sel)d.classList.add('sel');
+      if(byCountry)d.style.borderColor=ccColor(n.cc);
+      d.innerHTML=`<div class="xmark">✕</div><span class="flag">${n.flag}</span><div class="em">${n.em}</div><div class="nm">${n.nm}</div><div class="ctl">${byCountry?n.ctl:n.share}</div>`;
+      d.onclick=()=>openNode(i);
+      d.onmouseenter=e=>showTip('<b>'+n.nm+'</b> — '+n.by,e.clientX,e.clientY);
+      d.onmousemove=e=>showTip('<b>'+n.nm+'</b> — '+n.by,e.clientX,e.clientY);
+      d.onmouseleave=hideTip;
+      row.appendChild(d);
+      if(i<NODES.length-1){const a=document.createElement('div');a.className='arrow';a.textContent='→';row.appendChild(a);}
+    });
+  }
+  function ccColor(cc){return {us:'#4a8fe0',jp:'#5fbf78',nl:'#e8b04b',tw:'#e2483b',cn:'#e2483b',kr:'#b07de0'}[cc]||'#9b958c';}
+  function openNode(i){sel=i;const n=NODES[i];
+    dossier.classList.add('show');
+    const pct=({'100%':100,'~90%':90,'~75%':75,'~70%+':72,'~50%':50,'high':80,'—':0})[n.share]||40;
+    dossier.innerHTML=`<h4>${n.em} ${n.nm} ${n.flag}</h4>
+      <div class="meta">Controlled by <b style="color:var(--ink)">${n.by}</b> · market share <b style="color:var(--red)">${n.share}</b> · years to replace: ${n.rep}</div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      <p>${n.txt}</p>
+      ${n.share==='—'?'':`<button class="btn primary" id="cutBtn">⚔ Cut this node</button>`}`;
+    render();
+    const cb=$('#cutBtn');if(cb)cb.onclick=()=>cut(i);
+    dossier.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function cut(i){
+    NODES[i].isCut=true;banner.classList.add('show');
+    banner.innerHTML='<b>⚔ '+NODES[i].nm+' severed.</b> '+NODES[i].cutTxt;
+    let step=0;for(let j=i+1;j<NODES.length;j++){step++;((j,step)=>setTimeout(()=>{NODES[j].down=true;render();},step*260))(j,step);}
+    render();
+  }
+  function reset(){NODES.forEach(n=>{n.down=false;n.isCut=false;});sel=-1;banner.classList.remove('show');dossier.classList.remove('show');render();}
+  $('#resetChain').onclick=reset;
+  $('#countryToggle').onclick=e=>{byCountry=!byCountry;e.target.classList.toggle('on',byCountry);e.target.textContent=byCountry?'Show market share':'Color by country';render();};
+  onMode(m=>{NODES=m==='robot'?NODES_ROBOT:NODES_CHIP;reset();});
+  render();
+})();
+
+/* ============================================================
+   3. WIN THE CHIP WAR
+============================================================ */
+(function(){
+  const screen=$('#gameScreen'),live=$('#gameLive');
+  let S=null;
+  const LEVERS={
+    us:[
+      {id:'controls',h:'Export controls',d:'Restrict ASML lithography + US EDA tools to China. Bites hardest WITH allies aboard.'},
+      {id:'rd',h:'R&D subsidies',d:'CHIPS-Act style funding for domestic fabs and node development. Pays off on a delay.'},
+      {id:'allies',h:'Alliance-building',d:'Spend allied trust to pull the Netherlands + Japan into multilateral controls.'}
+    ],
+    prc:[
+      {id:'controls',h:'Stockpiling',d:'Buy Nvidia / ASML gear before the door shuts. Blunts the first waves of controls.'},
+      {id:'rd',h:'Indigenization R&D',d:'Fund SMIC + domestic litho (SMEE). Slowly close the node gap.'},
+      {id:'allies',h:'Market leverage',d:'Dangle market access to peel allies away and coerce firms into buying fewer US chips.'}
+    ]
+  };
+  function start(){
+    screen.innerHTML=`<div class="eyebrow" style="margin-bottom:6px">Choose your side · 2025</div>
+      <p style="color:var(--muted);margin:0 0 4px">It's 2025. The most consequential technology rivalry of the century is yours to run for six years.</p>
+      <div class="pick">
+        <div class="sidecard us" data-s="us"><h4>🇺🇸 United States</h4><p>Hold the lead. You start ahead on technology and alliances — but every control you impose costs your own firms the China market, and unilateral moves push Beijing toward self-sufficiency.</p></div>
+        <div class="sidecard prc" data-s="prc"><h4>🇨🇳 China (PRC)</h4><p>Break out. You're behind at the leading edge with no EUV — but you have scale, a vast domestic market, and the patience to indigenize the whole stack.</p></div>
+      </div>`;
+    $$('.sidecard',screen).forEach(c=>c.onclick=()=>init(c.dataset.s));
+  }
+  function init(side){
+    S={side,turn:1,budget:100,picks:{},
+       us:{techLead:70,allyTrust:80,fabCapacity:50,pendingFab:0},
+       prc:{indigenization:30,stockpile:35,fabCapacity:40},
+       market:100,log:[]};
+    live.textContent=(side==='us'?'🇺🇸 USA':'🇨🇳 PRC')+' · year 1/6';
+    renderTurn();
+  }
+  function meterGap(){return S.us.techLead - S.prc.indigenization;} // + = US ahead
+  function renderTurn(){
+    const me=S.side,enemy=me==='us'?'prc':'us';
+    const needle=clamp(50 + meterGap()*0.5,4,96);
+    const L=LEVERS[me];
+    screen.innerHTML=`
+      <div class="tuglabel"><span>🇺🇸 US lead</span><span style="color:var(--muted)">Year ${S.turn} / 6 · ${2024+S.turn}</span><span>PRC indigenization 🇨🇳</span></div>
+      <div class="tug"><div class="needle" style="left:${needle}%"></div></div>
+      <div class="stats">
+        <div class="stat"><div class="v" style="color:var(--us)">${S.us.techLead|0}</div><div class="l">US tech lead</div></div>
+        <div class="stat"><div class="v" style="color:var(--prc)">${S.prc.indigenization|0}</div><div class="l">PRC indigeniz.</div></div>
+        <div class="stat"><div class="v" style="color:${me==='us'?'var(--us)':'var(--prc)'}">${me==='us'?S.us.allyTrust|0:S.prc.stockpile|0}</div><div class="l">${me==='us'?'Ally trust':'Stockpile'}</div></div>
+        <div class="stat"><div class="v" style="color:var(--amber)">${S.market|0}</div><div class="l">Market health</div></div>
+      </div>
+      <div class="eyebrow" style="margin:4px 0 8px">Your moves this year — set intensity</div>
+      <div class="levers" id="levers"></div>
+      <div class="gamebtns">
+        <button class="btn primary" id="advance">Advance to ${2025+S.turn} →</button>
+        <span class="budget">policy capital: <b id="budgetN" style="color:var(--ink)">${S.budget}</b></span>
+      </div>
+      <div class="brief" id="brief"></div>`;
+    const lev=$('#levers');S.picks={};
+    L.forEach(l=>{
+      const card=document.createElement('div');card.className='lever';
+      card.innerHTML=`<h5>${l.h}</h5><div class="d">${l.d}</div>
+        <div class="seg" data-id="${l.id}">
+          <button data-v="0">None · 0</button><button data-v="1">Light · 10</button><button data-v="2">Std · 22</button><button data-v="3">Aggr · 38</button>
+        </div><div class="cost"></div>`;
+      lev.appendChild(card);
+      $$('.seg button',card).forEach(b=>b.onclick=()=>{
+        $$('.seg button',card).forEach(x=>x.classList.remove('on'));b.classList.add('on');
+        S.picks[l.id]=+b.dataset.v;updateCost();
+      });
+      S.picks[l.id]=0;$$('.seg button',card)[0].classList.add('on');
+    });
+    renderBrief();updateCost();
+    $('#advance').onclick=resolve;
+  }
+  const COSTS=[0,10,22,38];
+  function spend(){return Object.values(S.picks).reduce((a,v)=>a+COSTS[v],0);}
+  function updateCost(){const s=spend();$('#budgetN').textContent=(S.budget-s);$('#budgetN').style.color=s>S.budget?'var(--red)':'var(--ink)';$('#advance').disabled=s>S.budget;$('#advance').style.opacity=s>S.budget?.5:1;}
+  function renderBrief(){const b=$('#brief');if(!b)return;b.innerHTML=S.log.length?S.log.map(e=>`<div class="entry"><span class="yr">${e.yr}</span> ${e.t}</div>`).join(''):'<div class="entry" style="color:var(--faint)">Intelligence briefs will appear here as the years advance.</div>';b.scrollTop=b.scrollHeight;}
+
+  const EVENTS=[
+    {w:3,t:(me)=>{S.prc.indigenization+=12;return 'SMIC ships 7nm on DUV multi-patterning (the Huawei Mate 60 moment). Controls proven leaky; China\'s indigenization jumps.';}},
+    {w:2,t:(me)=>{if(S.us.allyTrust<60){return 'ASML lobbies The Hague against a servicing ban — and with allied trust low, multilateral control fails this year.';}return 'ASML lobbies The Hague, but your allied groundwork holds the coalition together.';}},
+    {w:2,t:(me)=>{S.market-=15;return 'Taiwan Strait tension spikes. Markets wobble; everyone\'s fab capacity is suddenly a hostage.';}},
+    {w:2,t:(me)=>{S.us.fabCapacity-=6;return 'China restricts gallium & germanium exports in retaliation — Western fab build-out slows.';}},
+    {w:2,t:(me)=>{S.us.pendingFab+=10;return 'A new $20B fab breaks ground in Arizona. Capacity is coming — but not for two years (lead times are brutal).';}},
+    {w:1,t:(me)=>{S.market-=10;return 'CXMT floods the market with legacy DRAM. Margins compress across the board.';}},
+    {w:1,t:(me)=>{S.us.techLead+=4;return 'A High-NA EUV tool ships to a Western fab — the leading edge stretches its lead.';}}
+  ];
+  function pickEvent(){const tot=EVENTS.reduce((a,e)=>a+e.w,0);let r=Math.random()*tot;for(const e of EVENTS){r-=e.w;if(r<=0)return e;}return EVENTS[0];}
+
+  function resolve(){
+    const me=S.side,p=S.picks;S.budget-=spend();
+    let notes=[];
+    // pending fab matures
+    if(S.us.pendingFab>0){S.us.fabCapacity+=S.us.pendingFab;notes.push('Arizona fab comes online: +'+S.us.pendingFab+' US capacity.');S.us.pendingFab=0;}
+    if(me==='us'){
+      const alliesIn=p.allies>=2;
+      S.us.allyTrust+=p.allies*4 - (p.controls>=3?10:p.controls*2);
+      if(p.controls){
+        const bite=alliesIn?p.controls*1.4:p.controls*0.6;
+        S.us.techLead+=bite*1.2;
+        S.prc.indigenization+= alliesIn? p.controls*1.5 : p.controls*4.2; // BACKFIRE: unilateral controls push self-sufficiency
+        if(S.prc.stockpile>20 && S.turn<=2){S.prc.indigenization-=p.controls*1.5;S.prc.stockpile-=12;notes.push('China burns stockpile to absorb the first controls.');}
+        S.market-= p.controls*4; // your firms lose China market
+        notes.push(alliesIn?'Multilateral controls bite hard; indigenization barely moves.':'Unilateral controls sting China but accelerate its self-sufficiency drive.');
+      }
+      S.us.techLead+= p.rd*2.2;
+      if(!p.rd){S.us.techLead-=4;notes.push('Starving R&D: the lead erodes even on defense.');}
+      if(p.rd)S.us.fabCapacity+=p.rd*1.5;
+    } else {
+      S.prc.stockpile+=p.controls*3;
+      S.prc.indigenization+= p.rd*3.0 + p.controls*0.6;
+      if(p.allies){S.us.allyTrust-=p.allies*3;S.market-=p.allies*2;notes.push('Market-access pressure peels at the US coalition.');}
+      S.prc.fabCapacity+=p.rd*1.2;
+      if(!p.rd){S.prc.indigenization-=2;notes.push('Without sustained R&D, the node gap stops closing.');}
+    }
+    // market penalty feedback
+    if(S.market<55){if(me==='us')S.us.techLead-=3;else S.prc.indigenization-=2;notes.push('Weak market health starves industry — progress takes a hit.');}
+    // random event
+    const ev=pickEvent();const evText=ev.t(me);
+    // clamp
+    S.us.techLead=clamp(S.us.techLead,0,100);S.prc.indigenization=clamp(S.prc.indigenization,0,100);
+    S.us.allyTrust=clamp(S.us.allyTrust,0,100);S.prc.stockpile=clamp(S.prc.stockpile,0,100);S.market=clamp(S.market,0,100);
+    S.log.unshift({yr:2024+S.turn,t:notes.join(' ')+' <b style="color:var(--amber)">EVENT:</b> '+evText});
+    S.budget+=28; // annual replenish
+    S.turn++;
+    if(S.turn>6)return ending();
+    live.textContent=(me==='us'?'🇺🇸 USA':'🇨🇳 PRC')+' · year '+S.turn+'/6';
+    renderTurn();
+  }
+  function ending(){
+    const me=S.side;const gap=meterGap();
+    const myMeter=me==='us'?S.us.techLead:S.prc.indigenization;
+    const second=me==='us'?S.us.allyTrust:S.prc.stockpile;
+    const score=Math.round((me==='us'?gap:-gap)*0.4 + S.market*0.3 + second*0.2 + S.budget*0.1 + 30);
+    let grade,verdict,line;
+    const winning=(me==='us'&&gap>15)||(me==='prc'&&gap<-5);
+    const lost=(me==='us'&&gap<-5)||(me==='prc'&&gap>25);
+    if(winning&&S.market>60){grade='A';verdict='Decisive Lead';line=me==='us'?'You held the edge AND kept your industry healthy — the rare win that doesn\'t hollow out your own firms.':'You broke out: indigenized the stack while the incumbent\'s controls fed your self-sufficiency. The book\'s central warning, realized.';}
+    else if(lost){grade='D';verdict=me==='us'?'Indigenized Rival':'Contained';line=me==='us'?'Aggressive unilateral controls backfired — you accelerated exactly the self-sufficiency you feared, and lost the market besides.':'Multilateral controls and patient allies boxed you in below the leading edge.';}
+    else{grade='B−';verdict='Pyrrhic Stalemate';line='A standoff. Neither side broke through — and the commercial cost of the fight shows up in everyone\'s books. Interdependence bends; it rarely snaps clean.';}
+    live.textContent='— game over —';
+    screen.innerHTML=`<div class="ending">
+      <div class="eyebrow">2030 · final assessment · ${me==='us'?'🇺🇸 United States':'🇨🇳 China'}</div>
+      <div class="grade" style="color:${grade[0]==='A'?'var(--good)':grade[0]==='D'?'var(--red)':'var(--amber)'}">${grade}</div>
+      <h3 style="margin:0 0 10px">${verdict}</h3>
+      <p style="color:#cfc9c0;max-width:52ch;margin:0 auto 14px">${line}</p>
+      <div class="stats" style="max-width:520px;margin:18px auto">
+        <div class="stat"><div class="v" style="color:var(--us)">${S.us.techLead|0}</div><div class="l">US lead</div></div>
+        <div class="stat"><div class="v" style="color:var(--prc)">${S.prc.indigenization|0}</div><div class="l">PRC indig.</div></div>
+        <div class="stat"><div class="v" style="color:var(--amber)">${S.market|0}</div><div class="l">Market</div></div>
+        <div class="stat"><div class="v">${score}</div><div class="l">Score</div></div>
+      </div>
+      <button class="btn primary" id="replay">↻ Play again</button>
+    </div>`;
+    $('#replay').onclick=start;
+  }
+  start();
+})();
+
+/* ============================================================
+   4. INTERROGATE THE BOOK
+============================================================ */
+(function(){
+  const QA=[
+    {kw:['china','build','own','make','cant','buy','indigen','smic'],q:"Why can't China just build its own advanced chips?",
+     a:["The bottleneck is one machine in one country. To print circuits below 7nm you need EUV lithography, and <b>ASML</b> in the Netherlands is the only company on Earth that makes EUV machines.",
+        "Each one costs ~$200M, has over 100,000 parts, and fires a laser at a tin droplet 50,000 times a second to make 13.5nm light. The US has pressured the Dutch government to never let one ship to China.",
+        "So China's SMIC is stuck doing 7nm the hard way — older DUV tools with multi-patterning — at low yields and high cost. They can approach the edge, but not lead it."],
+     cite:"Ch. on ASML & the EUV chokepoint",fu:[1,2]},
+    {kw:['tsmc','taiwan','foundry','morris','chang','island','shield'],q:"What is TSMC and why does it matter so much?",
+     a:["TSMC is the company Morris Chang founded in Taiwan in 1987 on a then-radical idea: a 'pure-play foundry' that makes <i>other</i> companies' chip designs and sells none of its own. That let a thousand fabless firms (Nvidia, Apple, AMD) exist.",
+        "Today TSMC makes roughly <b>90% of the world's most advanced logic chips</b> — on one island, 110 miles off the coast of China. People call it the 'Silicon Shield': Taiwan is too valuable to invade, and too valuable to lose."],
+     cite:"Ch. on TSMC & the foundry model",fu:[2,6]},
+    {kw:['export','control','backfire','work','sanction','effective','bis'],q:"Did the US export controls actually work, or backfire?",
+     a:["Both, and that's the point. The October 2022 BIS controls genuinely cut Huawei and SMIC off from EUV and the most advanced AI chips — that part bit hard.",
+        "But they also lit a fire under China's self-sufficiency drive. Within a year SMIC shipped a 7nm chip in Huawei's Mate 60 Pro, proving the controls leaked. The lesson the book keeps returning to: unilateral chokepoints accelerate the rival's indigenization. Controls work best when allies (the Dutch, the Japanese) move together."],
+     cite:"Ch. on the export-control era",fu:[0,4]},
+    {kw:['military','darpa','defense','cold war','missile','apollo','pentagon'],q:"What was the role of the US military and DARPA?",
+     a:["The chip industry was midwifed by the Cold War. The first big buyers of integrated circuits weren't consumers — they were missile and space programs. The Minuteman II guidance computer and the Apollo program bought early ICs in volume when no one else would.",
+        "That defense demand paid for the learning curve that made chips cheap enough for everything else. Compute and national security have been entangled from the very first transistor."],
+     cite:"Ch. on the Cold War origins",fu:[1,4]},
+    {kw:['war','win','who','thesis','oil','compute','why war','point'],q:"Why is it a 'war'? Who actually wins?",
+     a:["Miller's thesis: compute is the new oil — the input that decides economic and military power — and unlike oil, its supply runs through a handful of unavoidable chokepoints.",
+        "So 'winning' isn't about who makes the most chips. It's about who controls the chokepoints: the EUV machines (ASML), the design software (Synopsys/Cadence), the IP (ARM), the leading-edge fabs (TSMC). Whoever holds those holds a knife to everyone else's throat — including their own allies'."],
+     cite:"Ch. on chokepoints & the thesis",fu:[0,1]},
+    {kw:['japan','dram','1980','rise','fall','korea','samsung','sony'],q:"What about Japan — its rise and fall in chips?",
+     a:["In the 1980s Japan looked unstoppable. Sony's Akio Morita had licensed the transistor in 1953 and built the consumer-electronics empire; by the mid-80s Japanese firms dominated DRAM memory and terrified Washington.",
+        "Then a 1986 US-Japan trade agreement, a strong yen, and — crucially — Korea (Samsung) and Taiwan (TSMC) undercutting them on cost ate Japan's lunch. Japan still owns deep chokepoints in materials and tools (photoresist, silicon wafers), just not the leading-edge fabs."],
+     cite:"Ch. on Japan's DRAM era",fu:[1,2]},
+    {kw:['vulnerab','risk','biggest','concentration','strait','danger','weak'],q:"What's the single biggest vulnerability today?",
+     a:["Geographic concentration. Around 90% of the world's most advanced chips are made in Taiwan, and a huge share of the materials and tools sit in just a few other spots (ASML in the Netherlands, photoresist in Japan).",
+        "A conflict in the Taiwan Strait — even a blockade short of invasion — would idle the leading edge of the entire global economy. There is no quick substitute. That single point of failure is the book's quiet alarm bell."],
+     cite:"Ch. on the Taiwan scenario",fu:[1,2]}
+  ];
+  const QUIZ={q:"Quick quiz: which company makes the EUV machines no advanced chip can be made without?",opts:['Intel','ASML','TSMC'],ans:1,
+    ok:"Correct — ASML, in the Netherlands, is the sole maker of EUV lithography machines. That single fact is the spine of the whole book.",
+    no:"Not quite — it's <b>ASML</b> in the Netherlands, the only EUV maker on Earth. TSMC <i>uses</i> the machines; Intel buys them too."};
+  const msgs=$('#chatMsgs'),chips=$('#chatChips'),form=$('#chatForm'),input=$('#chatInput');
+  function add(cls,html){const d=document.createElement('div');d.className='msg '+cls;d.innerHTML=html;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
+  function typing(){const d=document.createElement('div');d.className='msg b typing';d.innerHTML='<span></span><span></span><span></span>';msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
+  function match(text){const t=text.toLowerCase().replace(/[^a-z0-9 ]/g,' ');let best=-1,bs=0;
+    QA.forEach((e,i)=>{let s=0;e.kw.forEach(k=>{if(t.includes(k))s+=2;});if(s>bs){bs=s;best=i;}});
+    return bs>0?best:-1;}
+  function answer(i){const e=QA[i];const ty=typing();
+    setTimeout(()=>{ty.remove();const html=e.a.map(p=>'<p>'+p+'</p>').join('')+'<span class="cite">— Chip War, '+e.cite+'</span>';add('b',html);
+      setFollow(e.fu);},700);}
+  function setFollow(ids){chips.innerHTML='';ids.forEach(id=>{const c=document.createElement('button');c.className='chip';c.textContent='↳ '+QA[id].q;c.onclick=()=>ask(QA[id].q,id);chips.appendChild(c);});
+    const q=document.createElement('button');q.className='chip';q.style.borderColor='var(--amber-deep)';q.style.color='var(--amber)';q.textContent='🎲 Quiz me';q.onclick=quiz;chips.appendChild(q);}
+  function ask(text,forceId){add('u',text);if(typeof forceId==='number')return answer(forceId);
+    const i=match(text);
+    if(i<0){const ty=typing();setTimeout(()=>{ty.remove();add('b','<p>The book doesn\'t cover that one head-on — but try one of these threads it does pull hard on:</p>');setFollow([0,1,2]);},600);return;}
+    answer(i);}
+  function quiz(){add('u','Quiz me');const ty=typing();setTimeout(()=>{ty.remove();
+    const d=add('b','<p>'+QUIZ.q+'</p>');const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:6px;flex-wrap:wrap;margin-top:8px';
+    QUIZ.opts.forEach((o,idx)=>{const b=document.createElement('button');b.className='chip';b.textContent=o;b.onclick=()=>{const ty2=typing();setTimeout(()=>{ty2.remove();add('b','<p>'+(idx===QUIZ.ans?QUIZ.ok:QUIZ.no)+'</p>');setFollow([0,4]);},500);};wrap.appendChild(b);});
+    d.appendChild(wrap);},500);}
+  form.onsubmit=e=>{e.preventDefault();const v=input.value.trim();if(!v)return;input.value='';ask(v);};
+  // seed
+  add('b','<p>I\'m the argument of <b>Chip War</b>, made answerable. Ask me anything about the semiconductor world — or tap a question below.</p>');
+  setFollow([0,1,2]);
+})();
+
+/* ============================================================
+   5. STEERCAST
+============================================================ */
+(function(){
+  const tree={
+    s1:{host:'HOST',title:'Ch.1 — Morita\'s bet',
+      lines:["In 1953, a young Akio Morita pays Bell Labs twenty-five thousand dollars to license the transistor.",
+             "Most people don't even know what it's for yet. Morita does. He puts it in a pocket radio.",
+             "That radio — the [[transistor|TR-55]] — is Japan's entry ticket into the electronics century."],
+      branches:[{label:'Tell me more about the transistor',kind:'deeper',to:'transistor'},{label:'Continue the spine →',kind:'spine',to:'s2'}]},
+    transistor:{host:'HOST',title:'↳ The transistor',
+      lines:["Back up to 1947. At Bell Labs, Bardeen, Brattain, and Shockley make the first transistor — a switch with no moving parts.",
+             "Shockley, brilliant and impossible to work for, moves to Mountain View, California to start a company.",
+             "His best people quit in disgust. Those 'traitorous eight' found Fairchild — and Silicon Valley is born from the resentment."],
+      branches:[{label:'Back to the spine →',kind:'spine',to:'s2'},{label:'Push back on Shockley\'s role',kind:'counter',to:'shockleyCounter'}]},
+    shockleyCounter:{host:'ANALYST',title:'↳ Counterpoint',
+      lines:["Let me push on the 'great man' framing. Shockley was a catalyst, sure.",
+             "But the real engine was the Cold War checkbook — the military bought these chips when no consumer would, and that demand paid for everything that followed.",
+             "Personalities make good stories. Procurement budgets make industries."],
+      branches:[{label:'Fair — back to the spine →',kind:'spine',to:'s2'}]},
+    s2:{host:'HOST',title:'Ch.2 — Morris Chang & the foundry',
+      lines:["Fast-forward to 1987. Morris Chang, passed over for the top job at Texas Instruments, moves to Taiwan.",
+             "He builds something nobody had: [[foundryEng|a pure-play foundry]]. TSMC makes other companies' chips and sells none of its own.",
+             "It sounds boring. It quietly becomes the most important company in the world."],
+      branches:[{label:'Give me the engineering',kind:'eng',to:'foundryEng'},{label:'On to the chokepoint →',kind:'spine',to:'s3'}]},
+    foundryEng:{host:'HOST',title:'↳ The fabless/foundry split',
+      lines:["Here's the move. Before TSMC, if you wanted to design chips you also had to own a multi-billion-dollar factory.",
+             "Chang split the two. Now a startup — Nvidia in 1993, say — could design a chip and have TSMC build it.",
+             "Because TSMC competed with none of its customers, everyone trusted it with their crown jewels. That trust is the moat."],
+      branches:[{label:'Back to the spine →',kind:'spine',to:'s3'}]},
+    s3:{host:'HOST',title:'Ch.3 — The ASML chokepoint',
+      lines:["Now the heart of it. To make the most advanced chips you need [[asmlCounter|EUV lithography]].",
+             "Only one company makes EUV machines: ASML, in Veldhoven, Netherlands. Each one ships in multiple 747s and costs over two hundred million dollars.",
+             "Inside, a laser hits a falling tin droplet fifty thousand times a second to make exactly the right wavelength of light. One company. One machine. The whole world depends on it."],
+      branches:[{label:'Wait — push back on that',kind:'counter',to:'asmlCounter'},{label:'How does this rhyme with today?',kind:'today',to:'s4'}]},
+    asmlCounter:{host:'ANALYST',title:'↳ But chokepoints leak',
+      lines:["Hold on — 'the whole world depends on it' oversells it.",
+             "China's SMIC reached 7nm without EUV at all, using older DUV machines and multi-patterning. The 2023 Huawei Mate 60 Pro proved it.",
+             "Chokepoints slow a rival down. They rarely stop one cold. That gap between 'slowed' and 'stopped' is the whole policy debate."],
+      branches:[{label:'So what changed today? →',kind:'today',to:'s4'}]},
+    s4:{host:'HOST',title:'Ch.4 — 2026: the controls bite',
+      lines:["Which brings us to now. Since October 2022, the US has tried to deny China the leading edge — chips, tools, and the people who service them.",
+             "The fight has become about allies: pressuring the Netherlands and Japan to match the controls, because unilateral ones just leak.",
+             "It's the oldest lesson in the book, playing out live: a chokepoint is only as strong as the coalition holding it."],
+      branches:[{label:'↺ Start over from the top',kind:'spine',to:'s1'}]}
+  };
+  const root=$('#cast');let cur='s1',path=[],playing=false,timer=null,lineIdx=0,speed=1,depth=0,ttsOn=true;
+  const synth=window.speechSynthesis;
+  function buildUI(){
+    root.innerHTML=`
+      <div class="breadcrumb" id="crumb"></div>
+      <div class="player">
+        <div class="hosts">
+          <div class="host" id="hHost"><div class="vu"><i></i><i></i><i></i><i></i><i></i></div><div class="nm">HOST</div></div>
+          <div class="host analyst" id="hAnalyst"><div class="vu"><i></i><i></i><i></i><i></i><i></i></div><div class="nm">ANALYST</div></div>
+        </div>
+        <button class="pbtn" id="pbtn">▶</button>
+        <div class="info"><div class="seg-title" id="segTitle"></div><div class="scrub"><i id="scrubFill"></i></div></div>
+        <button class="speed" id="speedBtn">1×</button>
+      </div>
+      <div class="transcript" id="trans"></div>
+      <div class="steerdock" id="dock"></div>
+      <div class="castfoot">
+        <div class="depth" id="depthMeter">depth <span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <button class="pill" id="voiceToggle">🔊 voices on</button>
+        <button class="btn" id="buildEp" style="margin-left:auto">⬇ Build my episode</button>
+      </div>`;
+    $('#pbtn').onclick=toggle;$('#speedBtn').onclick=cycleSpeed;
+    $('#voiceToggle').onclick=()=>{ttsOn=!ttsOn;$('#voiceToggle').textContent=ttsOn?'🔊 voices on':'🔇 voices off';if(!ttsOn&&synth)synth.cancel();};
+    $('#buildEp').onclick=buildEpisode;
+    loadSeg(cur,true);
+  }
+  function crumb(){const c=$('#crumb');c.innerHTML=path.map((id,i)=>`<span>${i?'› ':''}${shortTitle(tree[id].title)}</span>`).join('')+(path.length?' › ':'')+`<b>${shortTitle(tree[cur].title)}</b>`;}
+  function shortTitle(t){return t.replace(/^Ch\.\d+ — /,'').replace(/^↳ /,'');}
+  function loadSeg(id,first){
+    cur=id;if(!first)path.push(prev);prev=id; // path bookkeeping below
+    $('#segTitle').textContent=tree[id].title;$('#trans').innerHTML='';$('#dock').innerHTML='';lineIdx=0;
+    $('#scrubFill').style.width='0%';crumbPush(id);setHost(tree[id].host);
+    $('#tts'); $('#ttsState').textContent='ready';
+  }
+  let prev=null,realPath=['s1'];
+  function crumbPush(id){const c=$('#crumb');c.innerHTML=realPath.map((p,i)=>`${i?' › ':''}${i===realPath.length-1?'<b>'+shortTitle(tree[p].title)+'</b>':shortTitle(tree[p].title)}`).join('');}
+  function setHost(h){$('#hHost').classList.toggle('on',h==='HOST'&&playing);$('#hAnalyst').classList.toggle('on',h==='ANALYST'&&playing);}
+  function toggle(){playing?pause():play();}
+  function play(){playing=true;$('#pbtn').textContent='⏸';$('#ttsState').textContent='playing';setHost(tree[cur].host);step();}
+  function pause(){playing=false;$('#pbtn').textContent='▶';if(synth)synth.cancel();clearTimeout(timer);$('#hHost').classList.remove('on');$('#hAnalyst').classList.remove('on');}
+  function step(){
+    const seg=tree[cur];if(lineIdx>=seg.lines.length){finishSeg();return;}
+    const raw=seg.lines[lineIdx];const text=raw.replace(/\[\[.*?\|(.*?)\]\]/g,'$1');
+    const div=document.createElement('div');div.className='ln'+(seg.host==='ANALYST'?' analyst':'');
+    div.innerHTML='<b>'+seg.host+':</b> '+raw.replace(/\[\[(.*?)\|(.*?)\]\]/g,'<span class="inlinechip" data-to="$1">$2</span>');
+    $('#trans').appendChild(div);$('#trans').scrollTop=$('#trans').scrollHeight;
+    $$('.inlinechip',div).forEach(c=>c.onclick=()=>jumpInline(c.dataset.to));
+    $('#scrubFill').style.width=((lineIdx+1)/seg.lines.length*100)+'%';
+    if(ttsOn&&synth){const u=new SpeechSynthesisUtterance(text);u.rate=1.0*speed;u.pitch=seg.host==='ANALYST'?0.9:1.05;
+      const vs=synth.getVoices();if(vs.length){u.voice=vs[seg.host==='ANALYST'?Math.min(3,vs.length-1):0];}
+      u.onend=()=>{lineIdx++;if(playing)timer=setTimeout(step,160/speed);};
+      synth.speak(u);}
+    else{lineIdx++;timer=setTimeout(step, (1400+text.length*16)/speed);}
+  }
+  function finishSeg(){pause();$('#ttsState').textContent='your move';showBranches();}
+  function showBranches(){const dock=$('#dock');dock.innerHTML='';const seg=tree[cur];
+    seg.branches.forEach(b=>{const btn=document.createElement('button');btn.className='steerbtn '+b.kind;
+      const k={deeper:'GO DEEPER',counter:'COUNTERPOINT',eng:'ENGINEERING',today:'TODAY',spine:'SPINE'}[b.kind];
+      btn.innerHTML=`<span class="kk">${k}</span>${b.label}`;btn.onclick=()=>goTo(b.to,b.kind);dock.appendChild(btn);});
+  }
+  function goTo(id,kind){
+    if(kind==='deeper'||kind==='eng'||kind==='counter')depth=Math.min(3,depth+1);else depth=0;
+    if(id==='s1'){realPath=['s1'];}else{realPath.push(id);}
+    updDepth();cur=id;$('#segTitle').textContent=tree[id].title;$('#trans').innerHTML='';$('#dock').innerHTML='';lineIdx=0;$('#scrubFill').style.width='0%';crumbPush(id);
+    play();
+  }
+  function jumpInline(to){if(tree[to]){goTo(to,'deeper');}}
+  function updDepth(){$$('#depthMeter .d').forEach((d,i)=>d.classList.toggle('on',i<depth));}
+  function cycleSpeed(){speed=speed===1?1.5:speed===1.5?2:1;$('#speedBtn').textContent=speed+'×';}
+  function buildEpisode(){const seen=[...new Set(realPath)];
+    const html='<div style="padding:16px;font-family:var(--serif)"><h3 style="color:var(--red)">Your Chip War episode</h3>'+
+      seen.map(id=>'<p style="color:#cfc9c0"><b style="color:var(--red)">'+tree[id].host+' · '+shortTitle(tree[id].title)+'</b><br>'+tree[id].lines.map(l=>l.replace(/\[\[.*?\|(.*?)\]\]/g,'$1')).join(' ')+'</p>').join('')+'</div>';
+    const w=window.open('','_blank');if(w){w.document.write('<title>My episode</title><body style="background:#0d0d10;color:#ece8e1">'+html+'</body>');}else alert('Your assembled episode covers: '+seen.map(id=>shortTitle(tree[id].title)).join(' → '));}
+  buildUI();
+})();
+
+/* ============================================================
+   6. LIVING CHIP WAR
+============================================================ */
+(function(){
+  const CELLS={
+    node:{o:'5nm (N5)',n:'2nm (N2), ramping since Q4 2025',as:'TSMC Q3 2025 earnings',conf:'v',note:'Volume node moved two generations since the manuscript closed.'},
+    az:{o:'nothing yet',n:'4nm in volume; 3nm targeted for 2H 2027',as:'TSMC Arizona update',conf:'v',note:'US reshoring caught up to the prose.'},
+    entity:{o:'~30 entities',n:'140+ entities',as:'BIS final rule, Dec 2024',conf:'v',note:'Two big additions (Dec 2024, 2025) widened the net.'},
+    hbm:{o:'advanced logic + tools',n:'also HBM memory (ECCN 3A090.c)',as:'BIS rule, Dec 2024',conf:'p',note:'New memory controls pending final human review.'},
+    nvidia:{o:'H100 is the frontier',n:'Blackwell B200 (208B transistors) shipping',as:'Nvidia GTC 2024',conf:'v',note:'The frontier accelerator moved a full generation.'},
+    smic:{o:'stuck below 14nm',n:'shipping 7nm (Huawei Mate 60), 5nm attempts',as:'TechInsights teardown',conf:'p',note:'China climbed faster than the 2022 text assumed.'}
+  };
+  const prose=`<p>The most concentrated risk in technology has a name and an address. Roughly <span class="cell" data-c="node">5nm (N5)</span> is the most advanced node TSMC runs in volume — and TSMC makes about 90% of the world's leading-edge logic, almost all of it in Taiwan. The much-hyped Arizona fabs? As of the manuscript, they produce <span class="cell" data-c="az">nothing yet</span>.</p>
+  <p>Washington's answer has been the chokepoint. The Entity List — the roster of Chinese firms cut off from US technology — held <span class="cell" data-c="entity">~30 entities</span> for advanced-chip reasons, and the controls cover <span class="cell" data-c="hbm">advanced logic + tools</span>. The prize everyone is fighting over is AI compute, where <span class="cell" data-c="nvidia">the H100 is the frontier</span> accelerator and Nvidia owns ~90% of the market.</p>
+  <p>And China? The conventional wisdom held that SMIC was <span class="cell" data-c="smic">stuck below 14nm</span> without EUV. That assumption is exactly the kind of claim a book freezes in amber — and the kind these agents are built to watch.</p>`;
+  const wrap=$('#livingProse');wrap.innerHTML=prose;
+  let era='o';
+  function paint(){$$('.cell',wrap).forEach(c=>{const d=CELLS[c.dataset.c];c.textContent=era==='o'?d.o:d.n;c.style.color=era==='n'?'var(--good)':'';});}
+  paint();
+  $$('.cell',wrap).forEach(c=>{c.onclick=()=>openDiff(c.dataset.c);
+    c.onmouseenter=e=>{const d=CELLS[c.dataset.c];showTip('<b>watched cell</b> · source: '+d.as,e.clientX,e.clientY);};
+    c.onmouseleave=hideTip;});
+  $('#eraSwitch').onclick=e=>{era=era==='o'?'n':'o';e.currentTarget.classList.toggle('on',era==='n');paint();};
+  function openDiff(id){const d=CELLS[id];const p=$('#diffPanel');p.classList.add('show');
+    p.innerHTML=`<div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px">CELL · ${id} <span class="conf ${d.conf}" style="margin-left:8px">${d.conf==='v'?'✓ Verified':'⏳ Needs human review'}</span></div>
+      <div class="diffrow"><span class="lbl">As written '22</span><span class="o">${d.o}</span></div>
+      <div class="diffrow"><span class="lbl">As of today</span><span class="nw">${d.n}</span></div>
+      <p style="font-size:13.5px;color:#cfc9c0;margin:12px 0 6px">${d.note}</p>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted)">↳ source: ${d.as} · <a href="#living">view edit history</a></div>`;
+    p.scrollIntoView({behavior:'smooth',block:'nearest'});}
+  // feed
+  const FEED=[
+    {d:'today',c:'node',f:'v'},{d:'today',c:'entity',f:'v'},{d:'3 days ago',c:'nvidia',f:'v'},
+    {d:'1 week ago',c:'az',f:'v'},{d:'pending',c:'hbm',f:'p'},{d:'pending',c:'smic',f:'p'}
+  ];
+  const list=$('#feedList');let filter='all';
+  function renderFeed(){list.innerHTML='';FEED.filter(x=>filter==='all'||x.f===filter).forEach(x=>{const d=CELLS[x.c];
+    const card=document.createElement('div');card.className='fcard';
+    card.innerHTML=`<div class="fd">⟳ ${x.d}</div><div style="margin:4px 0"><span class="old">${d.o}</span> → <span class="new">${d.n}</span></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--faint)">src: ${d.as}</div><span class="conf ${x.f}">${x.f==='v'?'✓ Verified':'⏳ Pending'}</span>`;
+    card.onclick=()=>openDiff(x.c);list.appendChild(card);});}
+  renderFeed();
+  $$('#feedFilter button').forEach(b=>b.onclick=()=>{$$('#feedFilter button').forEach(x=>x.classList.remove('on'));b.classList.add('on');filter=b.dataset.f;renderFeed();});
+  // pipeline modal
+  $('#pipelineBtn').onclick=()=>{
+    const stages=['📡 Watcher scans the wire…','✍️ Drafter writes the diff…','🔍 Fact-checker matches primary source…','👤 Human gate: approve / revert'];
+    const m=document.createElement('div');m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px';
+    m.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--line);border-radius:16px;max-width:460px;width:100%;padding:24px">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px">INCOMING HEADLINE</div>
+      <div style="font-size:15px;color:var(--ink);margin-bottom:18px">"BIS adds 23 PRC entities to the chip-control list." — Sept 2025</div>
+      <div id="stages"></div>
+      <button class="btn" id="closeM" style="width:100%;margin-top:14px">Close</button></div>`;
+    document.body.appendChild(m);const sc=$('#stages',m);
+    stages.forEach((s,i)=>{const row=document.createElement('div');row.style.cssText='padding:11px 13px;border:1px solid var(--line);border-radius:9px;margin-bottom:8px;font-size:13.5px;color:var(--faint);opacity:.4;transition:.3s';row.textContent=s;sc.appendChild(row);
+      setTimeout(()=>{row.style.opacity='1';row.style.color='var(--ink)';row.style.borderColor=i===3?'var(--good)':'var(--red)';if(i===3)row.innerHTML=s+' <span style="color:var(--good)">✓ published to feed</span>';},700+i*750);});
+    $('#closeM',m).onclick=()=>m.remove();m.onclick=e=>{if(e.target===m)m.remove();};
+  };
+})();
+
+/* ============================================================
+   7. INSIDE THE MACHINE (deep zoom)
+============================================================ */
+(function(){
+  const cv=$('#zoomCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const slider=$('#zoomSlider'),scaleEl=$('#zScale'),nameEl=$('#zName'),ctlEl=$('#zCtl');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  const SETS={
+    chip:[
+      {s:'~15 cm',n:'Your phone',ctl:'Assembled in China · ~15 chips from a dozen countries',col:'#4a8fe0'},
+      {s:'~10 mm',n:'The logic board',ctl:'The SoC: designed in California, built by TSMC in Taiwan',col:'#5fc8c8'},
+      {s:'~5 mm',n:'The silicon die',ctl:'~20 billion transistors on a chip the size of a fingernail',col:'#e8b04b'},
+      {s:'~100 nm',n:'A logic cell',ctl:'Patterned by ASML EUV light — only one company on Earth makes it',col:'#e2483b'},
+      {s:'~3 nm',n:'One transistor',ctl:'A gate a few atoms thick. Three firms can build at this scale.',col:'#b07de0'},
+      {s:'~0.2 nm',n:'Silicon atoms',ctl:'The crystal lattice. Past here, physics says stop — and Moore’s Law slows.',col:'#5fbf78'}
+    ],
+    robot:[
+      {s:'~1.7 m',n:'The humanoid',ctl:'A Figure / Optimus-class robot · ~40 actuators, five supply chains',col:'#4a8fe0'},
+      {s:'~12 cm',n:'A joint actuator',ctl:'The hip/knee module — torque density is the whole game',col:'#5fc8c8'},
+      {s:'~4 cm',n:'The harmonic drive',ctl:'Precision reduction gear — a near-monopoly held in Japan',col:'#e8b04b'},
+      {s:'~2 cm',n:'The motor magnet',ctl:'A neodymium-iron-boron magnet doped with dysprosium for heat',col:'#e2483b'},
+      {s:'~5 nm',n:'A grain of Dy',ctl:'Dysprosium — China refines ~90% of it. The new chokepoint.',col:'#b07de0'},
+      {s:'~0.2 nm',n:'Rare-earth atoms',ctl:'The lattice that makes a magnet hold its field. Where the leverage lives.',col:'#5fbf78'}
+    ]
+  };
+  let LV=SETS.chip;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);render();}
+  function rr(x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+  function scene(i,cx,cy,size,alpha){
+    if(alpha<=0.01)return;
+    c.save();c.globalAlpha=alpha;c.translate(cx,cy);
+    const col=LV[i].col;const robot=MODE.cur==='robot';
+    if(i===0){ if(robot){c.strokeStyle=col;c.lineWidth=2;c.beginPath();c.arc(0,-size*0.28,size*0.08,0,7);c.stroke();c.beginPath();c.moveTo(0,-size*0.2);c.lineTo(0,size*0.18);c.moveTo(0,-size*0.1);c.lineTo(-size*0.14,size*0.02);c.moveTo(0,-size*0.1);c.lineTo(size*0.14,size*0.02);c.moveTo(0,size*0.18);c.lineTo(-size*0.1,size*0.42);c.moveTo(0,size*0.18);c.lineTo(size*0.1,size*0.42);c.stroke();}
+      else{c.strokeStyle=col;c.lineWidth=2;rr(-size*0.26,-size*0.5,size*0.52,size,12);c.stroke();c.globalAlpha=alpha*0.3;c.fillStyle=col;c.fillRect(-size*0.1,-size*0.04,size*0.2,size*0.16);}
+    } else if(i===1){ c.strokeStyle=col;c.lineWidth=1.5;c.strokeRect(-size*0.45,-size*0.32,size*0.9,size*0.64);
+      const chips=[[-.25,-.1,.18,.18],[.06,-.06,.28,.28],[-.3,.13,.12,.1],[.22,.18,.1,.08]];
+      chips.forEach((ch,k)=>{c.fillStyle=k===1?col:'#2c2c34';c.globalAlpha=alpha*(k===1?.9:.55);c.fillRect(ch[0]*size,ch[1]*size,ch[2]*size,ch[3]*size);});
+    } else if(i===2){ c.strokeStyle=col;c.lineWidth=1.5;
+      if(robot){c.beginPath();c.arc(0,0,size*0.36,0,7);c.stroke();for(let a=0;a<24;a++){const ang=a/24*Math.PI*2;c.beginPath();c.moveTo(Math.cos(ang)*size*0.3,Math.sin(ang)*size*0.3);c.lineTo(Math.cos(ang)*size*0.36,Math.sin(ang)*size*0.36);c.stroke();}c.beginPath();c.arc(0,0,size*0.1,0,7);c.stroke();}
+      else{c.strokeRect(-size*0.4,-size*0.4,size*0.8,size*0.8);const g=8,cell=size*0.8/g;c.strokeStyle='rgba(232,176,75,.32)';c.lineWidth=.6;for(let a=0;a<=g;a++){c.beginPath();c.moveTo(-size*.4+a*cell,-size*.4);c.lineTo(-size*.4+a*cell,size*.4);c.stroke();c.beginPath();c.moveTo(-size*.4,-size*.4+a*cell);c.lineTo(size*.4,-size*.4+a*cell);c.stroke();}}
+    } else if(i===3){ if(robot){c.fillStyle=col;c.globalAlpha=alpha*0.8;rr(-size*0.22,-size*0.3,size*0.44,size*0.6,8);c.fill();c.globalAlpha=alpha;c.fillStyle='#0d0d10';c.font='bold '+(size*0.12)+'px serif';c.textAlign='center';c.fillText('N  S',0,size*0.05);c.textAlign='left';}
+      else{c.strokeStyle=col;c.lineWidth=2;for(let k=-4;k<=4;k++){c.beginPath();c.moveTo(k*size*0.08,-size*0.45);c.lineTo(k*size*0.08,size*0.45);c.stroke();}c.strokeStyle='rgba(255,255,255,.22)';for(let k=-3;k<=3;k+=2){c.beginPath();c.moveTo(-size*.4,k*size*0.12);c.lineTo(size*.4,k*size*0.12);c.stroke();}}
+    } else if(i===4){ c.fillStyle=col;c.globalAlpha=alpha*.85;for(let k=-1;k<=1;k++){c.fillRect(k*size*0.18-size*0.03,-size*0.34,size*0.06,size*0.68);}c.globalAlpha=alpha;c.fillStyle='rgba(255,255,255,.3)';c.fillRect(-size*0.32,-size*0.07,size*0.64,size*0.14);
+    } else { c.fillStyle=col;const r=size*0.055;for(let row=-2;row<=2;row++)for(let cc2=-3;cc2<=3;cc2++){const ox=(row%2)*r;c.globalAlpha=alpha*.85;c.beginPath();c.arc(cc2*r*2+ox,row*r*1.7,r,0,7);c.fill();}
+    }
+    c.restore();
+  }
+  function render(){
+    const s=(+slider.value)/100;const d=s*(LV.length-1);const base=Math.min(Math.floor(d),LV.length-2);const f=d-base;
+    c.clearRect(0,0,W,H);const cx=W/2,cy=H/2;const sz=Math.max(W,H);
+    scene(base,cx,cy,sz*lerp(0.7,2.4,f),1-f);
+    scene(base+1,cx,cy,sz*lerp(0.28,0.7,f),f);
+    const act=f<0.5?base:base+1;
+    scaleEl.textContent=LV[act].s;nameEl.textContent=LV[act].n;ctlEl.textContent=LV[act].ctl;scaleEl.style.color=LV[act].col;
+    c.fillStyle='#6c6760';c.font='10px monospace';c.fillText('◄ drag to dive deeper ►',14,H-14);
+  }
+  slider.oninput=render;addEventListener('resize',fit);
+  onMode(m=>{LV=SETS[m]||SETS.chip;render();});
+  fit();
+})();
+
+/* ============================================================
+   8. THE SOUND OF THE CHIP WAR (sonification)
+============================================================ */
+(function(){
+  const cv=$('#soundCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);if(!playing)bg();}
+  let actx=null;
+  function ensure(){if(!actx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;actx=new AC();}if(actx.state==='suspended')actx.resume();return actx;}
+  function tone(freq,start,dur,type,vol){const a=ensure();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(freq,a.currentTime+start);o.connect(g);g.connect(a.destination);const t=a.currentTime+start;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.start(t);o.stop(t+dur+0.05);}
+  const moorePts=[2300,29000,275000,3.1e6,42e6,291e6,1e9,16e9,80e9,208e9];
+  let playing=null,t0=0,playDur=0;
+  function bg(){c.clearRect(0,0,W,H);c.fillStyle='#6c6760';c.font='11px monospace';c.fillText('press a movement ▶',12,H/2);}
+  function setNote(m){$('#soundNote').textContent=m;}
+  function moveMoore(){const a=ensure();if(!a){setNote('Web Audio not available in this browser.');return;}
+    const dur=5.5,f0=110;const o=a.createOscillator(),g=a.createGain();o.type='sawtooth';o.connect(g);g.connect(a.destination);
+    o.frequency.setValueAtTime(f0,a.currentTime);o.frequency.exponentialRampToValueAtTime(f0*128,a.currentTime+dur);
+    g.gain.setValueAtTime(0.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(0.07,a.currentTime+0.1);g.gain.setValueAtTime(0.07,a.currentTime+dur-0.4);g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+dur);
+    o.start();o.stop(a.currentTime+dur+0.1);
+    moorePts.forEach((v,i)=>{const p=i/(moorePts.length-1);tone(f0*Math.pow(2,7*p),p*dur,0.18,'square',0.1);});
+    startViz('moore',dur);}
+  function moveControls(){const a=ensure();if(!a){setNote('Web Audio not available.');return;}
+    const n=10,dur=5;const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=55;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(0.0001,a.currentTime);g.gain.linearRampToValueAtTime(0.06,a.currentTime+dur);o.start();o.stop(a.currentTime+dur+0.2);
+    for(let i=0;i<n;i++){const p=i/n;tone(180+p*340,p*dur,0.12,'square',0.13);if(i>5)tone(90,p*dur,0.18,'sawtooth',0.09);}
+    startViz('controls',dur);}
+  function moveConc(){const a=ensure();if(!a){setNote('Web Audio not available.');return;}
+    const chord=[262,330,392,440,523,659],dur=6;
+    chord.forEach((f,i)=>{const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=f;o.connect(g);g.connect(a.destination);const out=0.7+i*0.75;
+      g.gain.setValueAtTime(0.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(0.06,a.currentTime+0.1);
+      if(i<chord.length-1){g.gain.setValueAtTime(0.06,a.currentTime+out);g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+out+0.3);o.start();o.stop(a.currentTime+out+0.4);}
+      else{for(let k=0;k<6;k++){g.gain.setValueAtTime(0.06,a.currentTime+out+k*0.55);g.gain.exponentialRampToValueAtTime(0.02,a.currentTime+out+k*0.55+0.45);}g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+dur);o.start();o.stop(a.currentTime+dur+0.1);}});
+    startViz('conc',dur);}
+  const NOTES={chip:{moore:'Movement I — five decades of doubling, as seven octaves.',controls:'Movement II — each strike is an export-control action, 2018→2026.',conc:'Movement III — six fab regions; one by one they fall silent until only Taiwan rings.'},
+    robot:{moore:'Movement I — robot capability climbing: DOF, payload, autonomy, as a rising sweep.',controls:'Movement II — rare-earth export curbs and tariffs, struck in sequence.',conc:'Movement III — the magnet supply chain; voices drop until only China sustains the note.'}};
+  function startViz(kind,dur){playing=kind;playDur=dur;t0=performance.now();$$('.movement').forEach(m=>m.classList.toggle('playing',m.dataset.k===kind));setNote((NOTES[MODE.cur]||NOTES.chip)[kind]);requestAnimationFrame(viz);}
+  function viz(){if(!playing)return;const el=(performance.now()-t0)/1000,p=el/playDur;c.clearRect(0,0,W,H);
+    if(p>=1){playing=null;$$('.movement').forEach(m=>m.classList.remove('playing'));bg();return;}
+    if(playing==='moore'){c.strokeStyle='#e8b04b';c.lineWidth=2;c.beginPath();for(let i=0;i<=Math.floor(W*p);i+=3){const xp=i/W;const y=H-Math.pow(2,7*xp)/128*H*0.85;c.lineTo(i,y);}c.stroke();c.fillStyle='#e2483b';c.beginPath();c.arc(W*p,H-Math.pow(2,7*p)/128*H*0.85,4,0,7);c.fill();}
+    else if(playing==='controls'){const bars=10;for(let i=0;i<bars;i++){const bp=i/bars,on=p>=bp;c.fillStyle=on?(i>5?'#e2483b':'#e8b04b'):'#2c2c34';const bh=10+i*0.085*H+(on?6*Math.abs(Math.sin(performance.now()/100)):0);c.fillRect(i*(W/bars)+4,H-bh,W/bars-8,bh);}}
+    else{const dots=6,fallen=Math.floor(p*dots);for(let i=0;i<dots;i++){const x=(i+0.5)*(W/dots),alive=i>=fallen||i===dots-1;c.globalAlpha=alive?1:0.14;c.fillStyle=i===dots-1?'#e2483b':'#5fc8c8';const r=i===dots-1?(8+4*Math.abs(Math.sin(performance.now()/200))):9;c.beginPath();c.arc(x,H/2,r,0,7);c.fill();}c.globalAlpha=1;}
+    c.strokeStyle='rgba(255,255,255,.16)';c.beginPath();c.moveTo(W*p,0);c.lineTo(W*p,H);c.stroke();requestAnimationFrame(viz);}
+  $('#mMoore').onclick=moveMoore;$('#mControls').onclick=moveControls;$('#mConc').onclick=moveConc;
+  const MTXT={chip:[["Moore's Law","Fifty years of doubling, compressed into a seven-octave rise."],["The Controls","Each strike is an export-control action, 2018 → 2026."],["Concentration","Six fab regions sound together — then fall silent, one by one."]],
+    robot:[["Capability Climb","Degrees of freedom, payload, autonomy — the robot exponential as a rising sweep."],["The Curbs","Each strike is a rare-earth export curb or tariff, struck in sequence."],["The Magnet","Five suppliers sound together — all fade but China’s sustained note."]]};
+  function applySoundCopy(m){const t=MTXT[m]||MTXT.chip;const ids=['mMoore','mControls','mConc'];ids.forEach((id,i)=>{const card=$('#'+id);if(!card)return;card.querySelector('.mtitle').textContent=t[i][0];card.querySelector('.mdesc').textContent=t[i][1];});}
+  onMode(applySoundCopy);
+  addEventListener('resize',fit);fit();
+})();
+
+/* ============================================================
+   9. THE SILICON STAGE (theater)
+============================================================ */
+(function(){
+  const SCENES={chip:{
+    a1:{tab:'I · The Traitorous Eight',head:'ACT I, sc. 2 — Mountain View, California, 1957',cast:['shockley','noyce'],
+      lines:[{c:'dir',t:'A cramped lab. WILLIAM SHOCKLEY paces. ROBERT NOYCE and seven others stand stiffly.'},
+        {c:'SHOCKLEY',t:'I won a Nobel Prize for the transistor. Tomorrow you will all submit to lie-detector tests. Every one of you.'},
+        {c:'NOYCE',t:'We came west to build something. Not to be audited like suspects.'},
+        {c:'dir',t:'A silence. NOYCE looks to the others. A decision passes between them without a word.'},
+        {c:'NOYCE',t:'Then we’ll build it somewhere else.'},
+        {c:'dir',t:'The eight walk out. They found Fairchild. Silicon Valley is born from this room.'}]},
+    a2:{tab:'II · The Foundry',head:'ACT II, sc. 4 — A hotel suite, Taipei, 1985',cast:['minister','chang'],
+      lines:[{c:'dir',t:'MORRIS CHANG, 54, freshly arrived from Texas. A MINISTER waits with the blank checkbook of a state’s ambition.'},
+        {c:'MINISTER',t:'Dr. Chang. Taiwan wants a semiconductor industry. Tell us which American company to copy.'},
+        {c:'CHANG',t:'None of them. Copying keeps you one generation behind — forever.'},
+        {c:'MINISTER',t:'Then what?'},
+        {c:'CHANG',t:'A factory that invents nothing and owns nothing — and builds everyone else’s designs better than they can. A foundry. We make the chips the whole world is afraid to make for themselves.'},
+        {c:'dir',t:'The MINISTER does not yet grasp that he has just been handed the most important company of the next century.'}]},
+    a3:{tab:'III · The One Machine',head:'ACT III, sc. 1 — A ministry office, The Hague, present day',cast:['envoy','dutch'],
+      lines:[{c:'dir',t:'A US ENVOY sets a single page on the desk of a DUTCH official. Rain on the window.'},
+        {c:'ENVOY',t:'We’re asking you to stop ASML from servicing the machines China has already bought.'},
+        {c:'DUTCH',t:'You’re asking a Dutch company to break its contracts because Washington is nervous.'},
+        {c:'ENVOY',t:'I’m asking the one country that makes the one machine to remember which side of the line it’s on.'},
+        {c:'DUTCH',t:'And when the line moves? When it’s your turn to be told what your companies may sell?'},
+        {c:'dir',t:'The ENVOY has no answer. The whole chip war is in that pause.'}]}},
+  robot:{
+    a1:{tab:'I · The Hand',head:'ACT I, sc. 1 — A robotics lab, Fremont, present day',cast:['founder','engineer'],
+      lines:[{c:'dir',t:'A FOUNDER watches a humanoid fail, for the thousandth time, to fold a towel.'},
+        {c:'FOUNDER',t:'We have superhuman intelligence in the cloud and it still can’t do laundry.'},
+        {c:'ENGINEER',t:'Because intelligence was never the bottleneck. The hand is. Twenty-seven degrees of freedom, and every tendon is a supply chain.'},
+        {c:'dir',t:'The robot tries again. This time the towel folds. Nobody breathes.'},
+        {c:'FOUNDER',t:'Order ten thousand more actuators.'},
+        {c:'ENGINEER',t:'From where? The magnets are all one country.'}]},
+    a2:{tab:'II · The Magnet',head:'ACT II, sc. 3 — A trading floor, present day',cast:['buyer','broker'],
+      lines:[{c:'dir',t:'A BUYER for a Western automaker calls a rare-earth BROKER. The line crackles.'},
+        {c:'BUYER',t:'I need dysprosium-doped magnets. Enough for a million motors.'},
+        {c:'BROKER',t:'Everyone does. And it all comes through one country, refined in plants nobody else will build because the chemistry is filthy and the margins are thin.'},
+        {c:'BUYER',t:'That’s exactly what they used to say about chips.'},
+        {c:'dir',t:'A pause. The BUYER hears the echo of a war he thought was about silicon.'},
+        {c:'BROKER',t:'It was never about silicon. It was about the chokepoint. The chokepoint just moved.'}]},
+    a3:{tab:'III · The Body',head:'ACT III, sc. 1 — A hearing room, Washington, near future',cast:['senator','witness'],
+      lines:[{c:'dir',t:'A SENATOR leans into a microphone. A WITNESS — a roboticist — sits very still.'},
+        {c:'SENATOR',t:'You’re telling me the next decade’s strategic technology isn’t a chip. It’s a body.'},
+        {c:'WITNESS',t:'Compute walked off the wafer, Senator. It has arms now. Whoever owns the magnets, the motors, and the world-models owns the body.'},
+        {c:'SENATOR',t:'And where are we?'},
+        {c:'WITNESS',t:'We wrote the CHIPS Act four years too late. We are about to do it again.'},
+        {c:'dir',t:'The room goes quiet. Somewhere, the same mistake is being made for the third time.'}]}}};
+  const ACTORS={shockley:'Shockley',noyce:'Noyce + the 8',chang:'Morris Chang',minister:'The Minister',envoy:'US Envoy',dutch:'Dutch Official',founder:'The Founder',engineer:'The Engineer',buyer:'The Buyer',broker:'The Broker',senator:'The Senator',witness:'The Witness'};
+  const CHARMAP={'SHOCKLEY':'shockley','NOYCE':'noyce','MINISTER':'minister','CHANG':'chang','ENVOY':'envoy','DUTCH':'dutch','FOUNDER':'founder','ENGINEER':'engineer','BUYER':'buyer','BROKER':'broker','SENATOR':'senator','WITNESS':'witness'};
+  const CASTNOTE={chip:'<b>Dramatis personae:</b> Robert Noyce &amp; the eight who founded Fairchild · William Shockley · Morris Chang (TSMC) · a Taiwanese minister · a US trade envoy · a Dutch official holding ASML’s leash.',
+    robot:'<b>Dramatis personae:</b> a humanoid-robot founder · a tendon engineer · a rare-earth broker · a Western parts buyer · a senator · a roboticist who has seen this movie before.'};
+  let cur='a2',idx=0,timer=null;
+  const stageView=$('#stageView'),script=$('#stageScript'),spot=$('#spot');
+  function deck(){return SCENES[MODE.cur]||SCENES.chip;}
+  function renderTabs(){const d=deck();$$('#stageTabs button').forEach(b=>{b.textContent=d[b.dataset.s].tab;b.classList.toggle('on',b.dataset.s===cur);});$('#stageCast').innerHTML=CASTNOTE[MODE.cur]||CASTNOTE.chip;}
+  function renderScene(){const sc=deck()[cur];idx=0;clearTimeout(timer);
+    stageView.querySelectorAll('.actor').forEach(a=>a.remove());
+    const cast=sc.cast,xs=cast.length===2?[34,66]:cast.map((_,i)=>22+i*56/(Math.max(1,cast.length-1)));
+    cast.forEach((id,i)=>{const a=document.createElement('div');a.className='actor';a.dataset.char=id;a.style.left=xs[i]+'%';a.innerHTML='<div class="body"></div><div class="who">'+ACTORS[id]+'</div>';stageView.appendChild(a);});
+    spot.style.left='50%';
+    script.innerHTML='<div class="scenehead">'+sc.head+'</div>'+sc.lines.map((l,i)=>l.c==='dir'?'<p class="sl" data-i="'+i+'"><span class="dir">'+l.t+'</span></p>':'<p class="sl" data-i="'+i+'"><span class="char">'+l.c+'</span><br><span class="line">'+l.t+'</span></p>').join('');}
+  function playScene(){idx=0;clearTimeout(timer);advance();}
+  function advance(){const sc=deck()[cur];if(idx>=sc.lines.length)return;
+    $$('.sl',script).forEach(p=>p.classList.toggle('spoken',+p.dataset.i<=idx));
+    const active=$('.sl[data-i="'+idx+'"]',script);if(active)active.scrollIntoView({behavior:'smooth',block:'center'});
+    const l=sc.lines[idx];
+    if(l.c!=='dir'){const id=CHARMAP[l.c]||sc.cast[0];const a=stageView.querySelector('.actor[data-char="'+id+'"]');stageView.querySelectorAll('.actor').forEach(x=>x.classList.remove('lit'));if(a){a.classList.add('lit');spot.style.left=a.style.left;}}
+    else stageView.querySelectorAll('.actor').forEach(x=>x.classList.remove('lit'));
+    const dur=l.c==='dir'?2200:Math.max(2600,l.t.length*46);idx++;timer=setTimeout(advance,dur);}
+  $$('#stageTabs button').forEach(b=>b.onclick=()=>{cur=b.dataset.s;renderTabs();renderScene();});
+  $('#stagePlay').onclick=playScene;
+  onMode(()=>{renderTabs();renderScene();});
+  renderTabs();renderScene();
+})();
+
+/* ============================================================
+   10. THE WHAT-IF ENGINE
+============================================================ */
+(function(){
+  const FORKS={chip:[
+    {q:'What if the US had blocked TSMC’s rise in the 1990s?',body:['Without a neutral foundry to build their designs, the fabless revolution stalls. Nvidia, Apple silicon, AMD’s comeback — none get off the ground cheaply, because every chip startup still needs a multi-billion-dollar fab of its own.','Manufacturing stays locked inside a few vertically-integrated American and Japanese giants. The leading edge advances slower — but it never concentrates onto one vulnerable island.'],world:'The world today: no Silicon Shield, no Taiwan flashpoint — but also no cheap GPUs, and an AI boom that arrives years late.',plaus:55},
+    {q:'What if Japan had won the DRAM war of the 1980s?',body:['Japan’s memory giants — NEC, Toshiba, Hitachi — never cede the cost war to Korea. Samsung stays a minor player; Micron struggles. Tokyo, not Hsinchu or Seoul, becomes the gravitational center of chips.','Washington, alarmed, reaches for export and trade weapons a decade early. The “chip war” becomes a US–Japan story — and China inherits a very different, Japan-dominated supply chain to confront in the 2010s.'],world:'The world today: the chokepoints sit in Japan, and America’s 1980s playbook against an ally is the template for everything that follows.',plaus:40},
+    {q:'What if China had been allowed to buy ASML in 2015?',body:['With EUV technology inside its borders, China’s timeline to the leading edge collapses from “maybe never” to “this decade.” The single most important chokepoint — one machine, one company — simply dissolves.','Export controls lose their teeth before they’re written. The 2022 BIS rules would have nothing left to restrict. The entire architecture of American leverage rested on a sale that, in this timeline, went through.'],world:'The world today: no leading-edge chokepoint, no Mate 60 surprise — because China is already at the frontier, openly.',plaus:20},
+    {q:'What if EUV had failed and the industry stalled at 28nm?',body:['ASML’s twenty-year, multi-billion-dollar bet on extreme-ultraviolet light never pays off. Moore’s Law flatlines around 2015. No 5nm, no 3nm — and crucially, no chips able to train large AI models at today’s scale.','The geopolitics relax: with everyone stuck at the same mature node, there is no frontier to deny. But the AI revolution that defines the 2020s either doesn’t happen or crawls.'],world:'The world today: a calmer chip map, a colder AI winter. The fight was always about the frontier — remove it and the war cools.',plaus:35},
+    {q:'What if Taiwan and the mainland reunified peacefully tomorrow?',body:['Overnight, ~90% of the world’s most advanced logic sits under Beijing’s sovereignty. Every export control inverts: the leverage the US built to keep chips FROM China now hands China the crown jewels.','Expect emergency reshoring at any cost, a desperate scramble to qualify Samsung and Intel as alternatives, and TSMC’s Arizona and Japan fabs revalued as the most strategic real estate on Earth.'],world:'The world today: the Silicon Shield becomes the Silicon Sword, and the CHIPS Act looks like the cheapest insurance never bought in time.',plaus:15}],
+  robot:[
+    {q:'What if China corners the rare-earth magnet supply the way it never could with chips?',body:['Beijing already refines ~90% of the dysprosium and terbium that let a motor magnet hold its field under heat. If it chooses leverage over revenue, every Western humanoid, EV, and missile fin runs on a permission slip from one country.','Unlike EUV — which the West controlled — this chokepoint sits on the other side. The CHIPS-Act reflex (subsidize, reshore, ally up) fires again, a decade late, against a wall of chemistry nobody wanted to do at home.'],world:'The world today: the chip-war script runs in reverse — and this time America is the one being denied.',plaus:60},
+    {q:'What if a US lab open-sources a frontier robot world-model?',body:['A single open release of a capable vision-language-action model does to robotics what Linux did to servers: every startup, in every country, gets a brain for free. Hardware — actuators, magnets, batteries — becomes the only moat left.','The strategic prize shifts overnight from algorithms to atoms. Whoever makes the cheapest reliable body wins, and the body is mostly Chinese supply chain.'],world:'The world today: intelligence is commoditized, the body is the bottleneck, and the bottleneck is manufactured in Shenzhen.',plaus:45},
+    {q:'What if humanoids hit reliable autonomy by 2028 instead of 2035?',body:['Pull the timeline forward seven years and the labor-market and security consequences arrive before any policy is ready. The first country to field a million working humanoids resets the cost of physical labor — and of soldiering.','The research a careful author is doing now would be obsolete on arrival; only a living, self-updating format could keep pace with a field doubling its capability every few months.'],world:'The world today: the book about robots is out of date the week it ships — which is exactly why it can’t be a book.',plaus:35},
+    {q:'What if the West reshores actuators and batteries the way it tried to reshore fabs?',body:['A Robotics Act pours hundreds of billions into domestic magnet refining, harmonic-drive machining, and cell manufacturing. Like the CHIPS Act, it buys capacity — slowly, expensively, and a few years behind the threat.','The hard truth the chip experience taught: subsidies build fabs, but they can’t conjure a decade of accumulated process knowledge. The same lesson is waiting in robotics.'],world:'The world today: a second great reshoring — same playbook, same lag, same uncomfortable dependence in the meantime.',plaus:40},
+    {q:'What if the next war is fought mostly by machines we can’t resupply?',body:['Cheap autonomous drones and ground robots already define the battlefield. Scale that to humanoid logistics and the binding constraint becomes the magnet, the motor, and the chip inside each unit — all of which trace back through contested supply chains.','Attrition warfare against a peer becomes a manufacturing contest, and the manufacturing runs through the very chokepoints this research maps.'],world:'The world today: industrial base is destiny — the side that can build and rebuild bodies fastest sets the terms.',plaus:50}]};
+  const list=$('#forkList'),out=$('#forkOut');
+  function render(){const F=FORKS[MODE.cur]||FORKS.chip;list.innerHTML=F.map((f,i)=>'<div class="fork" data-i="'+i+'">'+f.q+'</div>').join('');$$('.fork',list).forEach(el=>el.onclick=()=>show(+el.dataset.i));show(0);}
+  function show(i){const F=FORKS[MODE.cur]||FORKS.chip;$$('.fork',list).forEach(el=>el.classList.toggle('on',+el.dataset.i===i));const f=F[i];
+    out.innerHTML='<p class="wq">'+f.q+'</p>'+f.body.map(p=>'<p>'+p+'</p>').join('')+'<div class="verdict">'+f.world+'</div><div class="plaus"><div class="pl">historians’ plausibility — could it really have gone this way?</div><div class="track"><i style="width:0%"></i></div></div>';
+    setTimeout(()=>{const bar=out.querySelector('.track i');if(bar)bar.style.width=f.plaus+'%';},60);}
+  onMode(render);render();
+})();
+
+/* ============================================================
+   11. SILICON TOP TRUMPS
+============================================================ */
+(function(){
+  const DECKS={chip:[
+    {n:'ASML',f:'🇳🇱',role:'EUV lithography',choke:99,share:62,replace:95,lev:96},
+    {n:'TSMC',f:'🇹🇼',role:'leading-edge foundry',choke:97,share:90,replace:92,lev:94},
+    {n:'Nvidia',f:'🇺🇸',role:'AI accelerators',choke:90,share:92,replace:68,lev:86},
+    {n:'Synopsys + Cadence',f:'🇺🇸',role:'chip-design software (EDA)',choke:88,share:75,replace:84,lev:78},
+    {n:'ARM',f:'🇬🇧',role:'CPU instruction set',choke:80,share:99,replace:74,lev:70},
+    {n:'Japan Inc. (TEL · JSR)',f:'🇯🇵',role:'tools & photoresist',choke:82,share:90,replace:80,lev:72},
+    {n:'Samsung',f:'🇰🇷',role:'foundry #2 + memory',choke:60,share:8,replace:55,lev:52},
+    {n:'Intel',f:'🇺🇸',role:'IDM, reshoring bet',choke:55,share:4,replace:50,lev:50},
+    {n:'SMIC',f:'🇨🇳',role:'China’s foundry, stuck at 7nm',choke:38,share:6,replace:32,lev:44}],
+  robot:[
+    {n:'China rare-earths',f:'🇨🇳',role:'Dy/Tb magnet refining',choke:97,share:90,replace:93,lev:95},
+    {n:'Harmonic Drive',f:'🇯🇵',role:'precision reduction gears',choke:88,share:82,replace:85,lev:74},
+    {n:'Nvidia (Jetson/Thor)',f:'🇺🇸',role:'robot brains + sim',choke:86,share:80,replace:66,lev:82},
+    {n:'CATL',f:'🇨🇳',role:'battery cells',choke:78,share:37,replace:70,lev:80},
+    {n:'Tesla Optimus',f:'🇺🇸',role:'humanoid + data flywheel',choke:70,share:20,replace:55,lev:64},
+    {n:'Figure',f:'🇺🇸',role:'humanoid, OpenAI-backed',choke:60,share:12,replace:48,lev:55},
+    {n:'Unitree',f:'🇨🇳',role:'low-cost humanoids',choke:58,share:25,replace:50,lev:60},
+    {n:'1X',f:'🇳🇴',role:'home humanoid (NEO)',choke:52,share:8,replace:44,lev:46},
+    {n:'Boston Dynamics',f:'🇺🇸',role:'the pioneer, now Hyundai',choke:55,share:6,replace:46,lev:48}]};
+  const STATS=[['choke','Chokepoint power'],['share','Market share'],['replace','Hard to replace'],['lev','Geopolitical leverage']];
+  let pool,you,house,yourScore,houseScore,round;
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function start(){pool=shuffle(DECKS[MODE.cur]||DECKS.chip);yourScore=0;houseScore=0;round=1;deal();}
+  function deal(){you=pool.pop();house=pool.pop();renderCard();}
+  function renderCard(){const wrap=$('#trumpsWrap');
+    wrap.innerHTML='<div class="score"><span>YOU <b id="ys">'+yourScore+'</b></span><span>Round '+round+'/5</span><span><b id="hs">'+houseScore+'</b> HOUSE</span></div>'+
+      '<div class="tcard"><div class="flag2">'+you.f+'</div><h4>'+you.n+'</h4><div class="role">'+you.role+'</div>'+
+      STATS.map(s=>'<div class="tstat" data-s="'+s[0]+'"><span class="sl2">'+s[1]+'</span><span class="sv">'+you[s[0]]+'</span></div>').join('')+'</div>'+
+      '<div class="houserow">▼ pick a stat to challenge the house ▼</div><div class="result" id="tres"></div>';
+    $$('.tstat',wrap).forEach(el=>el.onclick=()=>battle(el.dataset.s));}
+  function battle(stat){$$('.tstat').forEach(e=>e.style.pointerEvents='none');
+    const yv=you[stat],hv=house[stat],win=yv>hv,tie=yv===hv;
+    $$('.tstat').forEach(e=>{if(e.dataset.s===stat)e.classList.add(win?'win':tie?'':'lose');});
+    if(win)yourScore++;else if(!tie)houseScore++;
+    $('#ys').textContent=yourScore;$('#hs').textContent=houseScore;
+    $('#tres').innerHTML='House played <b>'+house.n+'</b> '+house.f+' — '+STATS.find(s=>s[0]===stat)[1]+' <b style="color:var(--amber)">'+hv+'</b>. '+(win?'<span style="color:var(--good)">You win the round.</span>':tie?'<span style="color:var(--muted)">A tie.</span>':'<span style="color:var(--red)">House takes it.</span>');
+    round++;setTimeout(()=>{if(round>5||pool.length<2)return finish();deal();},1700);}
+  function finish(){const wrap=$('#trumpsWrap'),won=yourScore>houseScore,tie=yourScore===houseScore;
+    const lesson=MODE.cur==='robot'?'The lesson of the robot deck: the company everyone’s heard of rarely holds the real leverage — the magnet refiner and the gear-cutter do.':'The lesson of the deck: market share isn’t power. A 62%-share toolmaker like ASML outranks a 90%-share designer, because what matters is how impossible you are to replace.';
+    wrap.innerHTML='<div style="text-align:center;padding:20px"><div class="eyebrow">final</div><div style="font-size:40px;margin:8px 0">'+(won?'🏆':'💼')+'</div><h3 style="margin:0 0 8px">'+(won?'You out-leveraged the house.':tie?'A standoff.':'The house held the chokepoints.')+'</h3><p style="color:var(--muted);max-width:48ch;margin:0 auto 14px">You '+yourScore+'–'+houseScore+'. '+lesson+'</p><button class="btn primary" id="treplay">↻ Re-deal</button></div>';
+    $('#treplay').onclick=start;}
+  onMode(start);start();
+})();
+
+/* ============================================================
+   12. THE PROJECTOR
+============================================================ */
+(function(){
+  const knob=$('#knob'),rail=$('#rail'),knobDate=$('#knobDate'),projDate=$('#projDate');
+  let t=0;
+  const months=['Jun \'26','Jul \'26','Aug \'26','Sep \'26','Oct \'26','Nov \'26','Dec \'26','Jan \'27','Feb \'27','Mar \'27','Apr \'27','May \'27','Jun \'27','Jul \'27','Aug \'27','Sep \'27','Oct \'27','Nov \'27','Dec \'27'];
+  function dateFor(t){return months[Math.round(t*(months.length-1))];}
+
+  // canvases
+  const euv=$('#euvCanvas'),euvc=euv.getContext('2d');
+  const wave=$('#waveCanvas'),wavec=wave.getContext('2d');
+  const robot=$('#robotCanvas'),robotc=robot.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);
+  function fit(cv,c){const r=cv.getBoundingClientRect();cv.width=r.width*DPR;cv.height=r.height*DPR;c.setTransform(DPR,0,0,DPR,0,0);return r;}
+  let R1,R2,R3;
+  function fitAll(){R1=fit(euv,euvc);R2=fit(wave,wavec);R3=fit(robot,robotc);render();}
+
+  // tracker rows
+  const tracker=[['🇳🇱 ASML','EUV litho'],['🇹🇼 TSMC','adv. fab'],['🇺🇸 Lam/AMAT','etch/depo'],['🇯🇵 TEL','tools'],['🇨🇳 SMIC','catch-up']];
+  $('#trackerRows').innerHTML=tracker.map((r,i)=>`<div class="agentrow"><span><span class="dot2" id="td${i}"></span>${r[0]}</span><span style="color:var(--muted)" id="tn${i}">${r[1]}</span></div>`).join('');
+  const trackerNotes=['export delta: +1 HBM rule','node: N2 ramps','SME license: pending','resist: stable','7nm yields: improving'];
+
+  // stacks
+  const silicon=[['🔬','EUV litho','ASML · NL','100%'],['🏭','Adv. fab','TSMC · TW','~90%'],['✏️','Design tools','EDA · US','~75%'],['⚙️','Etch / depo','US + JP','~']];
+  const robotStack=[['🧲','Dy/Tb magnets','China','~90%'],['🦾','Harmonic actuators','Japan','high'],['🔋','Battery cells','China + KR','high'],['🧠','World-model weights','US labs','~'],['🟩','Robot GPUs','Nvidia','~90%']];
+  $('#stackSilicon').innerHTML=silicon.map(s=>stk(s)).join('');
+  $('#stackRobot').innerHTML=robotStack.map(s=>stk(s)).join('');
+  function stk(s){return `<div class="stk"><div class="em">${s[0]}</div><div class="t">${s[1]}</div><div class="c">${s[2]}</div><div class="pct">${s[3]}</div></div>`;}
+
+  function render(){
+    knobDate.textContent=dateFor(t);projDate.textContent=dateFor(t).replace('\'','20');
+    knob.style.left=(t*100)+'%';knob.setAttribute('aria-valuenow',Math.round(t*100));
+    rail.querySelector('.datebadge').style.left='';
+
+    // A: video explainer fidelity
+    $('#fidVideo').textContent= t<.33?'static labeled diagram': t<.7?'auto-narrated clip ▶':'ask-anything real-time video ✦';
+    drawEUV();
+    // B: living doc
+    $('#fidDoc').textContent= t<.33?'a static table': t<.7?'agent-annotated, hourly':'fully self-updating ✦';
+    tracker.forEach((r,i)=>{const dot=$('#td'+i),note=$('#tn'+i);
+      if(t>.33){dot.style.background=i===4?'var(--amber)':'var(--good)';dot.style.boxShadow='0 0 6px currentColor';
+        note.textContent=t>.5?trackerNotes[i]:r[1];note.style.color=t>.5?'var(--amber)':'var(--muted)';}
+      else{dot.style.background='var(--panel2)';dot.style.boxShadow='none';note.textContent=r[1];note.style.color='var(--muted)';}});
+    $('#trackerNote').textContent= t<.33?'':'last self-updated: '+dateFor(t)+(t>.7?' · autonomous':' · drafts pending');
+    // C: voice tutor
+    $('#fidVoice').textContent= t<.33?'text Q&A': t<.7?'spoken answer 🔊':'on-device voice, offline ✦';
+    $('#voiceNote').textContent= t<.33?'cloud-hosted · costs per query': t<.7?'cloud voice · low latency':'on-device · offline · $0';
+    drawWave();
+    // D: robot tutor
+    $('#fidRobot').textContent= t<.33?'a static concept frame': t<.7?'teleoperated avatar': 'autonomous VLA tutor ✦';
+    drawRobot();
+    // thesis + stack crossfade
+    const th=$('#thesis');
+    th.textContent= t<.33?'Compute is the prize.': t<.66?'Compute walks off the wafer, into actuators.':'Whoever owns magnets, motors & world-models owns the body.';
+    $('#stackSilicon').style.opacity= t<.5? 1 : clamp(1-(t-.5)/.35,0,1);
+    $('#stackRobot').style.opacity= t<.5? 0 : clamp((t-.5)/.35,0,1);
+    $('#stackRobot').style.pointerEvents= t>.6?'auto':'none';
+    $('#stackFoot').textContent= t<.5?'The silicon stack — Chip War. Drag right to watch it become the robotics stack →':'The robotics stack — Robot War. China controls ~90% of the rare-earth magnets that move every actuator.';
+  }
+  function drawEUV(){const c=euvc,w=R1.width,h=R1.height;c.clearRect(0,0,w,h);
+    // source -> mirror -> reticle -> wafer
+    const y=h/2;c.strokeStyle='#2c2c34';c.lineWidth=1;
+    c.fillStyle='#9b958c';c.font='8px monospace';
+    const src={x:14,y},mir={x:w*0.42,y:h*0.3},ret={x:w*0.66,y},waf={x:w-18,y:h*0.72};
+    // beam
+    const beam=t>.05;
+    if(beam){c.strokeStyle=`rgba(232,176,75,${0.4+0.6*Math.abs(Math.sin(Date.now()/300))*Math.min(1,t*2)})`;c.lineWidth=2;
+      c.beginPath();c.moveTo(src.x,src.y);c.lineTo(mir.x,mir.y);c.lineTo(ret.x,ret.y);c.lineTo(waf.x,waf.y);c.stroke();}
+    // tin droplet pulse
+    c.fillStyle='#e2483b';c.beginPath();c.arc(src.x,src.y,3+2*Math.abs(Math.sin(Date.now()/200)),0,7);c.fill();
+    c.fillStyle='#9b958c';c.fillText('Sn source',src.x-4,src.y+16);
+    c.fillStyle='#5fc8c8';c.fillRect(mir.x-10,mir.y-3,20,6);c.fillText('mirror',mir.x-12,mir.y-8);
+    c.fillStyle='#b07de0';c.fillRect(ret.x-3,ret.y-12,6,24);c.fillText('reticle',ret.x-8,ret.y+22);
+    c.fillStyle='#4a8fe0';c.fillRect(waf.x-14,waf.y-2,28,5);c.fillText('wafer',waf.x-12,waf.y+14);
+    if(t>.5){c.fillStyle='rgba(232,176,75,.7)';c.font='8px monospace';c.fillText('▶ '+(t>.7?'ask anything':'auto-narrated'),w-78,12);}
+  }
+  function drawWave(){const c=wavec,w=R2.width,h=R2.height;c.clearRect(0,0,w,h);
+    if(t<.33){c.fillStyle='#6c6760';c.font='11px monospace';c.fillText('› EUV: 13.5nm. DUV: 193nm.',8,h/2);return;}
+    const bars=22,bw=w/bars;c.fillStyle=t>.7?'#5fbf78':'#e2483b';
+    for(let i=0;i<bars;i++){const a=(Math.sin(Date.now()/180+i*0.7)*0.5+0.5)*Math.min(1,(t-.33)/.3);const bh=4+a*(h-10);c.fillRect(i*bw+1,h/2-bh/2,bw-2,bh);}
+    c.fillStyle=t>.7?'#5fbf78':'#9b958c';c.font='8px monospace';c.fillText(t>.7?'on-device ●':'cloud voice',w-58,10);
+  }
+  function drawRobot(){const c=robotc,w=R3.width,h=R3.height;c.clearRect(0,0,w,h);
+    const bx=w*0.5,by=h-6;const reach=clamp((t-.2)/.6,0,1);
+    // whiteboard
+    c.strokeStyle='#2c2c34';c.strokeRect(8,6,w*0.42,h-16);
+    // SMILE curve being drawn
+    c.strokeStyle='#e8b04b';c.lineWidth=2;c.beginPath();
+    const x0=14,x1=8+w*0.42-6,yb=h*0.55;const steps=24;const drawn=Math.floor(steps*reach);
+    for(let i=0;i<=drawn;i++){const p=i/steps;const x=lerp(x0,x1,p);const yy=yb - Math.sin(p*Math.PI)* -18 + (Math.pow(p-0.5,2)*40-10);i===0?c.moveTo(x,yy):c.lineTo(x,yy);}
+    c.stroke();
+    if(reach>.9){c.fillStyle='#9b958c';c.font='7px monospace';c.fillText('design→fab→assembly',x0,h-3);}
+    // humanoid stick figure
+    c.strokeStyle='#ece8e1';c.lineWidth=2.4;const hx=w*0.74;
+    c.beginPath();c.arc(hx,18,7,0,7);c.stroke(); // head
+    c.beginPath();c.moveTo(hx,25);c.lineTo(hx,by-18);c.stroke(); // torso
+    c.beginPath();c.moveTo(hx,by-18);c.lineTo(hx-8,by);c.moveTo(hx,by-18);c.lineTo(hx+8,by);c.stroke();// legs
+    // arm raises toward board as t grows
+    const sh={x:hx,y:30};const ang=lerp(0.6,-1.4,reach);const elbow={x:sh.x+Math.cos(ang)*14,y:sh.y+Math.sin(ang)*14};
+    const hand={x:elbow.x-18*reach-4,y:elbow.y-6*reach};
+    c.strokeStyle='#e8b04b';c.beginPath();c.moveTo(sh.x,sh.y);c.lineTo(elbow.x,elbow.y);c.lineTo(hand.x,hand.y);c.stroke();
+    c.fillStyle='#e8b04b';c.beginPath();c.arc(hand.x,hand.y,2.5,0,7);c.fill();
+  }
+
+  // interaction
+  function setT(nt){t=clamp(nt,0,1);render();}
+  function fromX(clientX){const r=rail.getBoundingClientRect();return clamp((clientX-r.left)/r.width,0,1);}
+  let drag=false;
+  knob.addEventListener('pointerdown',e=>{drag=true;knob.setPointerCapture(e.pointerId);e.preventDefault();});
+  knob.addEventListener('pointermove',e=>{if(drag)setT(fromX(e.clientX));});
+  knob.addEventListener('pointerup',()=>drag=false);
+  rail.addEventListener('pointerdown',e=>{if(e.target===knob)return;setT(fromX(e.clientX));});
+  knob.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){setT(t+1/18);e.preventDefault();}if(e.key==='ArrowLeft'){setT(t-1/18);e.preventDefault();}});
+
+  // animate the canvases continuously
+  let raf;function loop(){if(t>.05){drawEUV();}if(t>.33){drawWave();}drawRobot();raf=requestAnimationFrame(loop);}
+  addEventListener('resize',fitAll);
+  // voices preload for tts (chrome)
+  if(window.speechSynthesis)speechSynthesis.getVoices();
+  fitAll();loop();
+})();
+</script>
+</body>
+</html>
