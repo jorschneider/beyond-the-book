@@ -451,6 +451,9 @@
   .flyunlocks div{padding:5px 0;color:var(--faint);transition:.3s}
   .flyunlocks div.lit{color:var(--good)}
   @media(max-width:680px){.flywheel{grid-template-columns:1fr}.flyside{border-left:none;border-top:1px solid var(--line)}}
+  #vrCanvas{width:100%;height:380px;display:block;background:#05050a;cursor:crosshair;touch-action:none}
+  .vrmsg{padding:14px 18px 2px;font-size:14px;color:#d8d2c8;min-height:38px}
+  .vrfoot{display:flex;gap:12px;align-items:center;padding:10px 18px 16px;flex-wrap:wrap}
 
   /* closing */
   section.close{padding:70px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(168,38,29,.05))}
@@ -492,6 +495,7 @@
         <a href="#rspec">Spec</a>
         <a href="#rguess">Guess</a>
         <a href="#rflywheel">Flywheel</a>
+        <a href="#rvr">VR</a>
       </span>
       <a href="#future">The Dial ↗</a>
     </div>
@@ -539,7 +543,7 @@
   </div><!-- /menu-chip -->
 
   <div class="menu-robot">
-  <h2>Five things only robots let you build</h2>
+  <h2>Six things only robots let you build</h2>
   <p class="menusub">Robot mode is its own gallery — fresh, embodied formats, not the chip ideas recolored. Click any to launch it.</p>
   <div class="cards">
     <a class="mcard" href="#rteleop"><div class="n">01 / teleop booth</div><h3>Drive the Hand</h3><p>Puppet a humanoid gripper to stack blocks — and feel why most "autonomous" robot demos are a human at the controls.</p><span class="tag">you are the robot</span></a>
@@ -547,6 +551,7 @@
     <a class="mcard" href="#rspec"><div class="n">03 / configurator</div><h3>Spec Your Humanoid</h3><p>Choose actuators, magnets, battery, brain — and watch the cost, the payload, and how much of your robot depends on one country.</p><span class="tag">build one</span></a>
     <a class="mcard" href="#rguess"><div class="n">04 / guessing game</div><h3>Teleop or Autonomous?</h3><p>Five clips. You call it: human-driven or self-driving? Learn the field's central illusion.</p><span class="tag">spot the human</span></a>
     <a class="mcard" href="#rflywheel"><div class="n">05 / loop sim</div><h3>The Data Flywheel</h3><p>More robots → more data → smarter robots. Spin the flywheel and watch it take off — or stall for lack of data.</p><span class="tag">scaling sim</span></a>
+    <a class="mcard" href="#rvr"><div class="n">06 / VR embodiment</div><h3>You Are the Robot</h3><p>A first-person booth where you pilot the robot through six generations, 2026→2031 — and feel it get better until it no longer needs you inside it.</p><span class="tag">be the robot</span></a>
     <a class="mcard" href="#future" style="border-color:var(--amber-deep)"><div class="n" style="color:var(--amber)">↔ the bridge</div><h3>The Projector ⏵</h3><p>The one format that spans both: drag the dial and watch Chip War become Robot War — chokepoints and media both recompile.</p><span class="tag" style="color:var(--amber);border-color:var(--amber-deep)">+18 months</span></a>
   </div>
   </div><!-- /menu-robot -->
@@ -948,6 +953,26 @@
   </div>
 </section>
 
+<!-- ============ ROBOT 6 — YOU ARE THE ROBOT (VR) ============ -->
+<section class="fmt robot-section" id="rvr">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R6 — VR EMBODIMENT</div>
+      <h2>You Are the Robot</h2>
+      <p class="tagline">Put on the headset. Be the robot — and feel it outgrow you.</p>
+      <p class="what">The most direct way to understand embodied AI is to wear it. This is a first-person booth where <em>you are the robot</em>, doing a simple pick-and-place — except you replay it across six generations, 2026 to 2031. Each cleared round, the body you're piloting gets better: the lag drains away, your vision sharpens, your hands stop shaking, the grasp begins to assist, and by the end the robot anticipates you and finishes the task itself. You watch your own role shrink from 100% toward nothing.</p>
+      <p class="why"><b>What a book can't do:</b> let you <em>inhabit</em> the improvement — start clumsy and tunnel-visioned, and feel the machine grow more capable around you until it no longer needs the human inside it.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>you-are-the-robot · click to grab / drop · 6 generations</span><span class="live">VR</span></div>
+      <canvas id="vrCanvas"></canvas>
+      <div class="vrmsg" id="vrMsg"></div>
+      <div class="vrfoot"><button class="btn primary" id="vrReset">↻ Restart at 2026</button><button class="btn" id="vrSkip">⏭ Skip a generation</button><span class="small">Clear all four blocks into the bin to jump a year — and watch the robot you're piloting get better.</span></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 this runs in a real headset over WebXR: room-scale hand tracking, a generative world model rendering the scene, and the "generations" driven by the actual capability curve. You won't simulate becoming obsolete — you'll rehearse it, in VR, with your own hands.</p></div>
+  </div>
+</section>
+
 <!-- ============ 12. PROJECTOR ============ -->
 <section class="fmt" id="future" style="border-top:2px solid var(--amber-deep)">
   <div class="wrap">
@@ -1106,7 +1131,7 @@ const ROBOT={
 const HERO_ROBOT={
   h1:'You spent a year on robots. <span class="hl">A year from now, AI lets you tell it like this.</span>',
   lede:'Same idea, new subject. Imagine the research is embodied AI and the deadline is late 2027. By the time the robotics book is "done," the tools to convey it have leapt — generative video, on-device voice, world-model sims, agents that keep it current.',
-  sub:'Below are <b>five fresh formats built only for robots</b> — drive a humanoid by hand, climb the capability ladder, spec a robot and meet its supply chain, tell teleoperation from autonomy, and spin the data flywheel. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
+  sub:'Below are <b>six fresh formats built only for robots</b> — drive a humanoid by hand, climb the capability ladder, spec a robot and meet its supply chain, tell teleoperation from autonomy, spin the data flywheel, and <em>be</em> the robot in VR as it learns to outgrow you. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
   hint:'Five embodied formats built for robots — entirely fresh, not the chip ideas recolored. Flip back to Chip War for the twelve silicon ones.'
 };
 const MENU_ROBOT={
@@ -2304,6 +2329,80 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
   $('#flyRun').onclick=()=>{running=!running;$('#flyRun').textContent=running?'⏸ Pause':'▶ Run a year';};
   $('#flyReset').onclick=()=>{cap=8;running=false;$('#flyRun').textContent='▶ Run a year';};
   addEventListener('resize',fit);fit();step();
+})();
+
+/* ============================================================
+   ROBOT 6 — YOU ARE THE ROBOT (VR embodiment)
+============================================================ */
+(function(){
+  const cv=$('#vrCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  const GENS=[
+    {y:2026,lag:.07,jit:6,fov:.62,grab:30,noise:.5,auto:0,cap:'You do everything — and it’s clumsy. This is teleoperation, 2026.'},
+    {y:2027,lag:.13,jit:4,fov:.78,grab:38,noise:.34,auto:0,cap:'Steadier. The vision model is denoising what you see.'},
+    {y:2028,lag:.24,jit:2.4,fov:.92,grab:50,noise:.2,auto:1,cap:'Your hands stop shaking. The grasp snaps to the object now.'},
+    {y:2029,lag:.4,jit:1.2,fov:1.05,grab:62,noise:.1,auto:2,cap:'The robot carries for you. Grab, then click — it finishes the motion itself.'},
+    {y:2030,lag:.62,jit:.5,fov:1.18,grab:76,noise:.04,auto:2,cap:'It anticipates you. Most of the motion is the robot’s, not yours.'},
+    {y:2031,lag:.85,jit:0,fov:1.3,grab:94,noise:0,auto:3,cap:'You just intend. The robot does the rest — and no longer needs you inside it.'}
+  ];
+  const COLS=['#4a8fe0','#5fbf78','#e8b04b','#b07de0'];
+  let gen,cap,objs,bin,reticle,mouse,grabbed,placing,headT,flash,flashT,started,rx,ry;
+  function spawn(){objs=[];for(let i=0;i<4;i++)objs.push({fx:0.26+i*0.13,fy:0.5,x:0,y:0,col:COLS[i],placed:false});bin={fx:0.83,fy:0.55,x:0,y:0};}
+  function reset(){gen=0;cap=0;grabbed=null;placing=null;headT=0;flash=null;flashT=0;started=false;mouse={x:W/2,y:H/2};reticle={x:W/2,y:H/2};spawn();setMsg();}
+  function setMsg(extra){const e=$('#vrMsg');if(e)e.innerHTML=(extra||'')+'<b style="color:var(--amber)">GEN '+(gen+1)+' · '+GENS[gen].y+'.</b> '+GENS[gen].cap;}
+  function nearest(rad){let best=null,bd=rad;objs.forEach(o=>{if(o.placed)return;const d=Math.hypot(o.x-reticle.x,o.y-reticle.y);if(d<bd){bd=d;best=o;}});return best;}
+  function overBin(){return Math.hypot(reticle.x-bin.x,reticle.y-bin.y)<56;}
+  function startPlace(o){placing={o:o,sx:o.x,sy:o.y,t:0};grabbed=null;}
+  function place(o){o.placed=true;cap=Math.min(100,cap+12);if(objs.every(x=>x.placed))setTimeout(nextGen,700);}
+  function nextGen(){if(gen>=GENS.length-1){finale();return;}gen++;spawn();grabbed=null;placing=null;flash='GEN '+(gen+1)+' ONLINE · '+GENS[gen].y;flashT=1;setMsg();}
+  function finale(){const e=$('#vrMsg');if(e)e.innerHTML='<b style="color:var(--good)">2031.</b> Six generations in, you barely touched the controls — the robot anticipated every move and finished on its own. You started as the robot’s hands; you ended as a formality. <em>That</em> arc is what a year of robot research is really about.';flash=null;}
+  function onClick(){started=true;if(placing)return;const g=GENS[gen];
+    if(grabbed){if(overBin()){const gg=grabbed;grabbed=null;place(gg);}else if(g.auto>=2){startPlace(grabbed);}else{grabbed=null;}}
+    else{const o=nearest(g.grab);if(o){if(g.auto>=3){startPlace(o);}else{grabbed=o;if(g.auto>=1){reticle.x=o.x;reticle.y=o.y;}}}}}
+  function pos(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+  cv.addEventListener('pointermove',e=>{const p=pos(e);mouse.x=p.x;mouse.y=p.y;});
+  cv.addEventListener('pointerdown',e=>{const p=pos(e);mouse.x=p.x;mouse.y=p.y;onClick();});
+  $('#vrReset').onclick=reset;
+  $('#vrSkip').onclick=()=>{if(objs){objs.forEach(o=>o.placed=true);}nextGen();};
+  function update(){const g=GENS[gen];headT+=0.045;
+    bin.x=bin.fx*W;bin.y=bin.fy*H;
+    objs.forEach(o=>{if(o===grabbed||(placing&&placing.o===o)||o.placed)return;o.x=o.fx*W;o.y=o.fy*H;});
+    reticle.x+=(mouse.x-reticle.x)*g.lag;reticle.y+=(mouse.y-reticle.y)*g.lag;
+    rx=reticle.x+(Math.random()-.5)*g.jit;ry=reticle.y+(Math.random()-.5)*g.jit;
+    if(grabbed){grabbed.x+=(rx-grabbed.x)*0.5;grabbed.y+=(ry-grabbed.y)*0.5;}
+    if(placing){placing.t+=0.05;const o=placing.o;o.x=lerp(placing.sx,bin.x,easeInOut(placing.t));o.y=lerp(placing.sy,bin.y,easeInOut(placing.t));if(placing.t>=1){const oo=o;placing=null;place(oo);}}
+    if(g.auto>=3&&!placing&&!grabbed){const rem=objs.filter(o=>!o.placed);if(rem.length&&Math.random()<0.013)startPlace(rem[0]);}
+    if(flashT>0)flashT-=0.016;
+  }
+  function box(o,sc){const s=24*(sc||1);c.fillStyle=o.col;c.fillRect(o.x-s/2,o.y-s/2,s,s);c.fillStyle='rgba(255,255,255,.18)';c.fillRect(o.x-s/2,o.y-s/2,s,6);}
+  function draw(){const g=GENS[gen];c.clearRect(0,0,W,H);
+    const bob=Math.sin(headT)*(6-gen*0.85);c.save();c.translate(0,bob);
+    c.fillStyle='#0a0a12';c.fillRect(-4,-12,W+8,H+24);
+    c.fillStyle='#16161f';c.beginPath();c.moveTo(W*0.08,H*0.66);c.lineTo(W*0.92,H*0.66);c.lineTo(W*0.76,H*0.4);c.lineTo(W*0.24,H*0.4);c.closePath();c.fill();
+    c.strokeStyle='#2c2c34';c.lineWidth=1;c.stroke();
+    c.strokeStyle='#e8b04b';c.lineWidth=2;c.strokeRect(bin.x-34,bin.y-22,68,44);c.fillStyle='rgba(232,176,75,.06)';c.fillRect(bin.x-34,bin.y-22,68,44);c.fillStyle='#6c6760';c.font='9px monospace';c.fillText('bin',bin.x-8,bin.y-28);
+    let pc=0;objs.forEach(o=>{if(o.placed&&!(placing&&placing.o===o)){c.fillStyle=o.col;c.fillRect(bin.x-26+pc*15,bin.y+4-pc*2,13,13);pc++;}});
+    objs.forEach(o=>{if(o.placed&&!(placing&&placing.o===o))return;box(o,grabbed===o?1.12:1);});
+    drawGripper();
+    c.restore();
+    noise(g);vignette(g);hud(g);
+  }
+  function drawGripper(){const open=grabbed?9:16;c.strokeStyle='#e2483b';c.lineWidth=3;
+    c.beginPath();c.moveTo(rx,H+12);c.lineTo(rx,ry);c.stroke();
+    c.beginPath();c.moveTo(rx-open,ry-2);c.lineTo(rx+open,ry-2);c.moveTo(rx-open,ry-2);c.lineTo(rx-open,ry+14);c.moveTo(rx+open,ry-2);c.lineTo(rx+open,ry+14);c.stroke();
+    c.fillStyle='rgba(226,72,59,.55)';c.beginPath();c.arc(rx,ry,3,0,7);c.fill();}
+  function noise(g){if(g.noise<=0)return;const n=Math.min(480,g.noise*600);for(let i=0;i<n;i++){c.fillStyle='rgba(200,205,220,'+(Math.random()*0.13)+')';c.fillRect(Math.random()*W,Math.random()*H,2,2);}
+    if(g.noise>0.3){c.fillStyle='rgba(0,0,0,0.1)';for(let y=0;y<H;y+=3)c.fillRect(0,y,W,1);}}
+  function vignette(g){const r=Math.min(W,H)*g.fov*0.8;const grd=c.createRadialGradient(W/2,H/2,r*0.45,W/2,H/2,r);grd.addColorStop(0,'rgba(0,0,0,0)');grd.addColorStop(1,'rgba(0,0,0,0.93)');c.fillStyle=grd;c.fillRect(0,0,W,H);
+    c.strokeStyle='rgba(232,176,75,0.10)';c.lineWidth=2;[-1,1].forEach(s=>{c.beginPath();c.arc(W/2+s*r*0.32,H/2,r*0.52,0,7);c.stroke();});}
+  function hud(g){c.fillStyle='#e8b04b';c.font='bold 12px monospace';c.fillText('GEN '+(gen+1)+'/6 · '+g.y,14,22);
+    const role=Math.max(6,100-gen*15-g.auto*7);c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('your role: '+role+'%',14,39);
+    if(!started){c.fillStyle='#ece8e1';c.font='12px monospace';c.textAlign='center';c.fillText('▶ click a block to grab · carry it to the bin · click to drop',W/2,H-14);c.textAlign='left';}
+    if(flashT>0&&flash){c.globalAlpha=Math.min(1,flashT);c.fillStyle='#e8b04b';c.font='bold 19px monospace';c.textAlign='center';c.fillText(flash,W/2,H/2-10);c.textAlign='left';c.globalAlpha=1;}}
+  function loop(){if(cv.offsetParent&&objs){update();draw();}requestAnimationFrame(loop);}
+  addEventListener('resize',()=>{fit();if(!started){mouse={x:W/2,y:H/2};reticle={x:W/2,y:H/2};}});
+  fit();reset();loop();
 })();
 
 /* ============================================================
