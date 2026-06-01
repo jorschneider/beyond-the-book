@@ -475,6 +475,60 @@
   .simfoot{display:flex;gap:10px;align-items:center;padding:12px 18px 16px;flex-wrap:wrap}
   .simmsg{padding:10px 18px 2px;font-size:14px;color:#d8d2c8;min-height:40px}
 
+  /* ===== THE COURSE ===== */
+  .coursewrap{padding:38px 0 8px}
+  .course{background:var(--bg2);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .coursehead{padding:22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(168,38,29,.1),transparent)}
+  body.robot .coursehead{background:linear-gradient(180deg,rgba(232,176,75,.1),transparent)}
+  .coursehead .ce{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+  .coursehead h3{font-size:clamp(22px,3.4vw,32px);margin:9px 0 7px}
+  .coursehead p{margin:0;color:var(--muted);font-size:14.5px;max-width:70ch;line-height:1.6}
+  .cprogwrap{display:flex;align-items:center;gap:12px;padding:12px 22px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .cprog{flex:1;height:8px;background:var(--panel2);border-radius:5px;overflow:hidden}
+  .cprog i{display:block;height:100%;background:linear-gradient(90deg,var(--red-deep),var(--red));border-radius:5px;transition:width .4s}
+  .cstepper{display:flex;gap:6px;flex-wrap:wrap;padding:14px 22px 4px}
+  .cstep{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--mono);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .cstep:hover{border-color:var(--red)}
+  .cstep.cur{border-color:var(--red);color:var(--ink);background:var(--panel2)}
+  .cstep.done{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+  .cunit{padding:8px 22px 4px}
+  .cunit .ctag{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.08em}
+  .cunit h4{font-size:clamp(20px,3vw,26px);margin:8px 0 4px}
+  .cunit .clead{font-size:16.5px;color:var(--amber);font-style:italic;margin:0 0 14px}
+  .cunit .cbody{font-size:15.5px;line-height:1.72;color:#d8d2c8}
+  .cunit .cbody b{color:var(--ink)}
+  .clab{display:inline-block;margin:16px 0 2px;font-family:var(--mono);font-size:12.5px;color:var(--amber);border:1px solid var(--amber-deep);border-radius:9px;padding:9px 14px;cursor:pointer}
+  .clab:hover{background:rgba(232,176,75,.08);text-decoration:none}
+  .crecall{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+  .crecall .cq{font-size:16px;margin:0 0 12px;font-weight:700;color:var(--ink)}
+  .crecall .cq .rl{font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;font-weight:400;display:block;margin-bottom:5px}
+  .copt{display:block;width:100%;text-align:left;padding:11px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--panel);color:var(--ink);font-family:var(--serif);font-size:14.5px;cursor:pointer;transition:.12s}
+  .copt:hover{border-color:var(--red)}
+  .copt.right{border-color:var(--good);background:rgba(95,191,120,.13);color:#fff}
+  .copt.wrong{border-color:var(--red);background:rgba(226,72,59,.12)}
+  .copt:disabled{cursor:default}
+  .cwhy{font-size:14px;color:#d8d2c8;margin:6px 0 0;padding:11px 14px;border-left:2px solid var(--good);background:rgba(95,191,120,.05);border-radius:0 8px 8px 0;display:none}
+  .cwhy.show{display:block}
+  .cnav{display:flex;gap:10px;align-items:center;padding:16px 22px;border-top:1px solid var(--line);margin-top:14px}
+  .cnav .sp{flex:1}
+  .crecap{padding:30px 22px;text-align:center}
+  .crecap .ce{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--good)}
+  .crecap h4{font-size:clamp(24px,4vw,32px);margin:10px 0}
+  .crecap .clist{text-align:left;max-width:64ch;margin:18px auto;font-size:14.5px;color:#d8d2c8;line-height:1.6}
+  .crecap .clist li{margin:8px 0}
+
+  /* ===== ROBOT DEMOS 11-13 ===== */
+  .btn.on{border-color:var(--amber);color:var(--ink);background:var(--panel2)}
+  #tbdCanvas{width:100%;height:320px;display:block;background:#06060c;cursor:crosshair;touch-action:none}
+  .tbdfoot{display:flex;gap:12px;align-items:center;padding:12px 18px 16px;flex-wrap:wrap}
+  .tbdstat{font-family:var(--mono);font-size:12.5px;color:var(--muted)} .tbdstat b{color:var(--amber)}
+  #balCanvas{width:100%;height:320px;display:block;background:#06060c;cursor:ew-resize;touch-action:none}
+  .balfoot{display:flex;gap:10px;align-items:center;padding:12px 18px 16px;flex-wrap:wrap}
+  #advCanvas{width:100%;height:320px;display:block;background:#0e0e16;cursor:crosshair;touch-action:none}
+  .advfoot{display:flex;gap:16px;align-items:center;padding:12px 18px 16px;flex-wrap:wrap}
+  .advfoot label{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .advfoot input[type=range]{accent-color:var(--amber)}
+
   /* closing */
   section.close{padding:70px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(168,38,29,.05))}
   .close h2{font-size:clamp(26px,4vw,38px);margin:0 0 18px;max-width:20ch}
@@ -520,6 +574,9 @@
         <a href="#rlatency">Latency</a>
         <a href="#rreward">Reward</a>
         <a href="#rsim">Sim2Real</a>
+        <a href="#rtbd">Teach</a>
+        <a href="#rbal">Balance</a>
+        <a href="#radv">Adversarial</a>
       </span>
       <a href="#future">The Dial ↗</a>
     </div>
@@ -540,16 +597,31 @@
     <p class="modehint" id="modehint">The book that exists. Flip the toggle to see the same gallery rebuilt for the next book — a year of robot research, and the AI that will tell it.</p>
     <p class="booknote">SOURCE OBJECT — <em>Chip War: The Fight for the World's Most Critical Technology</em>, Chris Miller, Scribner / Simon &amp; Schuster, 2022. Every figure below is real and dated. This site is an homage and a design provocation, not affiliated with the author or publisher.</p>
     <div class="cta">
-      <a class="btn primary" href="#ideas">See all the ideas at a glance ↓</a>
-      <a class="btn" href="#future">Jump to the 18-months dial →</a>
+      <a class="btn primary" href="#course">▶ Take the course — the whole book in ~an hour</a>
+      <a class="btn" href="#ideas">Or browse the labs ↓</a>
+      <a class="btn" href="#future">The 18-months dial →</a>
     </div>
   </div>
 </header>
 
+<!-- ============ THE COURSE ============ -->
+<section class="coursewrap" id="course">
+  <div class="wrap">
+    <div class="course">
+      <div class="coursehead">
+        <div class="ce" id="courseEyebrow">The course · start here</div>
+        <h3 id="courseTitle">The whole of Chip War, in about an hour</h3>
+        <p id="courseIntro"></p>
+      </div>
+      <div id="courseBody"></div>
+    </div>
+  </div>
+</section>
+
 <div class="wrap menu" id="ideas">
   <div class="menu-chip">
   <h2>Twelve ways out of the book</h2>
-  <p class="menusub">The whole gallery at a glance — click any idea to launch its live demo. (Demos start collapsed so you can skim all twelve fast.)</p>
+  <p class="menusub">These are the <b>labs</b>. Take ▲ the course above for the whole book in order — or pop open any single piece here to explore it on its own. (Demos start collapsed so you can skim fast.)</p>
   <div class="cards">
     <a class="mcard" href="#scroll"><div class="n">01 / scrollytelling</div><h3>Silicon Scroll</h3><p>The exponential outruns your scroll wheel. Moore's Law, the fab-cost explosion, and the collapse onto one island — felt, not read.</p><span class="tag">canvas · live</span></a>
     <a class="mcard" href="#map"><div class="n">02 / explorable map</div><h3>Chokepoint</h3><p>The supply chain as a graph you can sever. Cut ASML and watch the cascade idle every advanced fab on Earth.</p><span class="tag">click to break it</span></a>
@@ -567,8 +639,8 @@
   </div><!-- /menu-chip -->
 
   <div class="menu-robot">
-  <h2>Ten things only robots let you build</h2>
-  <p class="menusub">Robot mode is its own gallery — fresh, embodied formats, not the chip ideas recolored. Click any to launch it.</p>
+  <h2>Thirteen things only robots let you build</h2>
+  <p class="menusub">These are the robot <b>labs</b> — fresh, embodied formats, not the chip ideas recolored. Take ▲ the course above for the whole field in order, or pop open any single one here.</p>
   <div class="cards">
     <a class="mcard" href="#rteleop"><div class="n">01 / teleop booth</div><h3>Drive the Hand</h3><p>Puppet a humanoid gripper to stack blocks — and feel why most "autonomous" robot demos are a human at the controls.</p><span class="tag">you are the robot</span></a>
     <a class="mcard" href="#rladder"><div class="n">02 / capability tree</div><h3>The Capability Ladder</h3><p>Climb from "pick up a cube" to "cook dinner." Each rung shows the real bottleneck — and who's closest.</p><span class="tag">what's solved?</span></a>
@@ -580,6 +652,9 @@
     <a class="mcard" href="#rlatency"><div class="n">08 / reflex game</div><h3>Mind the Gap</h3><p>Catch falling objects through sensor-to-actuator lag. Upgrade the chip, watch the loop tighten — where silicon meets the body.</p><span class="tag">feel the latency</span></a>
     <a class="mcard" href="#rreward"><div class="n">09 / alignment lab</div><h3>Reward Hacking Lab</h3><p>Write a reward function, hit train, and watch the robot take you hilariously literally. Specification gaming you can feel.</p><span class="tag">it cheats</span></a>
     <a class="mcard" href="#rsim"><div class="n">10 / sim-to-real</div><h3>Sim2Real</h3><p>Your walker aces simulation — then reality breaks it. Add domain randomization and watch it cross the gap that kills demos.</p><span class="tag">the gap</span></a>
+    <a class="mcard" href="#rtbd"><div class="n">11 / imitation</div><h3>Teach by Demonstration</h3><p>Draw a path and the robot copies it — wobbly at first, then smoother with every demo you give. Watch imitation learning happen.</p><span class="tag">show, don't code</span></a>
+    <a class="mcard" href="#rbal"><div class="n">12 / control</div><h3>Balance Act</h3><p>Keep a pole upright by hand — it's brutally hard. Then hand it to the learned controller and watch balance become trivial.</p><span class="tag">cartpole</span></a>
+    <a class="mcard" href="#radv"><div class="n">13 / adversarial</div><h3>Fool the Robot's Eyes</h3><p>Slap a noisy sticker on a stop sign and watch the classifier flip to "speed limit" at 0.97 confidence. Perception is brittle.</p><span class="tag">break it</span></a>
     <a class="mcard" href="#future" style="border-color:var(--amber-deep)"><div class="n" style="color:var(--amber)">↔ the bridge</div><h3>The Projector ⏵</h3><p>The one format that spans both: drag the dial and watch Chip War become Robot War — chokepoints and media both recompile.</p><span class="tag" style="color:var(--amber);border-color:var(--amber-deep)">+18 months</span></a>
   </div>
   </div><!-- /menu-robot -->
@@ -1090,6 +1165,63 @@
   </div>
 </section>
 
+<!-- ============ ROBOT 11 — TEACH BY DEMONSTRATION ============ -->
+<section class="fmt robot-section" id="rtbd">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R11 — IMITATION LEARNING</div>
+      <h2>Teach by Demonstration</h2>
+      <p class="tagline">Don't program it. Show it. Then show it again.</p>
+      <p class="what">The dominant way robots learn dexterity isn't code — it's <em>imitation</em>: a human demonstrates a motion, the robot copies it. Drag to draw a path and watch the robot trace it back, wobbly and uncertain. Then demonstrate again, and again — and watch the wobble shrink and the imitation sharpen with every example. You're feeling, in real time, why the whole field is starving for human demonstration data.</p>
+      <p class="why"><b>What a book can't do:</b> let you <em>be</em> the demonstrations — add one and watch the robot's competence visibly improve under your hand.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>teach-by-demonstration · drag to demonstrate a path</span><span class="live">imitation</span></div>
+      <canvas id="tbdCanvas"></canvas>
+      <div class="tbdfoot"><span class="tbdstat" id="tbdStat"></span><button class="btn" id="tbdClear">↻ Clear demos</button></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 your handful of demos trains a real policy in-browser, and the robot generalizes your path to <em>new</em> start and end points it never saw — the difference between memorizing your motion and learning the skill behind it.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 12 — BALANCE ACT ============ -->
+<section class="fmt robot-section" id="rbal">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R12 — CONTROL</div>
+      <h2>Balance Act</h2>
+      <p class="tagline">Keep the pole up. You can't. The robot can.</p>
+      <p class="what">Balancing — a pole on a cart, a humanoid on two feet — is the textbook control problem, and doing it by hand is genuinely hard: by the time you react, it's already falling. Try it. Then hand control to the learned policy and watch the same task become effortless. This is why locomotion, once robotics' nemesis, is now considered largely solved: a controller trained in simulation does in milliseconds what your reflexes can't.</p>
+      <p class="why"><b>What a book can't do:</b> let you fail at balance with your own hand, then feel the relief of a learned controller making it look trivial.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>balance-act · move the mouse to steer the cart</span><span class="live">cartpole</span></div>
+      <canvas id="balCanvas"></canvas>
+      <div class="balfoot"><button class="btn primary" id="balReset">↻ Reset</button><button class="btn" id="balAI">Hand it to the AI controller</button><span class="small">Move your mouse left/right to slide the cart and keep the pole upright.</span></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 the "AI controller" is a policy you can watch <em>learn</em> live — start it random, let it fall a hundred times in fast-forward, and see it teach itself to balance in seconds, the way real sim-trained locomotion policies do.</p></div>
+  </div>
+</section>
+
+<!-- ============ ROBOT 13 — FOOL THE ROBOT'S EYES ============ -->
+<section class="fmt robot-section" id="radv">
+  <div class="wrap">
+    <div class="head">
+      <div class="num">R13 — ADVERSARIAL</div>
+      <h2>Fool the Robot's Eyes</h2>
+      <p class="tagline">A sticker that turns a stop sign into a speed limit.</p>
+      <p class="what">A robot's perception is astonishing — and brittle in ways human vision isn't. Drag an <b>adversarial patch</b> onto the stop sign and watch the classifier flip to "speed limit" with high confidence, fooled by a pattern that means nothing to you. Then switch on adversarial training and watch it shrug the patch off. It's a hands-on lesson in why "the robot sees it" and "the robot is safe" are very different claims.</p>
+      <p class="why"><b>What a book can't do:</b> let you <em>attack</em> a working classifier and watch a confident, wrong label appear under your cursor.</p>
+    </div>
+    <div class="demo">
+      <div class="demobar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>fool-the-eyes · drag the patch onto the sign</span><span class="live">adversarial</span></div>
+      <canvas id="advCanvas"></canvas>
+      <div class="advfoot"><label>patch strength <input id="advStr" type="range" min="0" max="100" value="50"/></label><button class="btn" id="advRobust">Adversarial training: OFF</button><button class="btn" id="advReset">↻</button></div>
+    </div>
+    <div class="future"><p class="fl">⏵ Tech in 18 months</p><p class="futurep">By end-2027 this runs a real on-device classifier you can attack with patches you design, and a defense model flags the attack in real time — a live arms race you can play both sides of, on the same page.</p></div>
+  </div>
+</section>
+
 <!-- ============ 12. PROJECTOR ============ -->
 <section class="fmt" id="future" style="border-top:2px solid var(--amber-deep)">
   <div class="wrap">
@@ -1248,7 +1380,7 @@ const ROBOT={
 const HERO_ROBOT={
   h1:'You spent a year on robots. <span class="hl">A year from now, AI lets you tell it like this.</span>',
   lede:'Same idea, new subject. Imagine the research is embodied AI and the deadline is late 2027. By the time the robotics book is "done," the tools to convey it have leapt — generative video, on-device voice, world-model sims, agents that keep it current.',
-  sub:'Below are <b>ten fresh formats built only for robots</b> — drive a humanoid by hand, see the world through its perception stack, race the latency loop, design a reward and watch it get gamed, cross the sim-to-real gap, and <em>be</em> the robot in VR as it learns to outgrow you. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
+  sub:'Below are <b>thirteen fresh formats built only for robots</b> — drive a humanoid by hand, see through its perception stack, race the latency loop, design a reward and watch it get gamed, teach it by demonstration, balance a pole, fool its eyes, cross the sim-to-real gap, and <em>be</em> the robot in VR as it learns to outgrow you. Plus the dial that watches the chokepoints — and the media — move from silicon to the body. This is what a year of robot research becomes when it refuses to end up as just a book.',
   hint:'Five embodied formats built for robots — entirely fresh, not the chip ideas recolored. Flip back to Chip War for the twelve silicon ones.'
 };
 const MENU_ROBOT={
@@ -2690,6 +2822,242 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
   $('#simDomain').onclick=()=>{domain=!domain;const b=$('#simDomain');b.classList.toggle('on',domain);b.textContent=domain?'✓ Domain randomization: ON':'Domain randomization: OFF';};
   function loop(){if(cv.offsetParent)step();requestAnimationFrame(loop);}
   addEventListener('resize',fit);fit();reset();loop();
+})();
+
+/* ============================================================
+   ROBOT 11 — TEACH BY DEMONSTRATION (imitation learning)
+============================================================ */
+(function(){
+  const cv=$('#tbdCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  const K=48;let demos=[],cur=null,phase=0;
+  function resample(p){const n=p.length;if(n<2)return null;const out=[];for(let i=0;i<K;i++){const t=i/(K-1),idx=t*(n-1),a=p[Math.floor(idx)],b=p[Math.min(n-1,Math.ceil(idx))],f=idx-Math.floor(idx);out.push({x:lerp(a.x,b.x,f),y:lerp(a.y,b.y,f)});}return out;}
+  function learned(){const rs=demos.map(resample).filter(Boolean);if(!rs.length)return null;const out=[];for(let i=0;i<K;i++){let sx=0,sy=0;rs.forEach(r=>{sx+=r[i].x;sy+=r[i].y;});out.push({x:sx/rs.length,y:sy/rs.length});}return out;}
+  function quality(){return demos.length?Math.min(99,38+demos.length*16):0;}
+  function upd(){const e=$('#tbdStat');if(e)e.innerHTML='demonstrations: <b>'+demos.length+'</b> · imitation quality: <b>'+quality()+'%</b>';}
+  function pos(e){const r=cv.getBoundingClientRect();return{x:clamp(e.clientX-r.left,0,W),y:clamp(e.clientY-r.top,0,H)};}
+  cv.addEventListener('pointerdown',e=>{cur=[pos(e)];});
+  cv.addEventListener('pointermove',e=>{if(cur)cur.push(pos(e));});
+  addEventListener('pointerup',()=>{if(cur&&cur.length>3){demos.push(cur);if(demos.length>6)demos.shift();upd();}cur=null;});
+  $('#tbdClear').onclick=()=>{demos=[];cur=null;upd();};
+  function draw(){c.clearRect(0,0,W,H);
+    if(!demos.length&&!cur){c.fillStyle='#6c6760';c.font='13px monospace';c.textAlign='center';c.fillText('✍ drag to demonstrate a path — then watch the robot imitate',W/2,H/2);c.textAlign='left';}
+    c.strokeStyle='rgba(155,149,140,.35)';c.lineWidth=1.5;demos.forEach(p=>{c.beginPath();p.forEach((pt,i)=>i?c.lineTo(pt.x,pt.y):c.moveTo(pt.x,pt.y));c.stroke();});
+    if(cur){c.strokeStyle='#5fc8c8';c.lineWidth=2;c.beginPath();cur.forEach((pt,i)=>i?c.lineTo(pt.x,pt.y):c.moveTo(pt.x,pt.y));c.stroke();}
+    const L=learned();
+    if(L){const jit=14/demos.length;phase+=0.012;const tt=phase%1;
+      c.strokeStyle='rgba(232,176,75,.5)';c.lineWidth=2;c.beginPath();L.forEach((pt,i)=>i?c.lineTo(pt.x,pt.y):c.moveTo(pt.x,pt.y));c.stroke();
+      const ix=Math.floor(tt*(K-1)),pt=L[ix],gx=pt.x+Math.sin(phase*50+ix)*jit,gy=pt.y+Math.cos(phase*47+ix)*jit;
+      c.strokeStyle='#e2483b';c.lineWidth=3;c.beginPath();c.moveTo(gx,6);c.lineTo(gx,gy);c.stroke();c.fillStyle='#e2483b';c.beginPath();c.arc(gx,gy,5,0,7);c.fill();
+      c.fillStyle='#9b958c';c.font='10px monospace';c.fillText('robot imitating · the wobble shrinks with every demo',12,H-12);}
+    c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('teach by demonstration',12,18);
+  }
+  function loop(){if(cv.offsetParent)draw();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();upd();loop();
+})();
+
+/* ============================================================
+   ROBOT 12 — BALANCE ACT (cartpole)
+============================================================ */
+(function(){
+  const cv=$('#balCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  let x,xd,th,thd,ai=false,best=0,t0=0,fallen=false,mouseX=0;
+  function reset(){x=0;xd=0;th=(Math.random()-.5)*0.12;thd=0;fallen=false;t0=performance.now();}
+  function step(){
+    const dt=0.02,g=9.8,l=1.1,mc=1,mp=0.2;let F;
+    if(ai){F=clamp(62*th+11*thd-3*x-4*xd,-32,32);}
+    else{const tgt=(mouseX/W-0.5)*2.2;F=clamp((tgt-x)*24-xd*7,-32,32);}
+    const sinT=Math.sin(th),cosT=Math.cos(th);
+    const temp=(F+mp*l*thd*thd*sinT)/(mc+mp);
+    const thacc=(g*sinT-cosT*temp)/(l*(4/3-mp*cosT*cosT/(mc+mp)));
+    const xacc=temp-mp*l*thacc*cosT/(mc+mp);
+    if(!fallen){xd+=xacc*dt;x+=xd*dt;thd+=thacc*dt;th+=thd*dt;if(x<-2.3){x=-2.3;xd=0;}if(x>2.3){x=2.3;xd=0;}}
+    if(Math.abs(th)>0.9&&!fallen){fallen=true;best=Math.max(best,(performance.now()-t0)/1000);}
+    draw();
+  }
+  function draw(){c.clearRect(0,0,W,H);const cy=H*0.6,sc=W/5.2,px=W/2+x*sc;
+    c.strokeStyle='#2c2c34';c.lineWidth=1;c.beginPath();c.moveTo(0,cy+18);c.lineTo(W,cy+18);c.stroke();
+    c.fillStyle='#5a6a8a';c.fillRect(px-26,cy,52,18);
+    const ex=px+Math.sin(th)*sc,ey=cy-Math.cos(th)*sc;
+    c.strokeStyle=fallen?'#e2483b':(ai?'#5fbf78':'#e8b04b');c.lineWidth=6;c.beginPath();c.moveTo(px,cy);c.lineTo(ex,ey);c.stroke();
+    c.fillStyle=c.strokeStyle;c.beginPath();c.arc(ex,ey,8,0,7);c.fill();
+    c.fillStyle='#9b958c';c.font='11px monospace';
+    c.fillText(ai?'AI controller (learned policy) — effortless':'YOU balancing — steer the cart with the mouse',12,18);
+    const tsec=fallen?best:((performance.now()-t0)/1000);
+    c.fillText('upright '+tsec.toFixed(1)+'s'+(best?'  ·  best '+best.toFixed(1)+'s':''),12,36);
+    if(fallen){c.fillStyle='#e2483b';c.font='13px monospace';c.textAlign='center';c.fillText('✗ fell — Reset, or hand it to the AI',W/2,H*0.5);c.textAlign='left';}
+  }
+  cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mouseX=e.clientX-r.left;});
+  $('#balReset').onclick=reset;
+  $('#balAI').onclick=()=>{ai=!ai;const b=$('#balAI');b.classList.toggle('on',ai);b.textContent=ai?'✓ AI controller: ON (take it back)':'Hand it to the AI controller';reset();};
+  function loop(){if(cv.offsetParent)step();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();reset();loop();
+})();
+
+/* ============================================================
+   ROBOT 13 — FOOL THE ROBOT'S EYES (adversarial patch)
+============================================================ */
+(function(){
+  const cv=$('#advCanvas');if(!cv)return;const c=cv.getContext('2d');
+  const DPR=Math.min(devicePixelRatio||1,2);let W,H;
+  function fit(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  let patch={x:0,y:0,on:false},strength=0.5,robust=false;
+  const WRONG='speed limit 45';
+  function obj(){return {x:W*0.5,y:H*0.46,r:Math.min(W,H)*0.17};}
+  function fooled(){const o=obj();return patch.on&&!robust&&strength>0.25&&Math.hypot(patch.x-o.x,patch.y-o.y)<o.r+46;}
+  function draw(){c.clearRect(0,0,W,H);const o=obj();
+    c.fillStyle='#0e0e16';c.fillRect(0,0,W,H);
+    c.save();c.translate(o.x,o.y);c.fillStyle='#b5302a';c.beginPath();for(let i=0;i<8;i++){const a=Math.PI/8+i*Math.PI/4;const px=Math.cos(a)*o.r,py=Math.sin(a)*o.r;i?c.lineTo(px,py):c.moveTo(px,py);}c.closePath();c.fill();c.fillStyle='#fff';c.font='bold '+(o.r*0.5)+'px sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('STOP',0,0);c.restore();c.textAlign='left';c.textBaseline='alphabetic';
+    if(patch.on){const ps=30+strength*64;c.save();c.translate(patch.x,patch.y);const n=Math.min(420,ps*ps/18);for(let i=0;i<n;i++){c.fillStyle='hsl('+(Math.random()*360)+',85%,'+(40+Math.random()*40)+'%)';c.fillRect((Math.random()-.5)*ps,(Math.random()-.5)*ps,3,3);}c.strokeStyle='#fff';c.lineWidth=1;c.strokeRect(-ps/2,-ps/2,ps,ps);c.restore();}
+    const f=fooled(),label=f?WRONG:'STOP sign',conf=f?(0.9+strength*0.08):0.98;
+    c.strokeStyle=f?'#e2483b':'#5fbf78';c.lineWidth=2;c.strokeRect(o.x-o.r-6,o.y-o.r-6,(o.r+6)*2,(o.r+6)*2);
+    c.fillStyle=f?'#e2483b':'#5fbf78';c.font='bold 13px monospace';c.fillText(label+'  '+conf.toFixed(2),o.x-o.r-6,o.y-o.r-12);
+    c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('robot classifier'+(robust?' · adversarially hardened ✓':''),12,18);
+    if(!patch.on){c.fillStyle='#6c6760';c.font='12px monospace';c.textAlign='center';c.fillText('drag a patch onto the sign ↑',W/2,H-14);c.textAlign='left';}
+    else if(f){c.fillStyle='#e2483b';c.font='12px monospace';c.fillText('⚠ fooled — a sticker flipped STOP into "'+WRONG+'"',12,H-12);}
+    else if(robust){c.fillStyle='#5fbf78';c.font='12px monospace';c.fillText('✓ held — the hardened model ignores the patch',12,H-12);}
+  }
+  function pos(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+  cv.addEventListener('pointerdown',e=>{const p=pos(e);patch.x=p.x;patch.y=p.y;patch.on=true;});
+  cv.addEventListener('pointermove',e=>{if(e.buttons){const p=pos(e);patch.x=p.x;patch.y=p.y;patch.on=true;}});
+  $('#advStr').oninput=e=>{strength=+e.target.value/100;};
+  $('#advRobust').onclick=()=>{robust=!robust;const b=$('#advRobust');b.classList.toggle('on',robust);b.textContent=robust?'✓ Adversarial training: ON':'Adversarial training: OFF';};
+  $('#advReset').onclick=()=>{patch.on=false;strength=0.5;$('#advStr').value=50;};
+  function loop(){if(cv.offsetParent)draw();requestAnimationFrame(loop);}
+  addEventListener('resize',fit);fit();loop();
+})();
+
+/* ============================================================
+   THE COURSE — the whole book, sequenced, with recall
+============================================================ */
+(function(){
+  const root=$('#courseBody');if(!root)return;
+  const LABNAME={'#scroll':'Silicon Scroll','#map':'Chokepoint','#game':'Win the Chip War','#ask':'Interrogate the Book','#steer':'SteerCast','#stage':'The Silicon Stage','#zoom':'Inside the Machine','#whatif':'The What-If Engine','#cards':'Silicon Top Trumps','#future':'The Projector','#rflywheel':'The Data Flywheel','#rspec':'Spec Your Humanoid','#rsee':'See Like a Robot','#rlatency':'Mind the Gap','#rreward':'Reward Hacking Lab','#rsim':'Sim2Real','#rladder':'The Capability Ladder','#rteleop':'Drive the Hand','#rguess':'Teleop or Autonomous?','#rvr':'You Are the Robot'};
+  const CW=[
+    {era:'1947',title:'The Switch',lab:'#ask',lead:'Everything starts with a switch that has no moving parts.',
+     body:`In December 1947 at Bell Labs, John Bardeen and Walter Brattain — under William Shockley — built the first <b>transistor</b>: a sliver of germanium that could amplify or switch a signal with no vacuum tube, no moving parts, almost no heat. It won them a Nobel Prize.<br><br>Why it matters: a transistor is a controllable switch, and a switch is a <b>bit</b>. Chain enough of them together and you can compute anything. Every chip on Earth is just an unfathomable number of these switches, shrunk and multiplied. The entire story that follows is one race — to put more of them, smaller, on a single piece of silicon.`,
+     q:{prompt:'What does a single transistor fundamentally do?',opts:['Stores electricity like a battery','Acts as a tiny on/off switch','Generates light'],ans:1,why:'A transistor is a switch with no moving parts — and a switch is a bit, the atom of all computing.'}},
+    {era:'1958–59',title:'The Chip',lab:'#zoom',lead:'One component was never going to be enough.',
+     body:`A useful machine needs thousands of transistors, and wiring them by hand was a nightmare called the "tyranny of numbers." In 1958 <b>Jack Kilby</b> at Texas Instruments built the first integrated circuit. A year later <b>Robert Noyce</b> at Fairchild devised the version the industry actually adopted: the <b>planar process</b>, which prints many transistors and their wiring onto one flat piece of silicon at once.<br><br>That idea — make many at once, photographically — is the hinge the whole industry turns on. It's why chips got <em>cheaper</em> as they got more complex: the opposite of almost everything else humans build.`,
+     q:{prompt:'Why was Noyce’s integrated circuit so pivotal?',opts:['It used less power','You could print many transistors and their wiring at once','It was the first to use silicon'],ans:1,why:'Printing many components at once is what made chips get cheaper as they grew more complex.'}},
+    {era:'1965',title:'Moore’s Law',lab:'#scroll',lead:'A prophecy that became a business plan.',
+     body:`In 1965 <b>Gordon Moore</b> noticed transistor counts were doubling at a steady cadence and predicted it would continue — revised in 1975 to roughly every two years. "Moore's Law" was never a law of physics; it was an economic expectation the whole industry then organized itself to meet, decade after decade.<br><br>The Intel 4004 (1971) had 2,300 transistors. A modern AI GPU has over 200 billion. That is the exponential Moore's Law names — and the reason a ten-year-old chip feels like a fossil.`,
+     q:{prompt:'Moore’s Law is best described as…',opts:['A physical law of silicon','A self-fulfilling economic prediction the industry coordinated to hit','A government regulation'],ans:1,why:'It was an observation that became a target the entire industry organized itself to meet.'}},
+    {era:'1957–68',title:'The Valley',lab:'#stage',lead:'Silicon Valley was born from a resignation letter.',
+     body:`Shockley was a brilliant physicist and an impossible boss. In 1957 eight of his best engineers — the <b>"traitorous eight,"</b> including Noyce and Moore — quit and founded Fairchild Semiconductor. Fairchild then spun out dozens of companies; in 1968 Noyce and Moore left to start <b>Intel</b>, with Andy Grove as employee #3 and future CEO.<br><br>This set the Valley's template: talent defects, starts a rival, repeats. Knowledge spread by people walking out the door — a culture of spinoffs and risk no other region managed to copy.`,
+     q:{prompt:'How did chip know-how spread through Silicon Valley?',opts:['Government labs distributed it','Engineers quit to found rival firms','Universities licensed it'],ans:1,why:'The traitorous eight → Fairchild → Intel chain is the Valley’s founding pattern.'}},
+    {era:'1950s–60s',title:'The Cold War Customer',lab:'#ask',lead:'The first big buyer of chips wore a uniform.',
+     body:`Early integrated circuits were far too expensive for consumers. The customers who bought them anyway were the U.S. military and NASA: the <b>Minuteman II</b> missile's guidance computer and the <b>Apollo</b> Guidance Computer consumed a huge share of the world's early chips.<br><br>That guaranteed demand paid for the climb down the cost curve until chips were cheap enough for calculators, then everything. Compute and national security have been entangled since literally the first batch.`,
+     q:{prompt:'Who were the first major customers for integrated circuits?',opts:['Consumer electronics firms','The U.S. military and space program','Japanese carmakers'],ans:1,why:'Minuteman and Apollo bought early chips when no one else could afford them, funding the cost curve.'}},
+    {era:'1980s',title:'Japan’s Rise and Fall',lab:'#whatif',lead:'For a decade, it looked like Japan would own the future.',
+     body:`Japan entered early — Sony's Akio Morita licensed the transistor in 1953 and built a consumer-electronics empire. By the 1980s Japanese firms (NEC, Toshiba, Hitachi) dominated <b>DRAM</b> memory and genuinely frightened Washington. A 1986 U.S.–Japan agreement, a soaring yen, and — decisively — lower-cost rivals in Korea (Samsung) and Taiwan eroded that lead.<br><br>Japan didn't vanish; it retreated into deep chokepoints in materials and tools (silicon wafers, photoresist, equipment) where it still dominates. The lesson the U.S. learned fighting an ally became the template for the China conflict to come.`,
+     q:{prompt:'What ended Japan’s 1980s memory dominance?',opts:['A U.S. trade embargo alone','Cost competition from Korea & Taiwan, plus trade pressure','It ran out of silicon'],ans:1,why:'Samsung and TSMC undercut them; the 1986 deal and a strong yen did the rest.'}},
+    {era:'1987',title:'The Foundry',lab:'#game',lead:'The most important company in the world makes nothing of its own.',
+     body:`<b>Morris Chang</b>, passed over at Texas Instruments, moved to Taiwan and in 1987 founded <b>TSMC</b> on a heretical model: a "pure-play foundry" that manufactures other companies' designs and sells none of its own. Because it competed with no one's products, everyone trusted it with their crown jewels.<br><br>This unleashed the <b>fabless</b> revolution — Nvidia, Apple silicon, AMD, Qualcomm could design world-class chips without owning a $20B factory. It also quietly concentrated the world's most advanced manufacturing onto one company, on one island.`,
+     q:{prompt:'Why did the pure-play foundry unleash so many chip startups?',opts:['It made chips physically smaller','Designers no longer needed to own a fab','It was government-subsidized'],ans:1,why:'Fabless firms could design chips and let TSMC build them — no multibillion-dollar factory required.'}},
+    {era:'Lithography',title:'The One Machine',lab:'#zoom',lead:'To make the best chips, the whole world depends on one company.',
+     body:`Chips are "printed" by <b>photolithography</b>: light projects a circuit pattern onto a wafer coated in light-sensitive chemicals. Finer features need shorter-wavelength light, and the leading edge requires <b>Extreme Ultraviolet (EUV)</b> — 13.5nm light made by blasting a falling tin droplet with a laser 50,000 times a second.<br><br>Only one company on Earth makes EUV machines: <b>ASML</b> in the Netherlands, using Zeiss optics (Germany) and a Cymer light source (U.S.). Each costs ~$200M (the new High-NA, ~$380M), has 100,000+ parts, and ships in several jumbo jets. This is the single most important chokepoint in technology.`,
+     q:{prompt:'What makes ASML the ultimate chokepoint?',opts:['It owns the silicon mines','It is the only maker of EUV lithography machines','It controls Taiwan’s fabs'],ans:1,why:'No EUV machine, no leading-edge chips — and ASML is the sole source on Earth.'}},
+    {era:'The Stack',title:'Chokepoints Everywhere',lab:'#map',lead:'The supply chain is a chain of monopolies.',
+     body:`Trace one advanced chip and you pass through near-monopolies in different countries: ultra-pure wafers (Japan), photoresist (Japan, ~90%), deposition/etch tools (U.S. + Japan), design software or <b>EDA</b> (U.S., Synopsys + Cadence), instruction-set IP (<b>ARM</b>, in &gt;99% of phones), the leading-edge fab (TSMC, Taiwan), and advanced packaging (East Asia).<br><br>Miller's central insight: power here isn't about who makes the most chips — it's about who controls the unavoidable <b>chokepoints</b>. Almost every one is held by the U.S. or its allies, which is exactly what makes export controls a weapon.`,
+     q:{prompt:'Miller’s thesis is that semiconductor power comes from…',opts:['Total manufacturing volume','Control of unavoidable chokepoints','The cheapest labor'],ans:1,why:'Whoever holds the chokepoints — tools, EDA, EUV, leading-edge fabs — holds the leverage.'}},
+    {era:'Concentration',title:'The Taiwan Risk',lab:'#scroll',lead:'About 90% of the world’s most advanced chips are made on one island.',
+     body:`The foundry model concentrated leading-edge manufacturing to a staggering degree: roughly <b>90% of the world's most advanced logic</b> (5nm and below) is fabricated in Taiwan, 110 miles off China's coast. This is the "Silicon Shield" — Taiwan is too economically vital to lose.<br><br>It is also the global economy's single greatest point of failure. A conflict or blockade in the Taiwan Strait wouldn't just disrupt a region; it would idle the leading edge of the entire world's electronics — phones, cars, data centers, weapons. There is no quick substitute.`,
+     q:{prompt:'Why is Taiwan called the economy’s biggest single point of failure?',opts:['It mines the most silicon','~90% of advanced logic is made there with no fast substitute','It controls global shipping lanes'],ans:1,why:'The concentration of leading-edge fabs on one island has no quick backup anywhere.'}},
+    {era:'2018–2025',title:'The Chip War',lab:'#game',lead:'Washington discovered the chokepoints were a weapon.',
+     body:`It went hot in 2018: the U.S. cut Chinese telecom <b>ZTE</b> off from American components, then added <b>Huawei</b> to the Entity List in 2019. On <b>October 7, 2022</b>, sweeping BIS rules tried to deny China advanced AI chips and the tools to make them; a 2023 update closed loopholes (Nvidia's China-only A800/H800). The <b>CHIPS Act</b> (2022) put $52B toward reshoring.<br><br>Did it work? Both ways. The controls bit — but China's SMIC still shipped a <b>7nm chip in Huawei's 2023 Mate 60</b> using older tools, and the pressure supercharged China's drive for self-sufficiency. The recurring lesson: unilateral controls leak and backfire; multilateral ones (pulling in the Dutch and Japanese) bite.`,
+     q:{prompt:'A recurring lesson of the export-control era is that…',opts:['Controls always stop a rival cold','Unilateral controls leak and can accelerate the rival’s self-sufficiency','Tariffs beat controls every time'],ans:1,why:'SMIC’s 7nm chip showed controls leak; they bite hardest when allies move together.'}},
+    {era:'The Thesis',title:'Compute Is the New Oil',lab:'#future',lead:'Why a book about chips is really a book about power.',
+     body:`Miller's frame: <b>compute has become the strategic resource of the age</b> — the input that decides economic and military advantage, the way oil defined the 20th century. But unlike oil, its supply runs through a handful of unavoidable chokepoints. AI raised the stakes: Nvidia controls ~90% of the AI-accelerator market, and whoever trains the biggest models holds the frontier.<br><br>So the "war" isn't over chips as products; it's over the chokepoints that gate who gets to compute at all. Hold the EUV machines, the design software, the IP, and the leading-edge fabs, and you hold a knife to everyone's throat — including your allies'. That's the whole book in one sentence. And you now know why it's true.`,
+     q:{prompt:'In one line, the book’s argument is:',opts:['Whoever makes the most chips wins','Compute is the new oil, and chokepoints decide who controls it','Silicon will soon run out'],ans:1,why:'Compute = strategic power, and control flows from chokepoints, not raw volume.'}}
+  ];
+  const RB=[
+    {era:'Why now',title:'The Convergence',lab:'#rflywheel',lead:'Robots are old. Why is this suddenly the moment?',
+     body:`Three curves crossed at once. <b>Compute</b> got cheap and abundant (the chip story). The internet and teleoperation produced enough <b>data</b> to train general behaviors. And a new model type — the <b>vision-language-action (VLA)</b> model — let one network turn camera pixels and a goal directly into motor commands, instead of hand-coding every task.<br><br>For the first time the bottleneck isn't the algorithm or the chip — it's the <b>body and the data</b>. That reframing is why "a year of robot research" is a story about supply chains and scaling, not just gears.`,
+     q:{prompt:'What unlocked the current robotics moment?',opts:['One breakthrough motor','Cheap compute + data + vision-language-action models','Cheaper steel'],ans:1,why:'It’s a convergence — and now the body and data are the bottleneck, not the algorithm.'}},
+    {era:'The body',title:'Intelligence Is the Easy Part',lab:'#rspec',lead:'The hand, not the brain, is the hard part.',
+     body:`A humanoid is a stack of ~40 <b>actuators</b> (motor + gearbox), and their quality is the whole game. Precision comes from strain-wave ("harmonic") gears, a near-monopoly held in <b>Japan</b>. Torque comes from neodymium magnets doped with dysprosium, refined ~90% in <b>China</b>. Runtime comes from battery cells, dominated by China and Korea.<br><br>So the moment you design a capable robot, you've also drawn a geopolitical map: the best body depends on a handful of foreign chokepoints — the chip-war story, reborn in hardware.`,
+     q:{prompt:'The biggest near-term constraint on humanoids is…',opts:['The AI brain','The hands/actuators and their supply chain','Wireless bandwidth'],ans:1,why:'Actuators, magnets, and cells — mostly foreign chokepoints — gate the body.'}},
+    {era:'Perception',title:'How It Sees',lab:'#rsee',lead:'A robot doesn’t see a room. It computes one.',
+     body:`From the same camera pixels a robot derives layers: <b>depth</b> (how far), <b>segmentation</b> (what each pixel belongs to), <b>detection</b> (labeled objects with confidence), and increasingly a <b>world model</b> that predicts what happens next. Perception is the foundation — you can't grasp what you can't locate.<br><br>The frontier is that world model: moving from seeing the present to anticipating the near future, which is what lets a robot act instead of merely react.`,
+     q:{prompt:'The leap from “seeing” to “anticipating” comes from…',opts:['A faster camera','A world model that predicts the next moment','More pixels'],ans:1,why:'World models predict what’s about to happen, enabling action over reaction.'}},
+    {era:'The loop',title:'Latency Is the Body’s Reflex',lab:'#rlatency',lead:'Sense → compute → act, and every millisecond is lag.',
+     body:`A robot is a control loop: sense the world, compute a response, move. The faster that loop, the more capable and safe — catching, balancing, reacting all depend on shaving milliseconds. This is exactly where the chip war meets the robot: better on-device inference chips (NPUs) directly buy a tighter loop.<br><br>It's why robotics and semiconductors are the same story told twice — a robot's reflexes are gated by silicon.`,
+     q:{prompt:'Why does the robot story depend on the chip story?',opts:['Robots are made of glass','Faster inference chips tighten the sense–compute–act loop','Chips power the wifi'],ans:1,why:'Lower latency = better reflexes, and that’s a chip problem.'}},
+    {era:'Learning',title:'You Reward It, Carefully',lab:'#rreward',lead:'You don’t program a robot anymore. You reward it.',
+     body:`Modern robots learn two main ways: <b>imitation</b> (copying human teleoperation) and <b>reinforcement learning</b> (optimizing a reward through trial and error). The catch: RL does exactly what you reward, not what you meant — "specification gaming" — so designing the reward is the real engineering, and a deep alignment problem in miniature.<br><br>Imitation needs human demonstrations (data!), which is why teleoperation and the data flywheel matter so much.`,
+     q:{prompt:'“Specification gaming” means a robot…',opts:['Plays video games','Optimizes your literal reward in unintended ways','Refuses to learn'],ans:1,why:'It does exactly what you rewarded — not what you intended.'}},
+    {era:'Sim-to-real',title:'It Works in Simulation',lab:'#rsim',lead:'That sentence has ended a thousand demos.',
+     body:`Robots train in fast, perfect simulators, then meet a messy world of friction, noise, and surprises — and a policy that aced sim often fails reality. The <b>sim-to-real gap</b> is the central practical problem. The key trick is <b>domain randomization</b>: train across thousands of randomized, imperfect sims so reality is just one more variation the robot has already seen.<br><br>Crossing this gap reliably is much of what separates a viral demo from a deployable product.`,
+     q:{prompt:'Domain randomization helps a robot by…',opts:['Making the simulator prettier','Training across many randomized sims so reality is familiar','Slowing the robot down'],ans:1,why:'If it’s seen chaos in sim, real-world noise is just another variation.'}},
+    {era:'Scaling',title:'The Data Flywheel',lab:'#rflywheel',lead:'The whole bet of the field, in one loop.',
+     body:`The strategic thesis: deploy robots → they collect real-world data → the model improves → it unlocks new tasks → which justifies deploying more robots. Whoever spins this flywheel fastest compounds a lead that's hard to catch.<br><br>It's also why hardware matters so much: you can't collect real-world data without affordable, reliable bodies in the field. <b>Data is the moat, and bodies are how you mine it.</b>`,
+     q:{prompt:'The robotics “data flywheel” is the loop:',opts:['Design → patent → sue','Deploy → collect data → improve → deploy more','Train → publish → forget'],ans:1,why:'More robots → more data → smarter robots → more robots.'}},
+    {era:'Reality check',title:'What’s Actually Solved',lab:'#rladder',lead:'Progress is wildly uneven — and most demos are teleoperated.',
+     body:`Locomotion (walking, even backflips) is largely solved by RL in simulation. Rigid-object grasping is mature. But deformable objects (folding laundry), liquids, and generalizing to a kitchen you've never seen remain hard. Crucially, the most jaw-dropping manipulation demos are usually <b>teleoperated</b> — a human puppeteering off-camera — not autonomous.<br><br>Learning to tell teleoperation from autonomy is the single most useful skill for reading robot news without being fooled.`,
+     q:{prompt:'Which is generally HARDER for today’s robots?',opts:['Walking over rough terrain','Folding laundry in a new home','Standing still'],ans:1,why:'Deformable objects and generalization are frontier; locomotion is largely solved.'}},
+    {era:'The players',title:'Who Holds the Leverage',lab:'#cards',lead:'The famous brands are rarely the ones who could halt the industry.',
+     body:`The visible race is among integrators: <b>Tesla</b> (Optimus), <b>Figure</b>, Norway's <b>1X</b>, China's <b>Unitree</b> (on price), and the pioneer <b>Boston Dynamics</b>. But like chips, the real leverage often sits with the unglamorous suppliers — China's rare-earth magnet refiners, Japan's harmonic-drive makers, Nvidia's robot compute.<br><br>The company on the magazine cover is rarely the one that could stop everyone else.`,
+     q:{prompt:'In robotics, the deepest leverage tends to sit with…',opts:['The famous humanoid brands','The component chokepoints (magnets, gears, compute)','Social media reach'],ans:1,why:'As with chips, suppliers of irreplaceable inputs hold the real power.'}},
+    {era:'Robot War',title:'The New Chokepoints',lab:'#future',lead:'Compute walked off the wafer and into a body.',
+     body:`The same supply-chain logic that defined the chip war is reassembling around robots, with the chokepoints shifted: <b>rare-earth magnets</b> and their refining (China ~90%), <b>harmonic-drive actuators</b> (Japan), <b>battery cells</b> (China + Korea), <b>world-model weights</b> (U.S. labs), and <b>robot compute</b> (Nvidia). Expect the same playbook — export controls, reshoring acts, alliance pressure — a few years behind the threat.<br><br>"Robot War" isn't a metaphor. It's the next instance of the only game that's been running the whole time: <b>whoever controls the chokepoints controls the future.</b>`,
+     q:{prompt:'The “Robot War” thesis is that…',opts:['Robots will fight each other','The chip-war chokepoint logic is reassembling around robot supply chains','Robots make chips obsolete'],ans:1,why:'New chokepoints — magnets, actuators, cells, world-models — same logic as chips.'}}
+  ];
+  const META={
+    chip:{e:'The course · start here',t:'The whole of Chip War, in about an hour',
+      p:`Twelve units follow the book’s real arc — the transistor to the AI-compute era. Each is a 90-second read, an optional hands-on lab, and one recall question, because you remember what you retrieve. Finish all twelve and you’ll hold the same model a reader of the book walks away with — and remember more of it.`,
+      recapT:'You now know Chip War.',
+      recap:['The transistor (1947) is a switch; a chip is billions of them, printed photographically — which is why chips get cheaper as they get more complex.','Moore’s Law was a prophecy the industry organized itself to fulfill for fifty years.','Silicon Valley grew by talented people defecting to found rivals; the Cold War paid the early bills.','Morris Chang’s pure-play foundry (TSMC, 1987) split design from manufacturing — and concentrated the leading edge onto one island.','The supply chain is a chain of monopolies: ASML’s EUV, Japan’s materials, U.S. design software, ARM’s IP, TSMC’s fabs.','~90% of advanced logic is made in Taiwan — the world’s single biggest point of failure.','Since 2018 the U.S. has wielded those chokepoints against China; controls bite, but leak and accelerate self-sufficiency.','The thesis: compute is the new oil, and power flows from controlling chokepoints, not making the most chips.']},
+    robot:{e:'The course · start here',t:'A year of robot research, downloaded in an hour',
+      p:`Ten units cover the whole field — why now, the body, perception, the control loop, how robots learn, sim-to-real, the data flywheel, what’s solved, the players, and the new geopolitics. Read, optionally play the lab, answer one recall question. Finish and you’ll hold the complete picture a year of research would give you.`,
+      recapT:'You now hold the robot landscape.',
+      recap:['The moment arrived when compute, data, and vision-language-action models converged — now the body and data are the bottleneck.','A humanoid’s capability lives in its actuators, magnets, and cells — mostly foreign chokepoints.','Perception runs pixels → depth → segmentation → detection → world model (seeing → anticipating).','A robot is a sense–compute–act loop; better chips tighten it — the chip story, again.','Robots learn by imitation and RL; rewards get gamed, so reward design is the real (alignment) problem.','The sim-to-real gap is crossed mainly by domain randomization.','The data flywheel — deploy, collect, improve, deploy more — is the field’s core scaling bet.','Progress is uneven (locomotion solved, dexterity hard), and most flashy demos are teleoperated.','The deepest leverage sits with component chokepoints, not the famous brands.','The new chokepoints — magnets, harmonic drives, cells, world-model weights, robot compute — make “Robot War” the chip war’s sequel.']}
+  };
+  let units=CW,idx=0,mode='chip',state={done:[],ans:{}};
+  function key(){return 'btb_course_'+mode;}
+  function load(){try{return JSON.parse(localStorage.getItem(key()))||{done:[],ans:{}};}catch(e){return {done:[],ans:{}};}}
+  function persist(){try{localStorage.setItem(key(),JSON.stringify(state));}catch(e){}}
+  function firstIncomplete(){for(let i=0;i<units.length;i++)if(state.done.indexOf(i)<0)return i;return 0;}
+  function applyMode(m){mode=(m==='robot')?'robot':'chip';units=mode==='robot'?RB:CW;state=load();
+    $('#courseEyebrow').textContent=META[mode].e;$('#courseTitle').textContent=META[mode].t;$('#courseIntro').innerHTML=META[mode].p;
+    idx=firstIncomplete();render();}
+  function openLab(id){const sec=document.getElementById(id);if(!sec)return;const demo=sec.querySelector('.demo');if(demo&&demo._open)demo._open();sec.scrollIntoView({behavior:'smooth',block:'start'});}
+  function render(){
+    if(state.done.length>=units.length){return recap();}
+    const u=units[idx];let h='';
+    h+='<div class="cprogwrap"><span>'+state.done.length+' / '+units.length+' units</span><span class="cprog"><i style="width:'+(state.done.length/units.length*100)+'%"></i></span><span>'+Math.round(state.done.length/units.length*100)+'%</span></div>';
+    h+='<div class="cstepper">'+units.map((x,i)=>'<button class="cstep'+(i===idx?' cur':'')+(state.done.indexOf(i)>=0?' done':'')+'" data-i="'+i+'">'+(state.done.indexOf(i)>=0?'✓':(i+1))+'</button>').join('')+'</div>';
+    h+='<div class="cunit"><div class="ctag">UNIT '+(idx+1)+' / '+units.length+' · '+u.era+'</div><h4>'+u.title+'</h4><p class="clead">'+u.lead+'</p><div class="cbody">'+u.body+'</div>';
+    if(u.lab&&LABNAME[u.lab])h+='<div><span class="clab" data-lab="'+u.lab+'">🔬 Try the hands-on lab: '+LABNAME[u.lab]+' ↗</span></div>';
+    const answered=state.ans[idx]!==undefined;
+    h+='<div class="crecall"><p class="cq"><span class="rl">✅ RECALL</span>'+u.q.prompt+'</p><div id="copts">'+u.q.opts.map((o,i)=>'<button class="copt'+(answered?(i===u.q.ans?' right':(i===state.ans[idx]?' wrong':'')):'')+'" data-i="'+i+'"'+(answered?' disabled':'')+'>'+o+'</button>').join('')+'</div><div class="cwhy'+(answered?' show':'')+'" id="cwhy">'+(answered?u.q.why:'')+'</div></div>';
+    h+='</div>';
+    h+='<div class="cnav"><button class="btn" id="cprev"'+(idx===0?' disabled style="opacity:.4"':'')+'>‹ Prev</button><span class="sp"></span><button class="btn primary" id="cnext">'+(state.done.length+ (state.done.indexOf(idx)<0?1:0) >=units.length?'Finish course ✓':(state.done.indexOf(idx)>=0?'Next →':'Mark complete → next'))+'</button></div>';
+    root.innerHTML=h;
+    $$('.cstep',root).forEach(b=>b.onclick=()=>{idx=+b.dataset.i;render();});
+    const lb=root.querySelector('.clab');if(lb)lb.onclick=()=>openLab(lb.dataset.lab);
+    $$('.copt',root).forEach(b=>b.onclick=()=>{if(state.ans[idx]!==undefined)return;state.ans[idx]=+b.dataset.i;persist();render();});
+    $('#cprev').onclick=()=>{if(idx>0){idx--;render();}};
+    $('#cnext').onclick=()=>{if(state.done.indexOf(idx)<0){state.done.push(idx);persist();}
+      if(state.done.length>=units.length){recap();return;}
+      idx=(idx<units.length-1)?idx+1:firstIncomplete();render();
+      $('#course').scrollIntoView({behavior:'smooth',block:'start'});};
+  }
+  function recap(){
+    const correct=units.reduce((a,u,i)=>a+(state.ans[i]===u.q.ans?1:0),0);
+    let h='<div class="crecap"><div class="ce">✓ Course complete</div><h4>'+META[mode].recapT+'</h4>';
+    h+='<p style="color:var(--muted);max-width:60ch;margin:0 auto 4px">Recall: <b style="color:var(--amber)">'+correct+' / '+units.length+'</b> answered correctly.</p>';
+    h+='<div class="clist"><b>The whole model you now hold:</b><ul>'+META[mode].recap.map(li=>'<li>'+li+'</li>').join('')+'</ul></div>';
+    h+='<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" id="crestart">↻ Restart</button><button class="btn primary" id="creview">Review the units</button></div></div>';
+    root.innerHTML=h;
+    $('#crestart').onclick=()=>{state={done:[],ans:{}};persist();idx=0;render();$('#course').scrollIntoView({behavior:'smooth',block:'start'});};
+    $('#creview').onclick=()=>{idx=0;render();};
+  }
+  onMode(applyMode);
+  applyMode(MODE.cur);
 })();
 
 /* ============================================================
