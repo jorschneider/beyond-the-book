@@ -495,6 +495,10 @@
   .cunit .ctag{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.08em}
   .cunit h4{font-size:clamp(20px,3vw,26px);margin:8px 0 4px}
   .cunit .clead{font-size:16.5px;color:var(--amber);font-style:italic;margin:0 0 14px}
+  .cviz{margin:2px 0 14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0a0a10}
+  .cviz canvas{width:100%;height:150px;display:block}
+  .cfacts{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+  .cfact{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);background:var(--panel);color:var(--amber);border-radius:18px;padding:5px 11px}
   .cunit .cbody{font-size:15.5px;line-height:1.72;color:#d8d2c8}
   .cunit .cbody b{color:var(--ink)}
   .clab{display:inline-block;margin:16px 0 2px;font-family:var(--mono);font-size:12.5px;color:var(--amber);border:1px solid var(--amber-deep);border-radius:9px;padding:9px 14px;cursor:pointer}
@@ -2935,7 +2939,7 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
 ============================================================ */
 (function(){
   const root=$('#courseBody');if(!root)return;
-  const LABNAME={'#scroll':'Silicon Scroll','#map':'Chokepoint','#game':'Win the Chip War','#ask':'Interrogate the Book','#steer':'SteerCast','#stage':'The Silicon Stage','#zoom':'Inside the Machine','#whatif':'The What-If Engine','#cards':'Silicon Top Trumps','#future':'The Projector','#rflywheel':'The Data Flywheel','#rspec':'Spec Your Humanoid','#rsee':'See Like a Robot','#rlatency':'Mind the Gap','#rreward':'Reward Hacking Lab','#rsim':'Sim2Real','#rladder':'The Capability Ladder','#rteleop':'Drive the Hand','#rguess':'Teleop or Autonomous?','#rvr':'You Are the Robot'};
+  const LABNAME={'#scroll':'Silicon Scroll','#map':'Chokepoint','#game':'Win the Chip War','#ask':'Interrogate the Book','#steer':'SteerCast','#stage':'The Silicon Stage','#zoom':'Inside the Machine','#whatif':'The What-If Engine','#cards':'Silicon Top Trumps','#future':'The Projector','#rflywheel':'The Data Flywheel','#rspec':'Spec Your Humanoid','#rsee':'See Like a Robot','#rlatency':'Mind the Gap','#rreward':'Reward Hacking Lab','#rsim':'Sim2Real','#rladder':'The Capability Ladder','#rteleop':'Drive the Hand','#rguess':'Teleop or Autonomous?','#rvr':'You Are the Robot','#rtbd':'Teach by Demonstration','#rbal':'Balance Act','#radv':'Fool the Robot’s Eyes'};
   const CW=[
     {era:'1947',title:'The Switch',lab:'#ask',lead:'Everything starts with a switch that has no moving parts.',
      body:`In December 1947 at Bell Labs, John Bardeen and Walter Brattain — under William Shockley — built the first <b>transistor</b>: a sliver of germanium that could amplify or switch a signal with no vacuum tube, no moving parts, almost no heat. It won them a Nobel Prize.<br><br>Why it matters: a transistor is a controllable switch, and a switch is a <b>bit</b>. Chain enough of them together and you can compute anything. Every chip on Earth is just an unfathomable number of these switches, shrunk and multiplied. The entire story that follows is one race — to put more of them, smaller, on a single piece of silicon.`,
@@ -2981,13 +2985,13 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
     {era:'The body',title:'Intelligence Is the Easy Part',lab:'#rspec',lead:'The hand, not the brain, is the hard part.',
      body:`A humanoid is a stack of ~40 <b>actuators</b> (motor + gearbox), and their quality is the whole game. Precision comes from strain-wave ("harmonic") gears, a near-monopoly held in <b>Japan</b>. Torque comes from neodymium magnets doped with dysprosium, refined ~90% in <b>China</b>. Runtime comes from battery cells, dominated by China and Korea.<br><br>So the moment you design a capable robot, you've also drawn a geopolitical map: the best body depends on a handful of foreign chokepoints — the chip-war story, reborn in hardware.`,
      q:{prompt:'The biggest near-term constraint on humanoids is…',opts:['The AI brain','The hands/actuators and their supply chain','Wireless bandwidth'],ans:1,why:'Actuators, magnets, and cells — mostly foreign chokepoints — gate the body.'}},
-    {era:'Perception',title:'How It Sees',lab:'#rsee',lead:'A robot doesn’t see a room. It computes one.',
+    {era:'Perception',title:'How It Sees',lab:['#rsee','#radv'],lead:'A robot doesn’t see a room. It computes one.',
      body:`From the same camera pixels a robot derives layers: <b>depth</b> (how far), <b>segmentation</b> (what each pixel belongs to), <b>detection</b> (labeled objects with confidence), and increasingly a <b>world model</b> that predicts what happens next. Perception is the foundation — you can't grasp what you can't locate.<br><br>The frontier is that world model: moving from seeing the present to anticipating the near future, which is what lets a robot act instead of merely react.`,
      q:{prompt:'The leap from “seeing” to “anticipating” comes from…',opts:['A faster camera','A world model that predicts the next moment','More pixels'],ans:1,why:'World models predict what’s about to happen, enabling action over reaction.'}},
     {era:'The loop',title:'Latency Is the Body’s Reflex',lab:'#rlatency',lead:'Sense → compute → act, and every millisecond is lag.',
      body:`A robot is a control loop: sense the world, compute a response, move. The faster that loop, the more capable and safe — catching, balancing, reacting all depend on shaving milliseconds. This is exactly where the chip war meets the robot: better on-device inference chips (NPUs) directly buy a tighter loop.<br><br>It's why robotics and semiconductors are the same story told twice — a robot's reflexes are gated by silicon.`,
      q:{prompt:'Why does the robot story depend on the chip story?',opts:['Robots are made of glass','Faster inference chips tighten the sense–compute–act loop','Chips power the wifi'],ans:1,why:'Lower latency = better reflexes, and that’s a chip problem.'}},
-    {era:'Learning',title:'You Reward It, Carefully',lab:'#rreward',lead:'You don’t program a robot anymore. You reward it.',
+    {era:'Learning',title:'You Reward It, Carefully',lab:['#rreward','#rtbd'],lead:'You don’t program a robot anymore. You reward it.',
      body:`Modern robots learn two main ways: <b>imitation</b> (copying human teleoperation) and <b>reinforcement learning</b> (optimizing a reward through trial and error). The catch: RL does exactly what you reward, not what you meant — "specification gaming" — so designing the reward is the real engineering, and a deep alignment problem in miniature.<br><br>Imitation needs human demonstrations (data!), which is why teleoperation and the data flywheel matter so much.`,
      q:{prompt:'“Specification gaming” means a robot…',opts:['Plays video games','Optimizes your literal reward in unintended ways','Refuses to learn'],ans:1,why:'It does exactly what you rewarded — not what you intended.'}},
     {era:'Sim-to-real',title:'It Works in Simulation',lab:'#rsim',lead:'That sentence has ended a thousand demos.',
@@ -2996,16 +3000,101 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
     {era:'Scaling',title:'The Data Flywheel',lab:'#rflywheel',lead:'The whole bet of the field, in one loop.',
      body:`The strategic thesis: deploy robots → they collect real-world data → the model improves → it unlocks new tasks → which justifies deploying more robots. Whoever spins this flywheel fastest compounds a lead that's hard to catch.<br><br>It's also why hardware matters so much: you can't collect real-world data without affordable, reliable bodies in the field. <b>Data is the moat, and bodies are how you mine it.</b>`,
      q:{prompt:'The robotics “data flywheel” is the loop:',opts:['Design → patent → sue','Deploy → collect data → improve → deploy more','Train → publish → forget'],ans:1,why:'More robots → more data → smarter robots → more robots.'}},
-    {era:'Reality check',title:'What’s Actually Solved',lab:'#rladder',lead:'Progress is wildly uneven — and most demos are teleoperated.',
+    {era:'Reality check',title:'What’s Actually Solved',lab:['#rladder','#rbal'],lead:'Progress is wildly uneven — and most demos are teleoperated.',
      body:`Locomotion (walking, even backflips) is largely solved by RL in simulation. Rigid-object grasping is mature. But deformable objects (folding laundry), liquids, and generalizing to a kitchen you've never seen remain hard. Crucially, the most jaw-dropping manipulation demos are usually <b>teleoperated</b> — a human puppeteering off-camera — not autonomous.<br><br>Learning to tell teleoperation from autonomy is the single most useful skill for reading robot news without being fooled.`,
      q:{prompt:'Which is generally HARDER for today’s robots?',opts:['Walking over rough terrain','Folding laundry in a new home','Standing still'],ans:1,why:'Deformable objects and generalization are frontier; locomotion is largely solved.'}},
-    {era:'The players',title:'Who Holds the Leverage',lab:'#cards',lead:'The famous brands are rarely the ones who could halt the industry.',
+    {era:'The players',title:'Who Holds the Leverage',lab:'#rguess',lead:'The famous brands are rarely the ones who could halt the industry.',
      body:`The visible race is among integrators: <b>Tesla</b> (Optimus), <b>Figure</b>, Norway's <b>1X</b>, China's <b>Unitree</b> (on price), and the pioneer <b>Boston Dynamics</b>. But like chips, the real leverage often sits with the unglamorous suppliers — China's rare-earth magnet refiners, Japan's harmonic-drive makers, Nvidia's robot compute.<br><br>The company on the magazine cover is rarely the one that could stop everyone else.`,
      q:{prompt:'In robotics, the deepest leverage tends to sit with…',opts:['The famous humanoid brands','The component chokepoints (magnets, gears, compute)','Social media reach'],ans:1,why:'As with chips, suppliers of irreplaceable inputs hold the real power.'}},
     {era:'Robot War',title:'The New Chokepoints',lab:'#future',lead:'Compute walked off the wafer and into a body.',
      body:`The same supply-chain logic that defined the chip war is reassembling around robots, with the chokepoints shifted: <b>rare-earth magnets</b> and their refining (China ~90%), <b>harmonic-drive actuators</b> (Japan), <b>battery cells</b> (China + Korea), <b>world-model weights</b> (U.S. labs), and <b>robot compute</b> (Nvidia). Expect the same playbook — export controls, reshoring acts, alliance pressure — a few years behind the threat.<br><br>"Robot War" isn't a metaphor. It's the next instance of the only game that's been running the whole time: <b>whoever controls the chokepoints controls the future.</b>`,
      q:{prompt:'The “Robot War” thesis is that…',opts:['Robots will fight each other','The chip-war chokepoint logic is reassembling around robot supply chains','Robots make chips obsolete'],ans:1,why:'New chokepoints — magnets, actuators, cells, world-models — same logic as chips.'}}
   ];
+  const CWX=[
+    {viz:'switch',facts:['Dec 1947','Bell Labs','a switch = a bit']},
+    {viz:'die',facts:['1958 Kilby · TI','1959 Noyce · Fairchild','the planar process']},
+    {viz:'moore',facts:['1965 → every ~2 yrs','4004: 2,300','B200: 208,000,000,000']},
+    {viz:'eight',facts:['1957: the eight quit','1968: Intel founded','a culture of spinoffs']},
+    {viz:'coldwar',facts:['Minuteman II','Apollo guidance','defense paid the bills']},
+    {viz:'japan',facts:['1980s DRAM kings','1986 trade deal','Korea + Taiwan won']},
+    {viz:'foundry',facts:['TSMC, 1987','pure-play foundry','unleashed the fabless era']},
+    {viz:'euv',facts:['ASML = 100% of EUV','13.5nm light','~$200M / machine']},
+    {viz:'chain',facts:['wafers + resist: Japan','EDA: US','ARM: >99% of phones']},
+    {viz:'taiwan',facts:['~90% advanced logic','one island','no quick substitute']},
+    {viz:'chipwar',facts:['Oct 7, 2022 controls','SMIC 7nm · Mate 60','CHIPS Act: $52B']},
+    {viz:'thesis',facts:['compute = the new oil','Nvidia ~90% AI chips','chokepoints > volume']}
+  ];
+  const RBX=[
+    {facts:['compute + data + VLA','body & data = the bottleneck']},
+    {facts:['~40 actuators','magnets: China ~90%','gears: Japan']},
+    {facts:['pixels→depth→seg→detect','world model = anticipation']},
+    {facts:['sense → compute → act','milliseconds = capability','NPUs tighten the loop']},
+    {facts:['imitation + RL','reward gets gamed','alignment in miniature']},
+    {facts:['sim is perfect','reality isn’t','domain randomization']},
+    {facts:['deploy → data → improve','data is the moat']},
+    {facts:['locomotion: solved','laundry: hard','most demos: teleop']},
+    {facts:['Tesla · Figure · Unitree · 1X','real leverage = suppliers']},
+    {facts:['magnets · gears · cells','world-models · compute','→ Robot War']}
+  ];
+  function drawViz(c,W,H,k,t){
+    c.clearRect(0,0,W,H);const cx=W/2,cy=H/2;c.lineWidth=2;c.textAlign='left';
+    if(k==='switch'){const on=Math.sin(t*1.6)>0;c.font='bold 44px monospace';c.textAlign='center';
+      c.fillStyle=on?'#5fbf78':'#3a3a44';c.fillText('1',cx-48,cy+12);c.fillStyle=on?'#3a3a44':'#e2483b';c.fillText('0',cx+48,cy+12);
+      c.strokeStyle='#2c2c34';c.lineWidth=10;c.lineCap='round';c.beginPath();c.moveTo(cx-18,cy);c.lineTo(cx+18,cy);c.stroke();c.lineCap='butt';
+      c.fillStyle='#e8b04b';c.beginPath();c.arc(cx+(on?18:-18),cy,9,0,7);c.fill();
+      c.font='11px monospace';c.fillStyle='#9b958c';c.fillText('one transistor = one switch = one bit',cx,H-14);c.textAlign='left';}
+    else if(k==='die'){const g=7,sz=Math.min(W,H)-56,x0=cx-sz/2,y0=cy-sz/2-6,cell=sz/g;c.strokeStyle='#3a3a44';c.lineWidth=1;
+      for(let a=0;a<=g;a++){c.beginPath();c.moveTo(x0+a*cell,y0);c.lineTo(x0+a*cell,y0+sz);c.stroke();c.beginPath();c.moveTo(x0,y0+a*cell);c.lineTo(x0+sz,y0+a*cell);c.stroke();}
+      const lit=Math.floor((t*7)%(g*g+1));for(let i=0;i<=lit;i++){const r=Math.floor(i/g),co=i%g;c.fillStyle='rgba(232,176,75,'+(0.15+0.5*(i/(g*g)))+')';c.fillRect(x0+co*cell+1,y0+r*cell+1,cell-2,cell-2);}
+      c.font='11px monospace';c.fillStyle='#9b958c';c.textAlign='center';c.fillText('print thousands at once — photographically',cx,H-12);c.textAlign='left';}
+    else if(k==='moore'){const x0=48,x1=W-18,y0=H-26,y1=20;c.strokeStyle='#2c2c34';c.beginPath();c.moveTo(x0,y1);c.lineTo(x0,y0);c.lineTo(x1,y0);c.stroke();
+      const prog=Math.min(1,(t%4)/3);c.strokeStyle='#e8b04b';c.lineWidth=2.5;c.beginPath();let started=false;
+      for(let i=0;i<=40;i++){const f=i/40;if(f>prog)break;const px=lerp(x0,x1,f),py=lerp(y0,y1,f*f*0.82+f*0.18);started?c.lineTo(px,py):c.moveTo(px,py);started=true;}c.stroke();
+      c.fillStyle='#9b958c';c.font='10px monospace';c.fillText('4004: 2,300',x0+4,y0-6);c.textAlign='right';c.fillText('B200: 208B',x1-2,y1+12);c.textAlign='left';
+      c.fillStyle='#e2483b';c.fillText('doubling every ~2 years (log scale)',x0+4,y1+12);}
+    else if(k==='eight'){c.strokeStyle='#3a3a44';c.strokeRect(28,cy-28,78,56);c.fillStyle='#6c6760';c.font='10px monospace';c.fillText('Shockley',36,cy-34);
+      const prog=(t*0.35)%1;for(let i=0;i<8;i++){const sx=66+(i%4)*9,sy=cy-14+Math.floor(i/4)*18,tx=W-128+(i%4)*22,ty=cy-12+Math.floor(i/4)*22;c.fillStyle='#e8b04b';c.beginPath();c.arc(lerp(sx,tx,prog),lerp(sy,ty,prog),4,0,7);c.fill();}
+      c.strokeStyle='#5fbf78';c.strokeRect(W-136,cy-26,108,52);c.fillStyle='#5fbf78';c.font='10px monospace';c.fillText('Fairchild → Intel',W-134,cy-32);
+      c.fillStyle='#9b958c';c.fillText('talent walks out → founds the rival',32,H-12);}
+    else if(k==='coldwar'){c.fillStyle='#5a6a8a';c.fillRect(cx-54,cy-26,12,52);c.beginPath();c.moveTo(cx-54,cy-26);c.lineTo(cx-66,cy);c.lineTo(cx-54,cy+2);c.fill();
+      c.fillStyle='#e8b04b';const fl=6+Math.abs(Math.sin(t*6))*12;c.beginPath();c.moveTo(cx-42,cy+12);c.lineTo(cx-42,cy+26);c.lineTo(cx-42+fl,cy+19);c.fill();
+      c.strokeStyle='#e2483b';c.lineWidth=2;c.beginPath();c.moveTo(cx-18,cy);c.lineTo(cx+20,cy);c.stroke();c.beginPath();c.moveTo(cx+14,cy-5);c.lineTo(cx+20,cy);c.lineTo(cx+14,cy+5);c.stroke();
+      c.fillStyle='#7a3b34';c.fillRect(cx+30,cy-16,42,32);c.strokeStyle='#e2483b';for(let i=0;i<4;i++){c.beginPath();c.moveTo(cx+30,cy-10+i*8);c.lineTo(cx+24,cy-10+i*8);c.stroke();c.beginPath();c.moveTo(cx+72,cy-10+i*8);c.lineTo(cx+78,cy-10+i*8);c.stroke();}
+      c.fillStyle='#9b958c';c.font='11px monospace';c.textAlign='center';c.fillText('the first customer wore a uniform',cx,H-12);c.textAlign='left';}
+    else if(k==='japan'){const base=H-26,bw=22;const kr=Math.max(0,Math.min(1,((t%5)-2)/2));
+      function bar(x,h,col,lab){c.fillStyle=col;c.fillRect(x,base-h,bw,h);c.fillStyle='#9b958c';c.font='9px monospace';c.textAlign='center';c.fillText(lab,x+bw/2,base+12);c.textAlign='left';}
+      bar(cx-72,42+58*(1-kr*0.55),'#e2483b','Japan');bar(cx-12,18+kr*72,'#b07de0','Korea');bar(cx+48,14+kr*66,'#5fbf78','Taiwan');
+      c.fillStyle='#9b958c';c.font='11px monospace';c.textAlign='center';c.fillText('Japan soared in the 80s — then got undercut',cx,16);c.textAlign='left';}
+    else if(k==='foundry'){['Nvidia','Apple','AMD'].forEach((n,i)=>{c.fillStyle='#4a8fe0';c.fillRect(20,cy-34+i*24,68,18);c.fillStyle='#08121f';c.font='9px monospace';c.fillText(n,26,cy-21+i*24);});
+      c.strokeStyle='#e8b04b';c.lineWidth=1.5;for(let i=0;i<3;i++){c.beginPath();c.moveTo(90,cy-25+i*24);c.lineTo(cx+8,cy);c.stroke();}
+      c.fillStyle='#e2483b';c.fillRect(cx+10,cy-22,82,44);c.fillStyle='#fff';c.font='bold 13px monospace';c.textAlign='center';c.fillText('TSMC',cx+51,cy+4);
+      c.fillStyle='#9b958c';c.font='11px monospace';c.fillText('design here · build there · own nothing',cx,H-12);c.textAlign='left';}
+    else if(k==='euv'){const y=cy,src={x:38,y:y+22},mir={x:cx-12,y:y-32},ret={x:cx+50,y:y},waf={x:W-32,y:y+30};
+      c.strokeStyle='rgba(232,176,75,'+(0.4+0.6*Math.abs(Math.sin(t*3)))+')';c.lineWidth=2;c.beginPath();c.moveTo(src.x,src.y);c.lineTo(mir.x,mir.y);c.lineTo(ret.x,ret.y);c.lineTo(waf.x,waf.y);c.stroke();
+      c.fillStyle='#e2483b';c.beginPath();c.arc(src.x,src.y,3+2*Math.abs(Math.sin(t*5)),0,7);c.fill();c.fillStyle='#9b958c';c.font='9px monospace';c.fillText('Sn',src.x-3,src.y+16);
+      c.fillStyle='#5fc8c8';c.fillRect(mir.x-10,mir.y-3,20,6);c.fillText('mirror',mir.x-14,mir.y-8);c.fillStyle='#b07de0';c.fillRect(ret.x-3,ret.y-12,6,24);
+      c.fillStyle='#4a8fe0';c.fillRect(waf.x-18,waf.y-2,30,5);c.fillText('wafer',waf.x-16,waf.y+16);
+      c.fillStyle='#e8b04b';c.font='11px monospace';c.textAlign='center';c.fillText('one company makes this machine: ASML',cx,16);c.textAlign='left';}
+    else if(k==='chain'){const items=[['🇳🇱','EUV'],['🇯🇵','resist'],['🇺🇸','EDA'],['🇹🇼','fab'],['🌐','chip']],n=items.length,gap=W/(n+0.4),y=cy-4;
+      items.forEach((it,i)=>{const x=gap*(i+0.6);if(i<n-1){c.strokeStyle='#3a3a44';c.lineWidth=1.5;c.beginPath();c.moveTo(x+18,y);c.lineTo(gap*(i+1.6)-18,y);c.stroke();}
+        c.fillStyle='#1c1c22';c.strokeStyle='#e8b04b';c.lineWidth=1.5;c.beginPath();c.arc(x,y,18,0,7);c.fill();c.stroke();c.font='15px serif';c.textAlign='center';c.fillStyle='#ece8e1';c.fillText(it[0],x,y+5);c.font='9px monospace';c.fillStyle='#9b958c';c.fillText(it[1],x,y+32);});
+      const pi=Math.floor(t)%n;c.strokeStyle='#e2483b';c.lineWidth=2;c.beginPath();c.arc(gap*(pi+0.6),y,18+3*Math.abs(Math.sin(t*4)),0,7);c.stroke();
+      c.fillStyle='#9b958c';c.font='11px monospace';c.textAlign='center';c.fillText('a chain of monopolies, in a few countries',cx,16);c.textAlign='left';}
+    else if(k==='taiwan'){const filter=Math.min(1,(t%5)/3);for(let i=0;i<36;i++){const s=(i*131)%97,px=28+((s*13)%(W-56)),py=22+((s*29)%(H-52)),tw=i===17;c.globalAlpha=tw?1:Math.max(0.06,1-filter);c.fillStyle=tw?'#e2483b':'#5fc8c8';const r=tw?5+filter*4*Math.abs(Math.sin(t*3)):3;c.beginPath();c.arc(px,py,Math.max(3,r),0,7);c.fill();}
+      c.globalAlpha=1;if(filter>0.6){c.fillStyle='#e2483b';c.font='11px monospace';c.textAlign='center';c.fillText('leading edge: ~90% on one island',cx,H-12);c.textAlign='left';}}
+    else if(k==='chipwar'){const y=cy;c.fillStyle='#2b2b33';c.fillRect(30,y-8,W-60,16);c.fillStyle='#4a8fe0';c.fillRect(30,y-8,(W-60)*0.5,16);c.fillStyle='#e2483b';c.fillRect(30+(W-60)*0.5,y-8,(W-60)*0.5,16);
+      c.fillStyle='#fff';const nx=30+(W-60)*(0.5+0.05*Math.sin(t));c.fillRect(nx-2,y-12,4,24);
+      for(let i=0;i<5;i++){const sx=58+i*(W-116)/4;if((t*0.8)%5>i){c.fillStyle='#e8b04b';c.beginPath();c.arc(sx,y-30,3+2*Math.abs(Math.sin(t*5+i)),0,7);c.fill();}}
+      c.fillStyle='#9b958c';c.font='10px monospace';c.fillText('US',32,y-16);c.textAlign='right';c.fillText('China',W-32,y-16);c.textAlign='center';c.fillText('export controls, 2018 → 2025',cx,H-12);c.textAlign='left';}
+    else if(k==='thesis'){c.strokeStyle='#2c2c34';c.lineWidth=18;c.beginPath();c.moveTo(20,cy+6);c.lineTo(W-20,cy+6);c.stroke();
+      c.strokeStyle='#e2483b';c.lineWidth=3;c.beginPath();c.arc(cx,cy+6,15,0,7);c.stroke();
+      for(let i=0;i<6;i++){const f=((t*0.4+i/6)%1),px=lerp(20,W-20,f);c.globalAlpha=Math.abs(px-cx)<16?0.3:1;c.fillStyle='#e8b04b';c.beginPath();c.arc(px,cy+6,4,0,7);c.fill();}c.globalAlpha=1;
+      c.fillStyle='#e8b04b';c.font='bold 13px monospace';c.textAlign='center';c.fillText('compute = the new oil',cx,cy-22);c.fillStyle='#9b958c';c.font='10px monospace';c.fillText('and it all flows through the chokepoint',cx,H-12);c.textAlign='left';}
+  }
+  let vizCv=null,vizCtx=null,vizW=0,vizH=0,vizKey=null,vizT=0;const VDPR=Math.min(devicePixelRatio||1,2);
+  function setupViz(){const cv=root.querySelector('.cviz canvas');if(!cv){vizCv=null;return;}vizCv=cv;vizCtx=cv.getContext('2d');fitViz();}
+  function fitViz(){if(!vizCv)return;const r=vizCv.getBoundingClientRect();vizW=r.width;vizH=r.height;vizCv.width=vizW*VDPR;vizCv.height=vizH*VDPR;vizCtx.setTransform(VDPR,0,0,VDPR,0,0);}
+  function vizLoop(){vizT+=0.016;if(vizCv&&vizCv.offsetParent&&vizKey){try{drawViz(vizCtx,vizW,vizH,vizKey,vizT);}catch(e){}}requestAnimationFrame(vizLoop);}
   const META={
     chip:{e:'The course · start here',t:'The whole of Chip War, in about an hour',
       p:`Twelve units follow the book’s real arc — the transistor to the AI-compute era. Each is a 90-second read, an optional hands-on lab, and one recall question, because you remember what you retrieve. Finish all twelve and you’ll hold the same model a reader of the book walks away with — and remember more of it.`,
@@ -3030,15 +3119,20 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
     const u=units[idx];let h='';
     h+='<div class="cprogwrap"><span>'+state.done.length+' / '+units.length+' units</span><span class="cprog"><i style="width:'+(state.done.length/units.length*100)+'%"></i></span><span>'+Math.round(state.done.length/units.length*100)+'%</span></div>';
     h+='<div class="cstepper">'+units.map((x,i)=>'<button class="cstep'+(i===idx?' cur':'')+(state.done.indexOf(i)>=0?' done':'')+'" data-i="'+i+'">'+(state.done.indexOf(i)>=0?'✓':(i+1))+'</button>').join('')+'</div>';
-    h+='<div class="cunit"><div class="ctag">UNIT '+(idx+1)+' / '+units.length+' · '+u.era+'</div><h4>'+u.title+'</h4><p class="clead">'+u.lead+'</p><div class="cbody">'+u.body+'</div>';
-    if(u.lab&&LABNAME[u.lab])h+='<div><span class="clab" data-lab="'+u.lab+'">🔬 Try the hands-on lab: '+LABNAME[u.lab]+' ↗</span></div>';
+    const X=(mode==='chip'?CWX:RBX)[idx]||{};
+    const vizH=X.viz?'<div class="cviz"><canvas></canvas></div>':'';
+    const factsH=X.facts?'<div class="cfacts">'+X.facts.map(f=>'<span class="cfact">'+f+'</span>').join('')+'</div>':'';
+    h+='<div class="cunit"><div class="ctag">UNIT '+(idx+1)+' / '+units.length+' · '+u.era+'</div><h4>'+u.title+'</h4><p class="clead">'+u.lead+'</p>'+vizH+factsH+'<div class="cbody">'+u.body+'</div>';
+    const labs=Array.isArray(u.lab)?u.lab:(u.lab?[u.lab]:[]);
+    if(labs.length)h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">'+labs.filter(id=>LABNAME[id]).map(id=>'<span class="clab" data-lab="'+id+'">🔬 Lab: '+LABNAME[id]+' ↗</span>').join('')+'</div>';
+    vizKey=X.viz||null;
     const answered=state.ans[idx]!==undefined;
     h+='<div class="crecall"><p class="cq"><span class="rl">✅ RECALL</span>'+u.q.prompt+'</p><div id="copts">'+u.q.opts.map((o,i)=>'<button class="copt'+(answered?(i===u.q.ans?' right':(i===state.ans[idx]?' wrong':'')):'')+'" data-i="'+i+'"'+(answered?' disabled':'')+'>'+o+'</button>').join('')+'</div><div class="cwhy'+(answered?' show':'')+'" id="cwhy">'+(answered?u.q.why:'')+'</div></div>';
     h+='</div>';
     h+='<div class="cnav"><button class="btn" id="cprev"'+(idx===0?' disabled style="opacity:.4"':'')+'>‹ Prev</button><span class="sp"></span><button class="btn primary" id="cnext">'+(state.done.length+ (state.done.indexOf(idx)<0?1:0) >=units.length?'Finish course ✓':(state.done.indexOf(idx)>=0?'Next →':'Mark complete → next'))+'</button></div>';
-    root.innerHTML=h;
+    root.innerHTML=h;setupViz();
     $$('.cstep',root).forEach(b=>b.onclick=()=>{idx=+b.dataset.i;render();});
-    const lb=root.querySelector('.clab');if(lb)lb.onclick=()=>openLab(lb.dataset.lab);
+    $$('.clab',root).forEach(lb=>lb.onclick=()=>openLab(lb.dataset.lab));
     $$('.copt',root).forEach(b=>b.onclick=()=>{if(state.ans[idx]!==undefined)return;state.ans[idx]=+b.dataset.i;persist();render();});
     $('#cprev').onclick=()=>{if(idx>0){idx--;render();}};
     $('#cnext').onclick=()=>{if(state.done.indexOf(idx)<0){state.done.push(idx);persist();}
@@ -3047,6 +3141,7 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
       $('#course').scrollIntoView({behavior:'smooth',block:'start'});};
   }
   function recap(){
+    vizCv=null;vizKey=null;
     const correct=units.reduce((a,u,i)=>a+(state.ans[i]===u.q.ans?1:0),0);
     let h='<div class="crecap"><div class="ce">✓ Course complete</div><h4>'+META[mode].recapT+'</h4>';
     h+='<p style="color:var(--muted);max-width:60ch;margin:0 auto 4px">Recall: <b style="color:var(--amber)">'+correct+' / '+units.length+'</b> answered correctly.</p>';
@@ -3057,7 +3152,9 @@ $$('.modeswitch button,.modemini button').forEach(b=>b.onclick=()=>setMode(b.dat
     $('#creview').onclick=()=>{idx=0;render();};
   }
   onMode(applyMode);
+  addEventListener('resize',fitViz);
   applyMode(MODE.cur);
+  vizLoop();
 })();
 
 /* ============================================================
